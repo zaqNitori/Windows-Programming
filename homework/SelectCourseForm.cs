@@ -14,12 +14,17 @@ namespace homework
     {
         private PresentationModel.CoursePresentationModel _coursePresentationModel;
         private string _courseUrl = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
+        private int _checkBoxWidth = 45;
+        private string _checkBoxName = "checkBoxCol";
+        private string _checkBoxTitle = "選取";
 
         public SelectCourseForm(PresentationModel.CoursePresentationModel coursePresentationModel)
         {
             InitializeComponent();
             InitializeDataGridView();
             _coursePresentationModel = coursePresentationModel;
+            courseGridView.CellContentClick += ChangeCourseDataGridViewCheckBoxStatus;
+            buttonShowSelectResult.Click += ShowSelectResult;
         }
 
         /// <summary>
@@ -61,7 +66,6 @@ namespace homework
             AddCheckBox();
             courseGridView.RowHeadersVisible = false;
             courseGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            //courseGridView.CellContentClick += courseGridView_CheckBoxCheck;
         }
 
         /// <summary>
@@ -73,10 +77,10 @@ namespace homework
         private void AddCheckBox()
         {
             DataGridViewColumn columnCheck = new DataGridViewCheckBoxColumn();
-            columnCheck.Width = 45;
-            columnCheck.Name = "checkBoxCol";
+            columnCheck.Width = _checkBoxWidth;
+            columnCheck.Name = _checkBoxName;
             courseGridView.Columns.Insert(0, columnCheck);
-            courseGridView.Columns[0].HeaderText = "選取";
+            courseGridView.Columns[0].HeaderText = _checkBoxTitle;
         }
 
         /// <summary>
@@ -96,9 +100,10 @@ namespace homework
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        private void dataGridView1_CheckBoxCheck(object sender, EventArgs e)
+        private void ChangeCourseDataGridViewCheckBoxStatus(object sender, EventArgs e)
         {
-            //MessageBox.Show(dataGridView1.CurrentCell.RowIndex.ToString());
+            _coursePresentationModel.SetCourseCheckBoxStatus(courseGridView.CurrentCell.RowIndex);
+            buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
         }
 
         /// <summary>
@@ -107,10 +112,9 @@ namespace homework
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        private void buttonCheckSelect_Click(object sender, EventArgs e)
+        private void ShowSelectResult(object sender, EventArgs e)
         {
-            //MessageBox.Show(_model.GetSelectedData(dataGridView1.Rows));
-            //MessageBox.Show(Convert.ToString(dataGridView1.Rows[3].Cells["Number"].Value));
+            MessageBox.Show(_coursePresentationModel.GetSelectedResult(courseGridView.Rows));
         }
 
     }
