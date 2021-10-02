@@ -14,9 +14,10 @@ namespace homework
         [STAThread]
         static void Main()
         {
+            Model.Model model = new Model.Model(new Model.CourseCrawler());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new SelectCourseForm(new PresentationModel.CoursePresentationModel(model)));
         }
     }
 }
