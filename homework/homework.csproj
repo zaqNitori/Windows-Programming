@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PresentationModel\HTMLParser.cs" />
+    <Compile Include="Model\CourseCrawler.cs" />
     <Compile Include="ViewModel\CourseProperty.cs" />
     <Compile Include="PresentationModel\CoursePresentationModel.cs" />
     <Compile Include="SelectCourseForm.cs">
@@ -62,9 +62,6 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\CourseDetail.cs" />
-    <Compile Include="ViewModel\CourseInfo.cs" />
-    <Compile Include="ViewModel\CourseTime.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

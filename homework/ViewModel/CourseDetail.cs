@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace homework.ViewModel
 {
@@ -28,7 +24,7 @@ namespace homework.ViewModel
             get; set;
         }
 
-        public string TA
+        public string TeachAssistant
         {
             get; set;
         }
