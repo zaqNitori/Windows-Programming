@@ -6,31 +6,22 @@ namespace homework.Model
 {
     public class Model
     {
-        public Model()
+        private CourseCrawler _courseCrawler;
+        public Model(CourseCrawler courseCrawler)
         {
-
+            _courseCrawler = courseCrawler;
         }
 
         /// <summary>
-        /// 取得畫面上選取到的資料內容
+        /// 取得課程資訊
         /// </summary>
+        /// <returns>Course Data</returns>
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public string GetSelectedData(DataGridViewRowCollection dataSource)
+        public List<ViewModel.Course> GetCourse(string url)
         {
-            string message = string.Empty;
-            foreach (DataGridViewRow row in dataSource)
-            {
-                if (Convert.ToBoolean(row.Cells["checkBoxCol"].Value) == true)
-                {
-                    message += Convert.ToString(row.Cells[ViewModel.CourseProperty.Number.ToString()].Value) 
-                        + Convert.ToString(row.Cells[ViewModel.CourseProperty.Name.ToString()].Value) 
-                        + Environment.NewLine;
-                }
-            }
-            return message;
+            return _courseCrawler.GetCourse(url);
         }
-
     }
 }
