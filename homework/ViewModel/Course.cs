@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace homework.ViewModel
 {
     public class Course
     {
+
         public string Number
         {
             get; set;
@@ -43,19 +40,40 @@ namespace homework.ViewModel
             get; set;
         }
 
-        public string Sunday { get; set; }
+        public string Sunday
+        {
+            get; set;
+        }
 
-        public string Monday { get; set; }
+        public string Monday
+        {
+            get; set;
+        }
 
-        public string Tuesday { get; set; }
+        public string Tuesday
+        {
+            get; set;
+        }
 
-        public string Wednesday { get; set; }
+        public string Wednesday
+        {
+            get; set;
+        }
 
-        public string Thursday { get; set; }
+        public string Thursday
+        {
+            get; set;
+        }
 
-        public string Friday { get; set; }
+        public string Friday
+        {
+            get; set;
+        }
 
-        public string Saturday { get; set; }
+        public string Saturday
+        {
+            get; set;
+        }
 
         public string Classroom
         {
@@ -67,17 +85,12 @@ namespace homework.ViewModel
             get; set;
         }
 
-        public string Note
-        {
-            get; set;
-        }
-
         public string NumberOfDropStudent
         {
             get; set;
         }
 
-        public string TA
+        public string TeachAssistant
         {
             get; set;
         }
@@ -88,6 +101,11 @@ namespace homework.ViewModel
         }
 
         public string Syllabus
+        {
+            get; set;
+        }
+
+        public string Note
         {
             get; set;
         }
