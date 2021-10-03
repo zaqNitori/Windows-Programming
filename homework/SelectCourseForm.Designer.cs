@@ -75,7 +75,7 @@ namespace homework
             this.Controls.Add(this.courseGridView);
             this.Name = "SelectCourseForm";
             this.Text = "SelectCourseForm";
-            this.Load += new System.EventHandler(this.SelectCourseFormLoad);
+            this.Load += new System.EventHandler(this.LoadSelectCourseForm);
             ((System.ComponentModel.ISupportInitialize)(this.courseGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
