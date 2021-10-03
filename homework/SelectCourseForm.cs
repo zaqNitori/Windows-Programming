@@ -13,7 +13,6 @@ namespace homework
     public partial class SelectCourseForm : Form
     {
         private PresentationModel.CoursePresentationModel _coursePresentationModel;
-        private string _courseUrl = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
         private int _checkBoxWidth = 45;
         private string _checkBoxName = "checkBoxCol";
         private string _checkBoxTitle = "選取";
@@ -35,7 +34,7 @@ namespace homework
         /// <history>
         ///     1.  2021.10.02  create function 
         /// </history>
-        private void SelectCourseFormLoad(object sender, EventArgs e)
+        private void LoadSelectCourseForm(object sender, EventArgs e)
         {
             RefreshFormObject();
             BindCourseData();
@@ -91,7 +90,7 @@ namespace homework
         /// </history>
         private void BindCourseData()
         {
-            courseGridView.DataSource = _coursePresentationModel.GetCourse(_courseUrl);
+            courseGridView.DataSource = _coursePresentationModel.GetCourse();
         }
 
         /// <summary>

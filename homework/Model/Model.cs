@@ -19,9 +19,9 @@ namespace homework.Model
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public List<ViewModel.Course> GetCourse(string url)
+        public List<ViewModel.Course> GetCourse()
         {
-            return _courseCrawler.GetCourse(url);
+            return _courseCrawler.GetCourse();
         }
     }
 }

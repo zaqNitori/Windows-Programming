@@ -9,36 +9,66 @@ namespace homework.Model
 {
     public class CourseCrawler
     {
+        private readonly string _courseUrl;
+
+        public CourseCrawler(string url)
+        {
+            _courseUrl = url;
+        }
+
         /// <summary>
         /// 至指定頁面爬取課程資料
         /// </summary>
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public List<ViewModel.Course> GetCourse(string url)
+        public List<ViewModel.Course> GetCourse()
         {
             const string TARGET = "//body/table";
             HtmlWeb webClient = new HtmlWeb();
             webClient.OverrideEncoding = Encoding.Default;
-            HtmlDocument document = webClient.Load(url);
-
+            HtmlDocument document = webClient.Load(_courseUrl);
             HtmlNode nodeTable = document.DocumentNode.SelectSingleNode(TARGET);
             HtmlNodeCollection nodeTableRow = nodeTable.ChildNodes;
 
             // 移除 tbody
-            nodeTableRow.RemoveAt(0);
+            RemoveNode(nodeTableRow, 0);
             // 移除 <tr>資工三
-            nodeTableRow.RemoveAt(0);
+            RemoveNode(nodeTableRow, 0);
             // 移除 table header
-            nodeTableRow.RemoveAt(0);
+            RemoveNode(nodeTableRow, 0);
             // 移除 <tr>小計
-            nodeTableRow.RemoveAt(nodeTableRow.Count - 1);
+            RemoveNode(nodeTableRow, nodeTableRow.Count - 1);
 
+            return FetchCourseContent(nodeTableRow);
+        }
+
+        /// <summary>
+        /// 移除標籤Node
+        /// </summary>
+        /// <param name="tableRows"></param>
+        /// <history>
+        ///     1.  2021.10.03  create function
+        /// </history> 
+        private void RemoveNode(HtmlNodeCollection tableRows, int index)
+        {
+            tableRows.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// 移除標籤Node
+        /// </summary>
+        /// <param name="tableRows"></param>
+        /// <history>
+        ///     1.  2021.10.03  create function
+        /// </history> 
+        private List<ViewModel.Course> FetchCourseContent(HtmlNodeCollection nodeTableRow)
+        {
             List<ViewModel.Course> courses = new List<ViewModel.Course>();
 
             foreach (var node in nodeTableRow)
             {
-                node.ChildNodes.RemoveAt(0);
+                RemoveNode(node.ChildNodes, 0);
                 courses.Add(CreateCourse(node.ChildNodes));
             }
 
@@ -55,29 +85,29 @@ namespace homework.Model
         {
             ViewModel.Course course = new ViewModel.Course
             {
-                Number = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Number),
-                Name = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Name),
-                Stage = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Stage),
-                Credit = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Credit),
-                Hour = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Hour),
-                RequiredOrElective = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.RequiredOrElective),
-                Teacher = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Teacher),
-                Sunday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Sunday),
-                Monday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Monday),
-                Tuesday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Tuesday),
-                Wednesday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Wednesday),
-                Thursday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Thursday),
-                Friday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Friday),
-                Saturday = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Saturday),
-                Classroom = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Classroom),
-                NumberOfStudent = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.NumberOfStudent),
-                NumberOfDropStudent = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.NumberOfDropStudent),
-                TeachAssistant = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.TeachAssistant),
-                Language = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Language),
-                Syllabus = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Syllabus),
-                Note = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Note),
-                Audit = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Audit),
-                Experiment = GetCourseInfo(nodeTableDatas, ViewModel.CourseProperty.Experiment)
+                Number = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Number),
+                Name = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Name),
+                Stage = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Stage),
+                Credit = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Credit),
+                Hour = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Hour),
+                RequiredOrElective = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.RequiredOrElective),
+                Teacher = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Teacher),
+                Sunday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Sunday),
+                Monday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Monday),
+                Tuesday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Tuesday),
+                Wednesday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Wednesday),
+                Thursday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Thursday),
+                Friday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Friday),
+                Saturday = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Saturday),
+                Classroom = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Classroom),
+                NumberOfStudent = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.NumberOfStudent),
+                NumberOfDropStudent = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.NumberOfDropStudent),
+                TeachAssistant = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.TeachAssistant),
+                Language = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Language),
+                Syllabus = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Syllabus),
+                Note = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Note),
+                Audit = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Audit),
+                Experiment = GetCourseInfo(nodeTableDatas, (int)ViewModel.CourseProperty.Experiment)
             };
             return course;
         }
@@ -88,9 +118,9 @@ namespace homework.Model
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        private string GetCourseInfo(HtmlNodeCollection nodeCollection, ViewModel.CourseProperty property)
+        private string GetCourseInfo(HtmlNodeCollection nodeCollection, int index)
         {
-            return nodeCollection[((int)property)].InnerText.Trim();
+            return nodeCollection[index].InnerText.Trim();
         }
 
     }

@@ -14,7 +14,8 @@ namespace homework
         [STAThread]
         static void Main()
         {
-            Model.Model model = new Model.Model(new Model.CourseCrawler());
+            string courseUrl = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
+            Model.Model model = new Model.Model(new Model.CourseCrawler(courseUrl));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SelectCourseForm(new PresentationModel.CoursePresentationModel(model)));
