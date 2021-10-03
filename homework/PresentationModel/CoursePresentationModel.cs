@@ -26,9 +26,9 @@ namespace homework.PresentationModel
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public List<ViewModel.Course> GetCourse(string url)
+        public List<ViewModel.Course> GetCourse()
         {
-            return _model.GetCourse(url);
+            return _model.GetCourse();
         }
 
         /// <summary>
@@ -86,6 +86,7 @@ namespace homework.PresentationModel
             if (_courseSelectData.Count > 0)
             {
                 selectIndex = _courseSelectData.ToList();
+                selectIndex.Sort();
                 foreach (int i in selectIndex)
                 {
                     message += Convert.ToString(dataSource[i].Cells[ViewModel.CourseProperty.Number.ToString()].Value)
