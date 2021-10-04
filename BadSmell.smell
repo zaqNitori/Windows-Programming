@@ -234,54 +234,6 @@
               <Comment />
               <Auto>false</Auto>
             </Smell>
-            <Smell>
-              <Id>4</Id>
-              <SmellType>ICS(變數-1)</SmellType>
-              <HashCode>Variable1.SelectCourseForm.courseGridView</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>SelectCourseForm.Designer.cs</File>
-              <Line>87</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(變數-1) Class 成員變數以底線開始，底線後第一個字母小寫，若由多個單字組成，從第二個單字開始，每個單字的第一個字母大寫，其餘小寫。 不以底線區隔單字</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>5</Id>
-              <SmellType>ICS(變數-1)</SmellType>
-              <HashCode>Variable1.SelectCourseForm.buttonSend</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>SelectCourseForm.Designer.cs</File>
-              <Line>88</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(變數-1) Class 成員變數以底線開始，底線後第一個字母小寫，若由多個單字組成，從第二個單字開始，每個單字的第一個字母大寫，其餘小寫。 不以底線區隔單字</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>6</Id>
-              <SmellType>ICS(變數-1)</SmellType>
-              <HashCode>Variable1.SelectCourseForm.buttonShowSelectResult</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>SelectCourseForm.Designer.cs</File>
-              <Line>89</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(變數-1) Class 成員變數以底線開始，底線後第一個字母小寫，若由多個單字組成，從第二個單字開始，每個單字的第一個字母大寫，其餘小寫。 不以底線區隔單字</Comment>
-              <Auto>false</Auto>
-            </Smell>
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
