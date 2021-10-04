@@ -15,9 +15,9 @@ namespace homework
             InitializeComponent();
             InitializeDataGridView();
             _coursePresentationModel = coursePresentationModel;
-            courseGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
-            courseGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
-            buttonShowSelectResult.Click += ShowSelectResult;
+            _courseGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
+            _courseGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
+            _buttonShowSelectResult.Click += ShowSelectResult;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace homework
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
                 _coursePresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
-                buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
+                _buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
             }
         }
 
@@ -51,7 +51,7 @@ namespace homework
             // Click CheckBox Event
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                courseGridView.EndEdit();
+                _courseGridView.EndEdit();
             }
         }
 
@@ -77,8 +77,8 @@ namespace homework
         /// </history>
         private void RefreshFormObject()
         {
-            buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
-            buttonShowSelectResult.Enabled = _coursePresentationModel.IsButtonShowSelectResultEnable();
+            _buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
+            _buttonShowSelectResult.Enabled = _coursePresentationModel.IsButtonShowSelectResultEnable();
         }
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace homework
         /// </history>
         private void InitializeDataGridView()
         {
-            courseGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            courseGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _courseGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            _courseGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AddCheckBox();
-            courseGridView.RowHeadersVisible = false;
-            courseGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            _courseGridView.RowHeadersVisible = false;
+            _courseGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace homework
             DataGridViewColumn columnCheck = new DataGridViewCheckBoxColumn();
             columnCheck.Width = _checkBoxWidth;
             columnCheck.Name = _checkBoxName;
-            courseGridView.Columns.Insert(0, columnCheck);
-            courseGridView.Columns[0].HeaderText = _checkBoxTitle;
+            _courseGridView.Columns.Insert(0, columnCheck);
+            _courseGridView.Columns[0].HeaderText = _checkBoxTitle;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace homework
         /// </history>
         private void BindCourseData()
         {
-            courseGridView.DataSource = _coursePresentationModel.GetCourse();
+            _courseGridView.DataSource = _coursePresentationModel.GetCourse();
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace homework
         /// </history>
         private void ShowSelectResult(object sender, EventArgs e)
         {
-            MessageBox.Show(_coursePresentationModel.GetSelectedResult(courseGridView.Rows));
+            MessageBox.Show(_coursePresentationModel.GetSelectedResult(_courseGridView.Rows));
         }
 
     }
