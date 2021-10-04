@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace homework
@@ -22,8 +15,44 @@ namespace homework
             InitializeComponent();
             InitializeDataGridView();
             _coursePresentationModel = coursePresentationModel;
-            courseGridView.CellContentClick += ChangeCourseDataGridViewCheckBoxStatus;
+            courseGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
+            courseGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
             buttonShowSelectResult.Click += ShowSelectResult;
+        }
+
+        /// <summary>
+        /// 監聽數值變動
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.04  create function ，為了避免連點問題，改成監聽MouseUp然後呼叫OnValueChanged，來解決。
+        /// </history>
+        private void ListenCourseDataGridOnCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Click CheckBox Event
+            if (e.ColumnIndex == 0 && e.RowIndex != -1)
+            {
+                _coursePresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
+                buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
+            }
+        }
+
+        /// <summary>
+        /// 監聽滑鼠點擊釋放
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.04  create function ，為了避免連點問題，改成監聽MouseUp然後呼叫OnValueChanged，來解決。
+        /// </history>
+        private void ListenCourseDataGridOnCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Click CheckBox Event
+            if (e.ColumnIndex == 0 && e.RowIndex != -1)
+            {
+                courseGridView.EndEdit();
+            }
         }
 
         /// <summary>
@@ -91,18 +120,6 @@ namespace homework
         private void BindCourseData()
         {
             courseGridView.DataSource = _coursePresentationModel.GetCourse();
-        }
-
-        /// <summary>
-        /// dataGridView 內 CheckBox被點擊的事件
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
-        private void ChangeCourseDataGridViewCheckBoxStatus(object sender, EventArgs e)
-        {
-            _coursePresentationModel.SetCourseCheckBoxStatus(courseGridView.CurrentCell.RowIndex);
-            buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
         }
 
         /// <summary>
