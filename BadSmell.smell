@@ -243,6 +243,16 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
+                <RelativePath>ManageCourseForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ManageCourseForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Model\CourseCrawler.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -288,6 +298,16 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>StartUpForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>StartUpForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>ViewModel\Course.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -299,7 +319,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>697</ProductionLoc>
+          <ProductionLoc>912</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
