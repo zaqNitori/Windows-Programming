@@ -45,7 +45,7 @@ namespace homework
         {
             string courseUrl = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
             Model.Model model = new Model.Model(new Model.CourseCrawler(courseUrl));
-            SelectCourseForm selectCourse = new SelectCourseForm(new PresentationModel.CoursePresentationModel(model));
+            SelectCourseForm selectCourse = new SelectCourseForm(new PresentationModel.CourseSelectingFormPresentationModel(model));
             selectCourse.Show();
         }
 
