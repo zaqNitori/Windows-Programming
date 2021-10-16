@@ -5,12 +5,12 @@ namespace homework
 {
     public partial class SelectCourseForm : Form
     {
-        private PresentationModel.CourseSelectingFormPresentationModel _coursePresentationModel;
+        private PresentationModel.CoursePresentationModel _coursePresentationModel;
         private int _checkBoxWidth = 45;
         private string _checkBoxName = "checkBoxCol";
         private string _checkBoxTitle = "選取";
 
-        public SelectCourseForm(PresentationModel.CourseSelectingFormPresentationModel coursePresentationModel)
+        public SelectCourseForm(PresentationModel.CoursePresentationModel coursePresentationModel)
         {
             InitializeComponent();
             InitializeDataGridView();

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace homework.PresentationModel
 {
-    public class CourseSelectingFormPresentationModel
+    public class CoursePresentationModel
     {
         private bool _isButtonSendEnable = false;
         private bool _isButtonShowSelectResultEnable = true;
@@ -13,7 +13,7 @@ namespace homework.PresentationModel
         private Model.Model _model;
         private HashSet<int> _courseSelectData;
 
-        public CourseSelectingFormPresentationModel(Model.Model model)
+        public CoursePresentationModel(Model.Model model)
         {
             _model = model;
             _courseSelectData = new HashSet<int>();
