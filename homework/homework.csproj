@@ -49,32 +49,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManageCourseForm.cs">
+    <Compile Include="MyForm\CourseSelectingResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageCourseForm.Designer.cs">
+    <Compile Include="MyForm\CourseSelectingResultForm.Designer.cs">
+      <DependentUpon>CourseSelectingResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\ManageCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ManageCourseForm.Designer.cs">
       <DependentUpon>ManageCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CourseCrawler.cs" />
-    <Compile Include="StartUpForm.cs">
+    <Compile Include="MyForm\StartUpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartUpForm.Designer.cs">
+    <Compile Include="MyForm\StartUpForm.Designer.cs">
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationModel\CourseSelectingResultPresentationModel.cs" />
     <Compile Include="ViewModel\CourseProperty.cs" />
-    <Compile Include="PresentationModel\CoursePresentationModel.cs" />
-    <Compile Include="SelectCourseForm.cs">
+    <Compile Include="PresentationModel\CourseSelectingPresentationModel.cs" />
+    <Compile Include="MyForm\SelectCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectCourseForm.Designer.cs">
+    <Compile Include="MyForm\SelectCourseForm.Designer.cs">
       <DependentUpon>SelectCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Course.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ManageCourseForm.resx">
+    <EmbeddedResource Include="MyForm\CourseSelectingResultForm.resx">
+      <DependentUpon>CourseSelectingResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ManageCourseForm.resx">
       <DependentUpon>ManageCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -86,10 +96,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SelectCourseForm.resx">
+    <EmbeddedResource Include="MyForm\SelectCourseForm.resx">
       <DependentUpon>SelectCourseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StartUpForm.resx">
+    <EmbeddedResource Include="MyForm\StartUpForm.resx">
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

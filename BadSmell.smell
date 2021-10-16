@@ -236,10 +236,7 @@
             </Smell>
           </Reviews>
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList>
-            <string>SpacingAndNewLine9</string>
-            <string>LongMethod.CourseCrawler.CreateCourse.30HtmlNodeCollection nodeTableDatas;</string>
-          </HashCodeRequestIgnoreList>
+          <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
