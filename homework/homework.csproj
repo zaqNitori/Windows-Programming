@@ -69,6 +69,7 @@
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationModel\CourseSelectingResultPresentationModel.cs" />
+    <Compile Include="PresentationModel\StartUpPresentationModel.cs" />
     <Compile Include="ViewModel\CourseProperty.cs" />
     <Compile Include="PresentationModel\CourseSelectingPresentationModel.cs" />
     <Compile Include="MyForm\SelectCourseForm.cs">
