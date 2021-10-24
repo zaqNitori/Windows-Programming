@@ -24,9 +24,7 @@ namespace homework
         {
             _startUpPresentationModel = startUpPresentationModel;
             InitializeComponent();
-            InitializeCourseSelectingButton();
-            InitializeCourseManagementButton();
-            InitializeExitButton();
+            InitializeButton();
             RefreshWidgetStatus();
         }
 
@@ -138,34 +136,14 @@ namespace homework
         /// <history>
         ///     1.  2021.10.24  create function
         /// </history>
-        private void InitializeCourseSelectingButton()
+        private void InitializeButton()
         {
             _buttonCourseSelecting.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonCourseSelectingEnabled");
-            _buttonCourseSelecting.Click += OpenCourseSelectForm;
-        }
-
-        /// <summary>
-        /// Initial button
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        private void InitializeCourseManagementButton()
-        {
             _buttonCourseManagement.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonCourseManagementEnabled");
-            _buttonCourseManagement.Click += OpenCourseManageForm;
-        }
-
-        /// <summary>
-        /// Initial button
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        private void InitializeExitButton()
-        {
             _buttonExit.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonExitEnabled");
             _buttonExit.Click += ExitStartUpForm;
+            _buttonCourseManagement.Click += OpenCourseManageForm;
+            _buttonCourseSelecting.Click += OpenCourseSelectForm;
         }
 
     }
