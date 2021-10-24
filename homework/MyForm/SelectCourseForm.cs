@@ -1,125 +1,79 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using homework.MyController;
 
 namespace homework
 {
     public partial class SelectCourseForm : Form
     {
+        private List<string> _department;
         private PresentationModel.CourseSelectingPresentationModel _courseSelectingPresentationModel;
-        private int _checkBoxWidth = 45;
-        private string _checkBoxName = "checkBoxCol";
-        private string _checkBoxTitle = "選取";
+        private const string BINDING_PROPERTY = "Enabled";
 
         public SelectCourseForm(PresentationModel.CourseSelectingPresentationModel coursePresentationModel)
         {
             InitializeComponent();
-            InitializeDataGridView();
+
             _courseSelectingPresentationModel = coursePresentationModel;
-            _courseGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
-            _courseGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
+            _courseSelectingPresentationModel._modelChanged += RefreshWidgetStatus;
+            _courseDataGridViewComponent1.SetPresentationModel(coursePresentationModel);
+            _courseDataGridViewComponent2.SetPresentationModel(coursePresentationModel);
+            
+            InitializeButton();
+            InitializeTabControl();
+        }
+
+        /// <summary>
+        /// Initial button
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        private void InitializeButton()
+        {
+            _buttonShowSelectResult.DataBindings.Add(BINDING_PROPERTY, _courseSelectingPresentationModel, "IsButtonSendEnable");
             _buttonShowSelectResult.Click += ShowSelectResult;
+            _buttonSend.DataBindings.Add(BINDING_PROPERTY, _courseSelectingPresentationModel, "IsButtonShowSelectResultEnable");
         }
 
         /// <summary>
-        /// 監聽數值變動
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <history>
-        ///     1.  2021.10.04  create function ，為了避免連點問題，改成監聽MouseUp然後呼叫OnValueChanged，來解決。
-        /// </history>
-        private void ListenCourseDataGridOnCellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            // Click CheckBox Event
-            if (e.ColumnIndex == 0 && e.RowIndex != -1)
-            {
-                _courseSelectingPresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
-                _buttonSend.Enabled = _courseSelectingPresentationModel.IsButtonSendEnable();
-            }
-        }
-
-        /// <summary>
-        /// 監聽滑鼠點擊釋放
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <history>
-        ///     1.  2021.10.04  create function ，為了避免連點問題，改成監聽MouseUp然後呼叫OnValueChanged，來解決。
-        /// </history>
-        private void ListenCourseDataGridOnCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // Click CheckBox Event
-            if (e.ColumnIndex == 0 && e.RowIndex != -1)
-            {
-                _courseGridView.EndEdit();
-            }
-        }
-
-        /// <summary>
-        /// Form Load Event
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <history>
-        ///     1.  2021.10.02  create function 
-        /// </history>
-        private void LoadSelectCourseForm(object sender, EventArgs e)
-        {
-            RefreshWidgetStatus();
-            BindCourseData();
-        }
-
-        /// <summary>
-        /// Initialize form object
+        /// 重整畫面上button的狀態
         /// </summary>
         /// <history>
-        ///     1.  2021.10.02  create function
+        ///     1.  2021.10.16  create function
+        ///     2.  2021.10.24  相同功能，不同呼叫方式
         /// </history>
         private void RefreshWidgetStatus()
         {
-            _buttonSend.Enabled = _courseSelectingPresentationModel.IsButtonSendEnable();
-            _buttonShowSelectResult.Enabled = _courseSelectingPresentationModel.IsButtonShowSelectResultEnable();
+            _buttonSend.DataBindings[0].ReadValue();
+            _buttonShowSelectResult.DataBindings[0].ReadValue();
         }
 
         /// <summary>
-        /// 初始化dataGridView設定
+        /// 初始化TabControl設定
         /// </summary>
         /// <history>
-        ///     1.  2021.09.30  create function
+        ///     1.  2021.10.25  create function
         /// </history>
-        private void InitializeDataGridView()
+        private void InitializeTabControl()
         {
-            _courseGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            _courseGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AddCheckBox();
-            _courseGridView.RowHeadersVisible = false;
-            _courseGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        }
-
-        /// <summary>
-        /// 加入CheckBox控制項
-        /// </summary>
-        /// <history>
-        ///     1.  2021.09.30  create function
-        /// </history>
-        private void AddCheckBox()
-        {
-            DataGridViewColumn columnCheck = new DataGridViewCheckBoxColumn();
-            columnCheck.Width = _checkBoxWidth;
-            columnCheck.Name = _checkBoxName;
-            _courseGridView.Columns.Insert(0, columnCheck);
-            _courseGridView.Columns[0].HeaderText = _checkBoxTitle;
-        }
-
-        /// <summary>
-        /// Bind Course Grid View DataSource
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
-        private void BindCourseData()
-        {
-            _courseGridView.DataSource = _courseSelectingPresentationModel.GetCourse();
+            string controlName = "_courseDataGridViewComponent";
+            _department = _courseSelectingPresentationModel.GetAllDepartment();
+            foreach (var dep in _department.Select((value, index) => new 
+            { 
+                value, index 
+            }))
+            {
+                _tabControl.TabPages[dep.index].Text = dep.value;
+                ((CourseDataGridViewComponent)this.Controls.Find(controlName + (dep.index + 1).ToString(), true)[0]).SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(dep.value));
+            }
         }
 
         /// <summary>
@@ -130,7 +84,7 @@ namespace homework
         /// </history>
         private void ShowSelectResult(object sender, EventArgs e)
         {
-            MessageBox.Show(_courseSelectingPresentationModel.GetSelectedResult(_courseGridView.Rows));
+            //MessageBox.Show(_courseSelectingPresentationModel.GetSelectedResult(_courseGridView.Rows));
         }
 
     }

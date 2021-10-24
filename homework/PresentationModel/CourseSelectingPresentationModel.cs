@@ -2,55 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using homework.Model;
+using homework.ViewModel;
 
 namespace homework.PresentationModel
 {
     public class CourseSelectingPresentationModel
     {
-        private bool _isButtonSendEnable = false;
-        private bool _isButtonShowSelectResultEnable = true;
-        private const string TARGET = "checkBoxCol";
-        private Model.Model _model;
+        public event ModelChangedEventHandler _modelChanged;
+        public delegate void ModelChangedEventHandler();
+        private CourseModel _courseModel;
         private HashSet<int> _courseSelectData;
 
-        public CourseSelectingPresentationModel(Model.Model model)
+        public CourseSelectingPresentationModel(CourseModel courseModel)
         {
-            _model = model;
+            _courseModel = courseModel;
             _courseSelectData = new HashSet<int>();
+            IsButtonSendEnable = false;
+            IsButtonShowSelectResultEnable = true;
+        }
+
+        public bool IsButtonSendEnable
+        {
+            get; set;
+        }
+
+        public bool IsButtonShowSelectResultEnable
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// GridCheckBox點擊事件trigger 
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        void NotifyObserver()
+        {
+            if (_modelChanged != null)
+                _modelChanged();
         }
 
         /// <summary>
         /// Get Course Data 
         /// </summary>
-        /// <returns>Course Data</returns>
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public List<ViewModel.Course> GetCourse()
+        public List<Course> GetCourse()
         {
-            return _model.GetCourse();
-        }
-
-        /// <summary>
-        /// btnSend status
-        /// </summary>
-        public bool IsButtonSendEnable()
-        {
-            return _isButtonSendEnable;
-        }
-
-        /// <summary>
-        /// btnShowSelectResult status
-        /// </summary>
-        public bool IsButtonShowSelectResultEnable()
-        {
-            return _isButtonShowSelectResultEnable;
+            return _courseModel.GetCourse();
         }
 
         /// <summary>
         /// 紀錄當前畫面上checkbox的狀態
         /// </summary>
-        /// <param name="index"></param>
         public void SetCourseCheckBoxStatus(int index)
         {
             if (_courseSelectData.Contains(index))
@@ -62,14 +69,8 @@ namespace homework.PresentationModel
                 _courseSelectData.Add(index);
             }
 
-            if (_courseSelectData.Count == 0)
-            {
-                _isButtonSendEnable = false;
-            }
-            else
-            {
-                _isButtonSendEnable = true;
-            }
+            IsButtonSendEnable = (_courseSelectData.Count == 0) ? false : true;
+            NotifyObserver();
         }
 
         /// <summary>
@@ -89,12 +90,34 @@ namespace homework.PresentationModel
                 selectIndex.Sort();
                 foreach (int i in selectIndex)
                 {
-                    message += Convert.ToString(dataSource[i].Cells[ViewModel.CourseProperty.Number.ToString()].Value)
-                        + Convert.ToString(dataSource[i].Cells[ViewModel.CourseProperty.Name.ToString()].Value)
+                    message += Convert.ToString(dataSource[i].Cells[CourseProperty.Number.ToString()].Value)
+                        + Convert.ToString(dataSource[i].Cells[CourseProperty.Name.ToString()].Value)
                         + Environment.NewLine;
                 }
             }
             return message;
+        }
+
+        /// <summary>
+        /// 取得所有班級名稱
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public List<string> GetAllDepartment()
+        {
+            return _courseModel.GetAllDepartment();
+        }
+
+        /// <summary>
+        /// 用班級名稱取得課表
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public List<Course> GetCourseByDepartmentName(string name)
+        {
+            return _courseModel.GetCourseByDepartmentName(name);
         }
 
     }
