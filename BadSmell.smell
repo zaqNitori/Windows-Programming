@@ -240,16 +240,6 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
-                <RelativePath>ManageCourseForm.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>ViewOrController</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>ManageCourseForm.Designer.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>Designer</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>Model\CourseCrawler.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -260,7 +250,57 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>PresentationModel\CoursePresentationModel.cs</RelativePath>
+                <RelativePath>MyForm\CourseSelectingResultForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\CourseSelectingResultForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\ManageCourseForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\ManageCourseForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\SelectCourseForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\SelectCourseForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\StartUpForm.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyForm\StartUpForm.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModel\CourseSelectingPresentationModel.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModel\CourseSelectingResultPresentationModel.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModel\StartUpPresentationModel.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -285,26 +325,6 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>SelectCourseForm.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>ViewOrController</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>SelectCourseForm.Designer.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>Designer</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>StartUpForm.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>ViewOrController</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>StartUpForm.Designer.cs</RelativePath>
-                <ProjectName>homework</ProjectName>
-                <AnalysisFileType>Designer</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>ViewModel\Course.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -316,7 +336,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>932</ProductionLoc>
+          <ProductionLoc>1175</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
