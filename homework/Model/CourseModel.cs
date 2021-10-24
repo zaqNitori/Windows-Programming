@@ -46,7 +46,6 @@ namespace homework.Model
         public void FetchCourseInfo(List<string> courseUrl)
         {
             String departmentName;
-            courseUrl.Add("https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433");
 
             foreach (var url in courseUrl)
             {
@@ -58,6 +57,34 @@ namespace homework.Model
                 _departments.Add(new Department(departmentName));
 
             }
+        }
+
+        /// <summary>
+        /// 取得所有班級名稱
+        /// </summary>
+        /// <returns>Course Data</returns>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public List<string> GetAllDepartment()
+        {
+            List<string> departments = new List<string>();
+            foreach (var dep in _departments)
+            {
+                departments.Add(dep.DepartmentName);
+            }
+            return departments;
+        }
+
+        /// <summary>
+        /// 用班級名稱取得課表
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public List<Course> GetCourseByDepartmentName(string name)
+        {
+            return _curriculum.Courses[name];
         }
 
     }
