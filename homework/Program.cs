@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using homework.Model;
+using homework.PresentationModel;
 
 namespace homework
 {
@@ -16,7 +18,16 @@ namespace homework
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartUpForm(new PresentationModel.StartUpPresentationModel()));
+
+            CourseModel courseModel = new CourseModel();
+
+            CourseSelectingPresentationModel courseSelectingPresentationModel = new CourseSelectingPresentationModel(courseModel);
+            StartUpPresentationModel startUpPresentationModel = new StartUpPresentationModel(courseModel);
+            
+            StartUpForm startUpForm = new StartUpForm(startUpPresentationModel);
+            startUpForm.SetCourseSelectingPresentationModel(courseSelectingPresentationModel);
+
+            Application.Run(startUpForm);
         }
     }
 }
