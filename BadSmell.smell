@@ -185,60 +185,21 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews>
-            <Smell>
-              <Id>1</Id>
-              <SmellType>ICS(空白與空行-9)</SmellType>
-              <HashCode>SpacingAndNewLine9</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>CourseCrawler.cs</File>
-              <Line>88</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(空白與空行-9) 陣列初始化的左大括號後面，右大括號前面</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>ICS(空白與空行-9)</SmellType>
-              <HashCode>SpacingAndNewLine9</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>CourseCrawler.cs</File>
-              <Line>111</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(空白與空行-9) 陣列初始化的左大括號後面，右大括號前面</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>3</Id>
-              <SmellType>Long method(過長函式)</SmellType>
-              <HashCode>LongMethod.CourseCrawler.CreateCourse.30HtmlNodeCollection nodeTableDatas;</HashCode>
-              <Severity>Warning</Severity>
-              <Weight>30</Weight>
-              <Project>homework</Project>
-              <File>CourseCrawler.cs</File>
-              <Line>84</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-          </Reviews>
+          <Reviews />
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
             <AnalysisFiles>
+              <AnalysisFile>
+                <RelativePath>Builder\CourseAnalyzer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Builder\CourseBuilder.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Model\CourseCrawler.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
@@ -336,7 +297,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1175</ProductionLoc>
+          <ProductionLoc>1256</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
