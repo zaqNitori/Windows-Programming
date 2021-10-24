@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\CourseBuilder.cs" />
+    <Compile Include="Builder\CourseAnalyzer.cs" />
     <Compile Include="MyForm\CourseSelectingResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
