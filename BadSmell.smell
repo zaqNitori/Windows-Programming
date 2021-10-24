@@ -185,7 +185,56 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Literal constants(字面常數)-"https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&amp;year=110&amp;sem=1&amp;code=2433"</SmellType>
+              <HashCode>LiteralConstants.FetchCourseInfo."https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&amp;year=110&amp;sem=1&amp;code=2433"</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>CourseModel.cs</File>
+              <Line>49</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>Unresolved warnings(忽視警告)-函式 SetGridDataSource 缺乏註解</SmellType>
+              <HashCode>homework\homework.CourseSelectingComponent.cs.Unresolved warnings(忽視警告)-函式 SetGridDataSource 缺乏註解.24</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework\homework</Project>
+              <File>CourseSelectingComponent.cs</File>
+              <Line>24</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>3</Id>
+              <SmellType>Lack of comments(缺乏註解)</SmellType>
+              <HashCode>24 homework.MyController.CourseSelectingComponent.SetGridDataSource(System.ComponentModel.IBindingList)</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>CourseSelectingComponent.cs</File>
+              <Line>24</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>homework.MyController.CourseSelectingComponent.SetGridDataSource(System.ComponentModel.IBindingList)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -206,9 +255,19 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Model\Model.cs</RelativePath>
+                <RelativePath>Model\CourseModel.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyController\CourseSelectingComponent.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>MyController\CourseSelectingComponent.Designer.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>MyForm\CourseSelectingResultForm.cs</RelativePath>
@@ -295,9 +354,19 @@
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ViewModel\Curriculum.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ViewModel\Department.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1256</ProductionLoc>
+          <ProductionLoc>1519</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
