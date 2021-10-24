@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using HtmlAgilityPack;
+using homework.Builder;
 
 namespace homework.Model
 {
     public class Model
     {
         private CourseCrawler _courseCrawler;
+        private CourseAnalyzer _courseAnalyzer;
+
         public Model(CourseCrawler courseCrawler)
         {
             _courseCrawler = courseCrawler;
+            _courseAnalyzer = new CourseAnalyzer();
         }
 
         /// <summary>
@@ -21,7 +25,9 @@ namespace homework.Model
         /// </history>
         public List<ViewModel.Course> GetCourse()
         {
-            return _courseCrawler.GetCourse();
+            HtmlNodeCollection nodeCollection = _courseCrawler.GetCourseNodeCollection();
+            return _courseAnalyzer.AnalyzeCourse(nodeCollection);
         }
+
     }
 }

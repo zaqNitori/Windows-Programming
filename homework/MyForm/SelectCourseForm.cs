@@ -5,16 +5,16 @@ namespace homework
 {
     public partial class SelectCourseForm : Form
     {
-        private PresentationModel.CoursePresentationModel _coursePresentationModel;
+        private PresentationModel.CourseSelectingPresentationModel _courseSelectingPresentationModel;
         private int _checkBoxWidth = 45;
         private string _checkBoxName = "checkBoxCol";
         private string _checkBoxTitle = "選取";
 
-        public SelectCourseForm(PresentationModel.CoursePresentationModel coursePresentationModel)
+        public SelectCourseForm(PresentationModel.CourseSelectingPresentationModel coursePresentationModel)
         {
             InitializeComponent();
             InitializeDataGridView();
-            _coursePresentationModel = coursePresentationModel;
+            _courseSelectingPresentationModel = coursePresentationModel;
             _courseGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
             _courseGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
             _buttonShowSelectResult.Click += ShowSelectResult;
@@ -33,8 +33,8 @@ namespace homework
             // Click CheckBox Event
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _coursePresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
-                _buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
+                _courseSelectingPresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
+                _buttonSend.Enabled = _courseSelectingPresentationModel.IsButtonSendEnable();
             }
         }
 
@@ -65,7 +65,7 @@ namespace homework
         /// </history>
         private void LoadSelectCourseForm(object sender, EventArgs e)
         {
-            RefreshFormObject();
+            RefreshWidgetStatus();
             BindCourseData();
         }
 
@@ -75,10 +75,10 @@ namespace homework
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        private void RefreshFormObject()
+        private void RefreshWidgetStatus()
         {
-            _buttonSend.Enabled = _coursePresentationModel.IsButtonSendEnable();
-            _buttonShowSelectResult.Enabled = _coursePresentationModel.IsButtonShowSelectResultEnable();
+            _buttonSend.Enabled = _courseSelectingPresentationModel.IsButtonSendEnable();
+            _buttonShowSelectResult.Enabled = _courseSelectingPresentationModel.IsButtonShowSelectResultEnable();
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace homework
         /// </history>
         private void BindCourseData()
         {
-            _courseGridView.DataSource = _coursePresentationModel.GetCourse();
+            _courseGridView.DataSource = _courseSelectingPresentationModel.GetCourse();
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace homework
         /// </history>
         private void ShowSelectResult(object sender, EventArgs e)
         {
-            MessageBox.Show(_coursePresentationModel.GetSelectedResult(_courseGridView.Rows));
+            MessageBox.Show(_courseSelectingPresentationModel.GetSelectedResult(_courseGridView.Rows));
         }
 
     }
