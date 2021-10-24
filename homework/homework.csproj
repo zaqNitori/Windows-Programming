@@ -51,6 +51,12 @@
   <ItemGroup>
     <Compile Include="Builder\CourseBuilder.cs" />
     <Compile Include="Builder\CourseAnalyzer.cs" />
+    <Compile Include="MyController\CourseDataGridViewComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyController\CourseDataGridViewComponent.Designer.cs">
+      <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\CourseSelectingResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,9 +87,14 @@
       <DependentUpon>SelectCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Course.cs" />
-    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\CourseModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Curriculum.cs" />
+    <Compile Include="ViewModel\Department.cs" />
+    <EmbeddedResource Include="MyController\CourseDataGridViewComponent.resx">
+      <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\CourseSelectingResultForm.resx">
       <DependentUpon>CourseSelectingResultForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,5 +130,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

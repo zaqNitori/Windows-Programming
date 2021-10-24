@@ -7,22 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using homework.Model;
+using homework.PresentationModel;
 
 namespace homework
 {
     public partial class StartUpForm : Form
     {
-        private PresentationModel.StartUpPresentationModel _startUpPresentationModel;
+        private SelectCourseForm _selectCourseForm;
+        private CourseSelectingPresentationModel _courseSelectingPresentationModel;
+        private ManageCourseForm _manageCourseForm;
+        private StartUpPresentationModel _startUpPresentationModel;
         private const string BINDING_PROPERTY = "Enabled";
 
-        public StartUpForm(PresentationModel.StartUpPresentationModel startUpPresentationModel)
+        public StartUpForm(StartUpPresentationModel startUpPresentationModel)
         {
             _startUpPresentationModel = startUpPresentationModel;
             InitializeComponent();
+            InitializeButton();
             RefreshWidgetStatus();
-            InitializeCourseSelectingButton();
-            InitializeCourseManagementButton();
-            InitializeExitButton();
+        }
+
+        /// <summary>
+        /// 設定PresentationModel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.24  create function
+        /// </history>
+        public void SetCourseSelectingPresentationModel(CourseSelectingPresentationModel courseSelectingPresentationModel)
+        {
+            _courseSelectingPresentationModel = courseSelectingPresentationModel;
         }
 
         /// <summary>
@@ -48,13 +64,11 @@ namespace homework
         /// </history>
         private void OpenCourseSelectForm(object sender, EventArgs e)
         {
-            string courseUrl = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
-            Model.Model model = new Model.Model(new Model.CourseCrawler(courseUrl));
-            SelectCourseForm selectCourse = new SelectCourseForm(new PresentationModel.CourseSelectingPresentationModel(model));
-            selectCourse.FormClosed += ListenCourseSelectFormClosed;
+            _selectCourseForm = new SelectCourseForm(_courseSelectingPresentationModel);
+            _selectCourseForm.FormClosed += ListenCourseSelectFormClosed;
             _startUpPresentationModel.IsButtonCourseSelectingEnabled = false;
             RefreshWidgetStatus();
-            selectCourse.Show();
+            _selectCourseForm.Show();
         }
 
         /// <summary>
@@ -81,11 +95,11 @@ namespace homework
         /// </history>
         private void OpenCourseManageForm(object sender, EventArgs e)
         {
-            ManageCourseForm manageCourse = new ManageCourseForm();
+            _manageCourseForm = new ManageCourseForm();
             _startUpPresentationModel.IsButtonCourseManagementEnabled = false;
-            manageCourse.FormClosed += ListenCourseManagementFormClosed;
+            _manageCourseForm.FormClosed += ListenCourseManagementFormClosed;
             RefreshWidgetStatus();
-            manageCourse.Show();
+            _manageCourseForm.Show();
         }
 
         /// <summary>
@@ -107,12 +121,13 @@ namespace homework
         /// </summary>
         /// <history>
         ///     1.  2021.10.16  create function
+        ///     2.  2021.10.24  相同功能，不同呼叫方式
         /// </history>
         private void RefreshWidgetStatus()
         {
-            _buttonExit.Enabled = _startUpPresentationModel.IsButtonExitEnabled;
-            _buttonCourseSelecting.Enabled = _startUpPresentationModel.IsButtonCourseSelectingEnabled;
-            _buttonCourseManagement.Enabled = _startUpPresentationModel.IsButtonCourseManagementEnabled;
+            _buttonExit.DataBindings[0].ReadValue();
+            _buttonCourseSelecting.DataBindings[0].ReadValue();
+            _buttonCourseManagement.DataBindings[0].ReadValue();
         }
 
         /// <summary>
@@ -121,34 +136,14 @@ namespace homework
         /// <history>
         ///     1.  2021.10.24  create function
         /// </history>
-        private void InitializeCourseSelectingButton()
+        private void InitializeButton()
         {
             _buttonCourseSelecting.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonCourseSelectingEnabled");
-            _buttonCourseSelecting.Click += OpenCourseSelectForm;
-        }
-
-        /// <summary>
-        /// Initial button
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        private void InitializeCourseManagementButton()
-        {
             _buttonCourseManagement.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonCourseManagementEnabled");
-            _buttonCourseManagement.Click += OpenCourseManageForm;
-        }
-
-        /// <summary>
-        /// Initial button
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        private void InitializeExitButton()
-        {
             _buttonExit.DataBindings.Add(BINDING_PROPERTY, _startUpPresentationModel, "IsButtonExitEnabled");
             _buttonExit.Click += ExitStartUpForm;
+            _buttonCourseManagement.Click += OpenCourseManageForm;
+            _buttonCourseSelecting.Click += OpenCourseSelectForm;
         }
 
     }

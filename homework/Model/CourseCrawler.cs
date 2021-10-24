@@ -9,14 +9,18 @@ namespace homework.Model
 {
     public class CourseCrawler
     {
-        private readonly string _courseUrl;
+        private const string NEW_LINE = "\n";
         private const string TARGET = "//body/table";
         private HtmlWeb _webClient;
 
-        public CourseCrawler(string url)
+        public CourseCrawler()
         {
-            _courseUrl = url;
             _webClient = new HtmlWeb();
+        }
+
+        public string DepartmentName
+        {
+            get; set;
         }
 
         /// <summary>
@@ -26,16 +30,17 @@ namespace homework.Model
         ///     1.  2021.10.02  create function
         ///     2.  2021.10.24  修改爬蟲程式，把Course的建立移到Builder
         /// </history>
-        public HtmlNodeCollection GetCourseNodeCollection()
+        public HtmlNodeCollection GetCourseNodeCollection(string courseUrl)
         {
             _webClient.OverrideEncoding = Encoding.Default;
-            HtmlDocument document = _webClient.Load(_courseUrl);
+            HtmlDocument document = _webClient.Load(courseUrl);
             HtmlNode nodeTable = document.DocumentNode.SelectSingleNode(TARGET);
             HtmlNodeCollection nodeTableRow = nodeTable.ChildNodes;
 
             // 移除 tbody
             RemoveNode(nodeTableRow, 0);
-            // 移除 <tr>資工三
+            // 移除 <tr> 科系名稱
+            DepartmentName = GetDepartmentName(nodeTableRow);
             RemoveNode(nodeTableRow, 0);
             // 移除 table header
             RemoveNode(nodeTableRow, 0);
@@ -53,10 +58,22 @@ namespace homework.Model
         ///     1.  2021.10.03  create function
         ///     2.  2021.10.24  將function改為public，讓model建立時可以使用
         /// </history> 
-        public void RemoveNode(HtmlNodeCollection tableRows, int index)
+        private void RemoveNode(HtmlNodeCollection tableRows, int index)
         {
             tableRows.RemoveAt(index);
-        }        
+        }
+
+        /// <summary>
+        /// 取得科系名稱
+        /// </summary>
+        /// <param name="tableRows"></param>
+        /// <history>
+        ///     1.  2021.10.24  create function
+        /// </history> 
+        private string GetDepartmentName(HtmlNodeCollection tableRows)
+        {
+            return tableRows[0].InnerText.Trim().Replace(NEW_LINE, string.Empty);
+        }
 
     }
 }

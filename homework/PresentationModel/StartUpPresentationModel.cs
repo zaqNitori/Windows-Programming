@@ -1,19 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using homework.Model;
 
 namespace homework.PresentationModel
 {
     public class StartUpPresentationModel
     {
+        private List<String> _courseUrl;
+        private CourseModel _courseModel;
 
-        public StartUpPresentationModel()
+        public StartUpPresentationModel(CourseModel courseModel)
         {
             IsButtonCourseManagementEnabled = true;
             IsButtonCourseSelectingEnabled = true;
             IsButtonExitEnabled = true;
+            _courseUrl = new List<string>();
+            _courseModel = courseModel;
+        }
+
+        /// <summary>
+        /// 新增要爬取的科系課程網址 
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.24  create function
+        /// </history>
+        public void AddCourseUrl(string url)
+        {
+            _courseUrl.Add(url);
+        }
+
+        /// <summary>
+        /// 依據設定的網址爬取課程 
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.24  create function
+        /// </history>
+        public void FetchCourse()
+        {
+            _courseModel.FetchCourseInfo(_courseUrl);
         }
 
         /// <summary>
