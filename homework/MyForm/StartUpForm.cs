@@ -16,6 +16,7 @@ namespace homework
     {
         private SelectCourseForm _selectCourseForm;
         private CourseSelectingPresentationModel _courseSelectingPresentationModel;
+        private CourseSelectResultPresentationModel _courseSelectingResultPresentationModel;
         private ManageCourseForm _manageCourseForm;
         private StartUpPresentationModel _startUpPresentationModel;
         private const string BINDING_PROPERTY = "Enabled";
@@ -26,6 +27,7 @@ namespace homework
             InitializeComponent();
             InitializeButton();
             RefreshWidgetStatus();
+
         }
 
         /// <summary>
@@ -39,6 +41,19 @@ namespace homework
         public void SetCourseSelectingPresentationModel(CourseSelectingPresentationModel courseSelectingPresentationModel)
         {
             _courseSelectingPresentationModel = courseSelectingPresentationModel;
+        }
+
+        /// <summary>
+        /// 設定PresentationModel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public void SetCourseSelectingResultPresentationModel(CourseSelectResultPresentationModel courseSelectingResultPresentationModel)
+        {
+            _courseSelectingResultPresentationModel = courseSelectingResultPresentationModel;
         }
 
         /// <summary>
@@ -65,6 +80,7 @@ namespace homework
         private void OpenCourseSelectForm(object sender, EventArgs e)
         {
             _selectCourseForm = new SelectCourseForm(_courseSelectingPresentationModel);
+            _selectCourseForm.SetCourseSelectingResultPresentationModel(_courseSelectingResultPresentationModel);
             _selectCourseForm.FormClosed += ListenCourseSelectFormClosed;
             _startUpPresentationModel.IsButtonCourseSelectingEnabled = false;
             RefreshWidgetStatus();

@@ -10,10 +10,10 @@ namespace homework.ViewModel
     {
         public Curriculum()
         {
-            Courses = new Dictionary<string, List<Course>>();
+            Courses = new Dictionary<string, Course>();
         }
 
-        public Dictionary<string, List<Course>> Courses
+        public Dictionary<string, Course> Courses
         {
             get; set;
         }

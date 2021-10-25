@@ -185,9 +185,45 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Unsuitable naming(名不符實)-ActivateDoubleBuffer(activate)</SmellType>
+              <HashCode>UnsuitableNaming.Common.ActivateDoubleBuffer.ActivateDoubleBuffer</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>Common.cs</File>
+              <Line>19</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>ICS(函式-2)</SmellType>
+              <HashCode>Method2.Common.ActivateDoubleBuffer</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>Common.cs</File>
+              <Line>19</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(函式-2) 每個函式表示一種操作，因此一律使用動詞做為第一個單字</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList />
+          <HashCodeRequestIgnoreList>
+            <string>UnsuitableNaming.Common.ActivateDoubleBuffer.ActivateDoubleBuffer</string>
+            <string>Method2.Common.ActivateDoubleBuffer</string>
+          </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
@@ -197,6 +233,16 @@
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Builder\CourseBuilder.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Common.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Data\StoreDataManager.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -221,12 +267,12 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>MyForm\CourseSelectingResultForm.cs</RelativePath>
+                <RelativePath>MyForm\CourseSelectResultForm.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>ViewOrController</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>MyForm\CourseSelectingResultForm.Designer.cs</RelativePath>
+                <RelativePath>MyForm\CourseSelectResultForm.Designer.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
@@ -266,7 +312,7 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>PresentationModel\CourseSelectingResultPresentationModel.cs</RelativePath>
+                <RelativePath>PresentationModel\CourseSelectResultPresentationModel.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -317,7 +363,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1638</ProductionLoc>
+          <ProductionLoc>2108</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

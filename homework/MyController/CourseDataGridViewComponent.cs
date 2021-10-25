@@ -17,11 +17,12 @@ namespace homework.MyController
         const int COLUMN_WIDTH = 45;
         const string COLUMN_NAME = "checkBoxCol";
         const string COLUMN_TITLE = "選取";
-
+        
         public CourseDataGridViewComponent()
         {
             InitializeComponent();
             InitializeDataGridView();
+            Common.ActivateDoubleBuffer(_courseDataGridView);
         }
 
         /// <summary>
@@ -106,10 +107,12 @@ namespace homework.MyController
         /// </history>
         private void ListenCourseDataGridOnCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            string courseId;
             // Click CheckBox Event
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _courseSelectingPresentationModel.SetCourseCheckBoxStatus(e.RowIndex);
+                courseId = Convert.ToString(_courseDataGridView.Rows[e.RowIndex].Cells[CourseProperty.Number.ToString()].Value);
+                _courseSelectingPresentationModel.SetCourseCheckBoxStatus(courseId);
             }
         }
 
