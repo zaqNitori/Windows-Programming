@@ -23,28 +23,6 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 新增要爬取的科系課程網址 
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        public void AddCourseUrl(string url)
-        {
-            _courseUrl.Add(url);
-        }
-
-        /// <summary>
-        /// 依據設定的網址爬取課程 
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history>
-        public void FetchCourse()
-        {
-            _courseModel.FetchCourseInfo(_courseUrl);
-        }
-
-        /// <summary>
         /// 回傳button狀態 
         /// </summary>
         /// <returns>button狀態</returns>
