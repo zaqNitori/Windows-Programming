@@ -12,12 +12,14 @@ namespace homework.PresentationModel
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         private CourseModel _courseModel;
-        private HashSet<int> _courseSelectData;
+        private HashSet<string> _courseSelectData;
+        private const string ADD_COURSE_SUCCESS = "加選成功";
+        private const string ADD_COURSE_FAIL = "加選失敗";
 
         public CourseSelectingPresentationModel(CourseModel courseModel)
         {
             _courseModel = courseModel;
-            _courseSelectData = new HashSet<int>();
+            _courseSelectData = new HashSet<string>();
             IsButtonSendEnable = false;
             IsButtonShowSelectResultEnable = true;
         }
@@ -45,28 +47,17 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// Get Course Data 
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
-        public List<Course> GetCourse()
-        {
-            return _courseModel.GetCourse();
-        }
-
-        /// <summary>
         /// 紀錄當前畫面上checkbox的狀態
         /// </summary>
-        public void SetCourseCheckBoxStatus(int index)
+        public void SetCourseCheckBoxStatus(string courseId)
         {
-            if (_courseSelectData.Contains(index))
+            if (_courseSelectData.Contains(courseId))
             {
-                _courseSelectData.Remove(index);
+                _courseSelectData.Remove(courseId);
             }
             else
             {
-                _courseSelectData.Add(index);
+                _courseSelectData.Add(courseId);
             }
 
             IsButtonSendEnable = (_courseSelectData.Count == 0) ? false : true;
@@ -79,20 +70,18 @@ namespace homework.PresentationModel
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        public string GetSelectedResult(DataGridViewRowCollection dataSource)
+        public string GetSelectedResult()
         {
             string message = string.Empty;
-            List<int> selectIndex;
+            List<string> selectIndex;
             
             if (_courseSelectData.Count > 0)
             {
                 selectIndex = _courseSelectData.ToList();
                 selectIndex.Sort();
-                foreach (int i in selectIndex)
+                foreach (string str in selectIndex)
                 {
-                    message += Convert.ToString(dataSource[i].Cells[CourseProperty.Number.ToString()].Value)
-                        + Convert.ToString(dataSource[i].Cells[CourseProperty.Name.ToString()].Value)
-                        + Environment.NewLine;
+                    message += str + Environment.NewLine;
                 }
             }
             return message;
@@ -106,7 +95,7 @@ namespace homework.PresentationModel
         /// </history>
         public List<string> GetAllDepartment()
         {
-            return _courseModel.GetAllDepartment();
+            return _courseModel.GetAllDepartmentName();
         }
 
         /// <summary>
@@ -118,6 +107,28 @@ namespace homework.PresentationModel
         public List<Course> GetCourseByDepartmentName(string name)
         {
             return _courseModel.GetCourseByDepartmentName(name);
+        }
+
+        /// <summary>
+        /// 送出課表，先檢查
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public void SendSelectedCourses()
+        {
+            string errorMessage = _courseModel.CheckCoursesConflict(_courseSelectData.ToList());
+
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                _courseModel.AddSelectedCourses();
+                MessageBox.Show(ADD_COURSE_SUCCESS);
+            }
+            else
+            {
+                MessageBox.Show(ADD_COURSE_FAIL + Environment.NewLine + errorMessage);
+            }
+
         }
 
     }

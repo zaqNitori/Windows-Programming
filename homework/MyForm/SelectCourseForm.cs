@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using homework.MyController;
+using homework.PresentationModel;
 
 namespace homework
 {
     public partial class SelectCourseForm : Form
     {
         private List<string> _department;
-        private PresentationModel.CourseSelectingPresentationModel _courseSelectingPresentationModel;
+        private CourseSelectingPresentationModel _courseSelectingPresentationModel;
+        private CourseSelectResultPresentationModel _courseSelectingResultPresentationModel;
+        private CourseSelectResultForm _courseSelectResultForm;
         private const string BINDING_PROPERTY = "Enabled";
 
-        public SelectCourseForm(PresentationModel.CourseSelectingPresentationModel coursePresentationModel)
+        public SelectCourseForm(CourseSelectingPresentationModel coursePresentationModel)
         {
             InitializeComponent();
 
@@ -25,7 +28,7 @@ namespace homework
             _courseSelectingPresentationModel._modelChanged += RefreshWidgetStatus;
             _courseDataGridViewComponent1.SetPresentationModel(coursePresentationModel);
             _courseDataGridViewComponent2.SetPresentationModel(coursePresentationModel);
-            
+
             InitializeButton();
             InitializeTabControl();
         }
@@ -39,8 +42,22 @@ namespace homework
         private void InitializeButton()
         {
             _buttonShowSelectResult.DataBindings.Add(BINDING_PROPERTY, _courseSelectingPresentationModel, "IsButtonShowSelectResultEnable");
-            _buttonShowSelectResult.Click += ShowSelectResult;
+            _buttonShowSelectResult.Click += OpenCourseSelectResultForm;
             _buttonSend.DataBindings.Add(BINDING_PROPERTY, _courseSelectingPresentationModel, "IsButtonSendEnable");
+            _buttonSend.Click += SendSelectedCourses;
+        }
+
+        /// <summary>
+        /// 設定PresentationModel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public void SetCourseSelectingResultPresentationModel(CourseSelectResultPresentationModel courseSelectingResultPresentationModel)
+        {
+            _courseSelectingResultPresentationModel = courseSelectingResultPresentationModel;
         }
 
         /// <summary>
@@ -77,14 +94,41 @@ namespace homework
         }
 
         /// <summary>
+        /// 監聽選課結果form關閉事件
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.02  create function
+        /// </history>
+        private void OpenCourseSelectResultForm(object sender, EventArgs e)
+        {
+            _courseSelectResultForm = new CourseSelectResultForm(_courseSelectingResultPresentationModel);
+            _courseSelectResultForm.FormClosed += ListenCourseSelectResultFormClosed;
+            _courseSelectingPresentationModel.IsButtonShowSelectResultEnable = false;
+            RefreshWidgetStatus();
+            _courseSelectResultForm.Show();
+        }
+
+        /// <summary>
+        /// 送出選取課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.02  create function
+        /// </history>
+        private void SendSelectedCourses(object sender, EventArgs e)
+        {
+            _courseSelectingPresentationModel.SendSelectedCourses();
+        }
+
+        /// <summary>
         /// 顯示選課結果button 點擊事件
         /// </summary>
         /// <history>
         ///     1.  2021.10.02  create function
         /// </history>
-        private void ShowSelectResult(object sender, EventArgs e)
+        private void ListenCourseSelectResultFormClosed(object sender, FormClosedEventArgs e)
         {
-            //MessageBox.Show(_courseSelectingPresentationModel.GetSelectedResult(_courseGridView.Rows));
+            _courseSelectingPresentationModel.IsButtonShowSelectResultEnable = true;
+            RefreshWidgetStatus();
         }
 
     }
