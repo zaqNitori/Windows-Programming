@@ -51,17 +51,19 @@
   <ItemGroup>
     <Compile Include="Builder\CourseBuilder.cs" />
     <Compile Include="Builder\CourseAnalyzer.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Data\StoreDataManager.cs" />
+    <Compile Include="MyForm\CourseSelectResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\CourseSelectResultForm.Designer.cs">
+      <DependentUpon>CourseSelectResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyController\CourseDataGridViewComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MyController\CourseDataGridViewComponent.Designer.cs">
       <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyForm\CourseSelectingResultForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MyForm\CourseSelectingResultForm.Designer.cs">
-      <DependentUpon>CourseSelectingResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MyForm\ManageCourseForm.cs">
       <SubType>Form</SubType>
@@ -76,7 +78,7 @@
     <Compile Include="MyForm\StartUpForm.Designer.cs">
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationModel\CourseSelectingResultPresentationModel.cs" />
+    <Compile Include="PresentationModel\CourseSelectResultPresentationModel.cs" />
     <Compile Include="PresentationModel\StartUpPresentationModel.cs" />
     <Compile Include="ViewModel\CourseProperty.cs" />
     <Compile Include="PresentationModel\CourseSelectingPresentationModel.cs" />
@@ -95,8 +97,8 @@
     <EmbeddedResource Include="MyController\CourseDataGridViewComponent.resx">
       <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyForm\CourseSelectingResultForm.resx">
-      <DependentUpon>CourseSelectingResultForm.cs</DependentUpon>
+    <EmbeddedResource Include="MyForm\CourseSelectResultForm.resx">
+      <DependentUpon>CourseSelectResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\ManageCourseForm.resx">
       <DependentUpon>ManageCourseForm.cs</DependentUpon>
