@@ -26,11 +26,12 @@ namespace homework
 
             _courseSelectingPresentationModel = coursePresentationModel;
             _courseSelectingPresentationModel._modelChanged += RefreshWidgetStatus;
+            _courseSelectingPresentationModel._courseChanged += RefreshTabControl;
             _courseDataGridViewComponent1.SetPresentationModel(coursePresentationModel);
             _courseDataGridViewComponent2.SetPresentationModel(coursePresentationModel);
 
             InitializeButton();
-            InitializeTabControl();
+            RefreshTabControl();
         }
 
         /// <summary>
@@ -50,8 +51,6 @@ namespace homework
         /// <summary>
         /// 設定PresentationModel
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
@@ -79,7 +78,7 @@ namespace homework
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
-        private void InitializeTabControl()
+        private void RefreshTabControl()
         {
             string controlName = "_courseDataGridViewComponent";
             _department = _courseSelectingPresentationModel.GetAllDepartment();
