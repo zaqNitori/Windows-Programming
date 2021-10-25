@@ -26,7 +26,7 @@ namespace homework.MyController
         }
 
         /// <summary>
-        /// 監聽滑鼠點擊釋放
+        /// 設定PM
         /// </summary>
         /// <history>
         ///     1.  2021.10.25  create function
@@ -37,7 +37,7 @@ namespace homework.MyController
         }
 
         /// <summary>
-        /// 監聽滑鼠點擊釋放
+        /// 設定資料來源
         /// </summary>
         /// <history>
         ///     1.  2021.10.25  create function

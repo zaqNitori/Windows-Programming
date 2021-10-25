@@ -10,6 +10,8 @@ namespace homework.Model
 {
     public class CourseModel
     {
+        public event CourseChangedEventHandler _courseDropped;
+        public delegate void CourseChangedEventHandler();
         private CourseCrawler _courseCrawler;
         private CourseAnalyzer _courseAnalyzer;
         private StoreDataManager _storeDataManager;
@@ -67,14 +69,42 @@ namespace homework.Model
         }
 
         /// <summary>
-        /// 用班級名稱取得課表
+        /// 用班級名稱取得可顯示的課表
         /// </summary>
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
         public List<Course> GetCourseByDepartmentName(string name)
         {
-            return _storeDataManager.GetCourseByDepartmentName(name);
+            List<Course> allCourses = _storeDataManager.GetCourseByDepartmentName(name);
+            List<Course> showCourses = new List<Course>();
+            foreach (var ac in allCourses)
+            {
+                if (!IsCourseNumberConflict(ac))
+                {
+                    showCourses.Add(ac);
+                }
+            }
+            return showCourses;
+        }
+
+        /// <summary>
+        /// 把已經選取的課號從總課表上移除
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        private bool IsCourseNumberConflict(Course course)
+        {
+            BindingList<Course> chosenCourses = _storeDataManager.GetChosenCourses();
+            foreach (var cc in chosenCourses)
+            {
+                if (GetCourseNumber(cc) == GetCourseNumber(course))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -152,7 +182,7 @@ namespace homework.Model
         {
             string errorMessage = "";
             if (GetCourseName(course2).Equals(GetCourseName(course1)))
-                errorMessage += SAME_COURSE_NAME_TEXT + GetCourseId(course1) + GetCourseName(course1) + COMMA + GetCourseId(course2) + GetCourseName(course2) + Environment.NewLine;
+                errorMessage += SAME_COURSE_NAME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) + COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
             return errorMessage;
         }
 
@@ -173,7 +203,7 @@ namespace homework.Model
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
-        private string GetCourseId(Course course)
+        private string GetCourseNumber(Course course)
         {
             return course.Number;
         }
@@ -194,7 +224,7 @@ namespace homework.Model
                 || CheckTimeDuplicate(course1.Thursday, course2.Thursday)
                 || CheckTimeDuplicate(course1.Friday, course2.Friday)
                 || CheckTimeDuplicate(course1.Saturday, course2.Saturday))
-                errorMessage += SAME_COURSE_TIME_TEXT + GetCourseId(course1) + GetCourseName(course1) + COMMA + GetCourseId(course2) + GetCourseName(course2) + Environment.NewLine;
+                errorMessage += SAME_COURSE_TIME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) + COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
             return errorMessage;
         }
 
@@ -235,6 +265,19 @@ namespace homework.Model
         public void DropCourse(int index)
         {
             _storeDataManager.DropCourse(index);
+            NotifyCourseDropped();
+        }
+
+        /// <summary>
+        /// Drop事件要觸發畫面更新 
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        private void NotifyCourseDropped()
+        {
+            if (_courseDropped != null)
+                _courseDropped();
         }
 
     }

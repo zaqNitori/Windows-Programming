@@ -11,6 +11,9 @@ namespace homework.PresentationModel
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
+        public event CourseChangedEventHandler _courseChanged;
+        public delegate void CourseChangedEventHandler();
+
         private CourseModel _courseModel;
         private HashSet<string> _courseSelectData;
         private const string ADD_COURSE_SUCCESS = "加選成功";
@@ -22,6 +25,7 @@ namespace homework.PresentationModel
             _courseSelectData = new HashSet<string>();
             IsButtonSendEnable = false;
             IsButtonShowSelectResultEnable = true;
+            _courseModel._courseDropped += NotifyCourseChanged;
         }
 
         public bool IsButtonSendEnable
@@ -40,7 +44,7 @@ namespace homework.PresentationModel
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
-        void NotifyObserver()
+        private void NotifyModelChanged()
         {
             if (_modelChanged != null)
                 _modelChanged();
@@ -61,7 +65,7 @@ namespace homework.PresentationModel
             }
 
             IsButtonSendEnable = (_courseSelectData.Count == 0) ? false : true;
-            NotifyObserver();
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -121,14 +125,28 @@ namespace homework.PresentationModel
 
             if (string.IsNullOrEmpty(errorMessage))
             {
+                _courseSelectData.Clear();
                 _courseModel.AddSelectedCourses();
                 MessageBox.Show(ADD_COURSE_SUCCESS);
+                NotifyCourseChanged();
             }
             else
             {
                 MessageBox.Show(ADD_COURSE_FAIL + Environment.NewLine + errorMessage);
             }
 
+        }
+
+        /// <summary>
+        /// 課程送出後，重整畫面 
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        private void NotifyCourseChanged()
+        {
+            if (_courseChanged != null)
+                _courseChanged();
         }
 
     }
