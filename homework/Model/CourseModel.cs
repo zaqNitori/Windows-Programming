@@ -119,16 +119,57 @@ namespace homework.Model
         }
 
         /// <summary>
-        /// 驗證是否有衝突
+        /// 驗證所有已選取跟正被選取的課程是否有衝突
         /// </summary>
         /// <history>
-        ///     1.  2021.10.25  create function
+        ///     1.  2021.10.30  create function
         /// </history> 
         public string CheckCoursesConflict(List<String> courses)
         {
+            string errorMessage = string.Empty;
+            ConvertSelectedCourses(courses);
+            
+            errorMessage += CheckSelectedCoursesConflict();
+            errorMessage += CheckExsistedCoursesConflict();
+            
+            return errorMessage;
+        }
+
+        /// <summary>
+        /// 驗證正被選取的課程是否有衝突
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.30  create function
+        /// </history> 
+        private string CheckSelectedCoursesConflict()
+        {
             string courseNameConflictErrorMessage = string.Empty;
             string courseTimeConflictErrorMessage = string.Empty;
-            _selectedCourses = ConvertSelectedCourses(courses);
+            int length = _selectedCourses.Count;
+
+            for (var i = 0; i < length; i++)
+            {
+                for (var j = i + 1; j < length; j++) 
+                {
+                    courseNameConflictErrorMessage += CheckIfCourseNameConflict(_selectedCourses[i], _selectedCourses[j]);
+                    courseTimeConflictErrorMessage += CheckIfCourseTimeComplicated(_selectedCourses[i], _selectedCourses[j]);
+                }
+            }
+
+            return courseNameConflictErrorMessage + courseTimeConflictErrorMessage;
+        }
+
+        /// <summary>
+        /// 驗證選取課程是否跟現在課表是否有衝突
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        ///     2.  2021.10.30  修復同時選取有問題的課程時也要阻擋
+        /// </history> 
+        private string CheckExsistedCoursesConflict()
+        {
+            string courseNameConflictErrorMessage = string.Empty;
+            string courseTimeConflictErrorMessage = string.Empty;
             BindingList<Course> chosenCourses = _storeDataManager.GetChosenCourses();
 
             foreach (var s in _selectedCourses)
@@ -159,17 +200,17 @@ namespace homework.Model
         /// </summary>
         /// <history>
         ///     1.  2021.10.25  create function
+        ///     2.  2021.10.30  取消回傳，直接修改再private成員，方便共用
         /// </history>
-        private List<Course> ConvertSelectedCourses(List<String> courses)
+        private void ConvertSelectedCourses(List<String> courses)
         {
-            List<Course> selectedCourses = new List<Course>();
+            _selectedCourses = new List<Course>();
 
             foreach (var c in courses)
             {
-                selectedCourses.Add(GetCurriculumByCourseId(c));
+                _selectedCourses.Add(GetCurriculumByCourseId(c));
             }
 
-            return selectedCourses;
         }
 
         /// <summary>

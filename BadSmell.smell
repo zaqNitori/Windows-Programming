@@ -188,13 +188,13 @@
           <Reviews>
             <Smell>
               <Id>1</Id>
-              <SmellType>Unsuitable naming(名不符實)-ActivateDoubleBuffer(activate)</SmellType>
-              <HashCode>UnsuitableNaming.Common.ActivateDoubleBuffer.ActivateDoubleBuffer</HashCode>
+              <SmellType>Unsuitable naming(名不符實)-CheckExsistedCoursesConflict(exsisted)</SmellType>
+              <HashCode>UnsuitableNaming.CourseModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</HashCode>
               <Severity>Red</Severity>
               <Weight>1</Weight>
               <Project>homework</Project>
-              <File>Common.cs</File>
-              <Line>19</Line>
+              <File>CourseModel.cs</File>
+              <Line>169</Line>
               <StartLine>0</StartLine>
               <StartCol>0</StartCol>
               <EndLine>0</EndLine>
@@ -202,27 +202,10 @@
               <Comment />
               <Auto>false</Auto>
             </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>ICS(函式-2)</SmellType>
-              <HashCode>Method2.Common.ActivateDoubleBuffer</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>Common.cs</File>
-              <Line>19</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(函式-2) 每個函式表示一種操作，因此一律使用動詞做為第一個單字</Comment>
-              <Auto>false</Auto>
-            </Smell>
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
-            <string>UnsuitableNaming.Common.ActivateDoubleBuffer.ActivateDoubleBuffer</string>
-            <string>Method2.Common.ActivateDoubleBuffer</string>
+            <string>UnsuitableNaming.CourseModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
           </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
@@ -363,7 +346,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2168</ProductionLoc>
+          <ProductionLoc>2209</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
