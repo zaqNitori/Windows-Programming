@@ -202,6 +202,22 @@
               <Comment />
               <Auto>false</Auto>
             </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>ICS(空白與空行-7)</SmellType>
+              <HashCode>SpacingAndNewLine7</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>ManageCourseForm.cs</File>
+              <Line>99</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(空白與空行-7) 二元運算子的前面與後面各加一個空白</Comment>
+              <Auto>false</Auto>
+            </Smell>
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
@@ -356,7 +372,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2658</ProductionLoc>
+          <ProductionLoc>2744</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

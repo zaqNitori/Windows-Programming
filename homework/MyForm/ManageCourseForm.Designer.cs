@@ -115,6 +115,7 @@ namespace homework
             // 
             // _courseTimeDataGridView
             // 
+            this._courseTimeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._courseTimeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._courseTimeDataGridView.Location = new System.Drawing.Point(253, 190);
             this._courseTimeDataGridView.Name = "_courseTimeDataGridView";
