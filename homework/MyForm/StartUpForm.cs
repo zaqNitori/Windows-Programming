@@ -18,6 +18,7 @@ namespace homework
         private CourseSelectingPresentationModel _courseSelectingPresentationModel;
         private CourseSelectResultPresentationModel _courseSelectingResultPresentationModel;
         private ManageCourseForm _manageCourseForm;
+        private CourseManagementPresentationModel _courseManagementPresentationModel;
         private StartUpPresentationModel _startUpPresentationModel;
         private const string BINDING_PROPERTY = "Enabled";
 
@@ -28,6 +29,19 @@ namespace homework
             InitializeButton();
             RefreshWidgetStatus();
 
+        }
+
+        /// <summary>
+        /// 設定PresentationModel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <history>
+        ///     1.  2021.10.30  create function
+        /// </history>
+        public void SetCourseManagementPresentationModel(CourseManagementPresentationModel courseManagementPresentationModel)
+        {
+            _courseManagementPresentationModel = courseManagementPresentationModel;
         }
 
         /// <summary>
