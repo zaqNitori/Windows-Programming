@@ -34,6 +34,7 @@ namespace homework.ViewModel
         public const string SOURCE_GROUP_BOX_TITLE = "GroupBoxTitle";
         public const string SOURCE_BUTTON_CONFIRM_ENABLED = "IsButtonConfirmEnabled";
         public const string SOURCE_BUTTON_ADD_ENABLED = "IsButtonAddCourseEnabled";
+        public const string SOURCE_BUTTON_CONFIRM_TEXT = "ButtonConfirmText";
     }
 
 }

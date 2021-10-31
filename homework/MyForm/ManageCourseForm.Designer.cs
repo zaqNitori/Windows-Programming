@@ -61,6 +61,14 @@ namespace homework
             this._buttonAddCourse = new System.Windows.Forms.Button();
             this._courseListBox = new System.Windows.Forms.ListBox();
             this._tabPage2 = new System.Windows.Forms.TabPage();
+            this._courseSection = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._sunday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._monday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._tuesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._wednesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._thursday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._friday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._saturday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this._courseTabControl.SuspendLayout();
             this._tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._courseTimeDataGridView)).BeginInit();
@@ -110,13 +118,23 @@ namespace homework
             this._buttonConfirm.Name = "_buttonConfirm";
             this._buttonConfirm.Size = new System.Drawing.Size(241, 61);
             this._buttonConfirm.TabIndex = 4;
-            this._buttonConfirm.Text = "button2";
+            this._buttonConfirm.Text = "儲存";
             this._buttonConfirm.UseVisualStyleBackColor = true;
             // 
             // _courseTimeDataGridView
             // 
+            this._courseTimeDataGridView.AllowUserToAddRows = false;
             this._courseTimeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._courseTimeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._courseTimeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this._courseSection,
+            this._sunday,
+            this._monday,
+            this._tuesday,
+            this._wednesday,
+            this._thursday,
+            this._friday,
+            this._saturday});
             this._courseTimeDataGridView.Location = new System.Drawing.Point(265, 190);
             this._courseTimeDataGridView.Name = "_courseTimeDataGridView";
             this._courseTimeDataGridView.RowHeadersWidth = 51;
@@ -390,12 +408,76 @@ namespace homework
             this._tabPage2.Text = "tabPage2";
             this._tabPage2.UseVisualStyleBackColor = true;
             // 
+            // _courseSection
+            // 
+            this._courseSection.HeaderText = "節數";
+            this._courseSection.MinimumWidth = 6;
+            this._courseSection.Name = "_courseSection";
+            this._courseSection.ReadOnly = true;
+            // 
+            // Sunday
+            // 
+            this._sunday.FalseValue = "false";
+            this._sunday.HeaderText = "日";
+            this._sunday.MinimumWidth = 6;
+            this._sunday.Name = "Sunday";
+            this._sunday.TrueValue = "true";
+            // 
+            // Monday
+            // 
+            this._monday.FalseValue = "false";
+            this._monday.HeaderText = "一";
+            this._monday.MinimumWidth = 6;
+            this._monday.Name = "Monday";
+            this._monday.TrueValue = "true";
+            // 
+            // Tuesday
+            // 
+            this._tuesday.FalseValue = "false";
+            this._tuesday.HeaderText = "二";
+            this._tuesday.MinimumWidth = 6;
+            this._tuesday.Name = "Tuesday";
+            this._tuesday.TrueValue = "true";
+            // 
+            // Wednesday
+            // 
+            this._wednesday.FalseValue = "false";
+            this._wednesday.HeaderText = "三";
+            this._wednesday.MinimumWidth = 6;
+            this._wednesday.Name = "Wednesday";
+            this._wednesday.TrueValue = "true";
+            // 
+            // Thursday
+            // 
+            this._thursday.FalseValue = "false";
+            this._thursday.HeaderText = "四";
+            this._thursday.MinimumWidth = 6;
+            this._thursday.Name = "Thursday";
+            this._thursday.TrueValue = "true";
+            // 
+            // Friday
+            // 
+            this._friday.FalseValue = "false";
+            this._friday.HeaderText = "五";
+            this._friday.MinimumWidth = 6;
+            this._friday.Name = "Friday";
+            this._friday.TrueValue = "true";
+            // 
+            // Saturday
+            // 
+            this._saturday.FalseValue = "false";
+            this._saturday.HeaderText = "六";
+            this._saturday.MinimumWidth = 6;
+            this._saturday.Name = "Saturday";
+            this._saturday.TrueValue = "true";
+            // 
             // ManageCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1176, 594);
             this.Controls.Add(this._courseTabControl);
+            this.DoubleBuffered = true;
             this.Name = "ManageCourseForm";
             this.Text = "ManageCourseForm";
             this._courseTabControl.ResumeLayout(false);
@@ -443,5 +525,13 @@ namespace homework
         private System.Windows.Forms.DataGridView _courseTimeDataGridView;
         private System.Windows.Forms.ComboBox _courseHourComboBox;
         private System.Windows.Forms.ComboBox _courseRequiredOrElectiveComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _courseSection;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _sunday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _monday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _tuesday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _wednesday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _thursday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _friday;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn _saturday;
     }
 }
