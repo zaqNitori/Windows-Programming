@@ -15,14 +15,6 @@ namespace homework
     public partial class ManageCourseForm : Form
     {
         private CourseManagementPresentationModel _courseManagementPresentationModel;
-        private const string BINDING_READ_ONLY_STATUS = "ReadOnly";
-        private const string BINDING_ENABLED_STATUS = "Enabled";
-        private const string BINDING_TEXT = "Text";
-        private const string SOURCE_COMBO_BOX_ENABLED = "IsCourseComboBoxEnabled";
-        private const string SOURCE_READ_ONLY_STATUS = "IsCourseEditReadOnly";
-        private const string SOURCE_GROUP_BOX_TITLE = "GroupBoxTitle";
-        private const string SOURCE_BUTTON_CONFIRM_ENABLED = "IsButtonConfirmEnabled";
-        private const string SOURCE_BUTTON_ADD_ENABLED = "IsButtonConfirmEnabled";
         const string COLUMN_NAME = "courseHour";
         const string COLUMN_TITLE = "節數";
 
@@ -51,8 +43,34 @@ namespace homework
         /// </summary>
         private void InitializeButton()
         {
-            _buttonAddCourse.DataBindings.Add(BINDING_ENABLED_STATUS, _courseManagementPresentationModel, SOURCE_BUTTON_ADD_ENABLED);
-            _buttonConfirm.DataBindings.Add(BINDING_ENABLED_STATUS, _courseManagementPresentationModel, SOURCE_BUTTON_CONFIRM_ENABLED);
+            _buttonAddCourse.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_BUTTON_ADD_ENABLED);
+            _buttonAddCourse.Click += ListenButtonAddCourseClicked; 
+            _buttonConfirm.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_BUTTON_CONFIRM_ENABLED);
+            _buttonConfirm.Click += ListenButtonConfirmClicked;
+        }
+
+        /// <summary>
+        /// 點擊新增/儲存按鈕
+        /// </summary>
+        private void ListenButtonConfirmClicked(object sender, EventArgs e)
+        {
+            _courseManagementPresentationModel.ClickConfirm();
+            _courseManagementPresentationModel.ClearCourse();
+            ClearGroupBoxStatus();
+            RefreshGroupBoxStatus();
+            RefreshButtonStatus();
+        }
+
+        /// <summary>
+        /// 點擊新增課程按鈕
+        /// </summary>
+        private void ListenButtonAddCourseClicked(object sender, EventArgs e)
+        {
+            _courseManagementPresentationModel.ClickAddCourse();
+            _courseManagementPresentationModel.ClearCourse();
+            ClearGroupBoxStatus();
+            RefreshGroupBoxStatus();
+            RefreshButtonStatus();
         }
 
         /// <summary>
@@ -60,8 +78,7 @@ namespace homework
         /// </summary>
         private void InitializeListBox()
         {
-            _courseListBox.DataSource = _courseManagementPresentationModel.GetCurriculumAsItem();
-            _courseListBox.SelectedIndex = -1;
+            RefreshListBoxStatus();
             _courseListBox.SelectedIndexChanged += ListenCourseListBoxSelectedIndexChanged;
         }
 
@@ -71,16 +88,16 @@ namespace homework
         private void SetGroupBoxControlsStatus()
         {
             InitializeDataGridView();
-            _courseGroupBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, SOURCE_GROUP_BOX_TITLE);
+            _courseGroupBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, CourseManageProperty.SOURCE_GROUP_BOX_TITLE);
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
             {
-                c.DataBindings.Add(BINDING_ENABLED_STATUS, _courseManagementPresentationModel, SOURCE_COMBO_BOX_ENABLED);
+                c.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_COMBO_BOX_ENABLED);
             }
 
             foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
             {
-                c.DataBindings.Add(BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, SOURCE_READ_ONLY_STATUS);
+                c.DataBindings.Add(CourseManageProperty.BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_READ_ONLY_STATUS);
             }
         }
 
@@ -89,7 +106,7 @@ namespace homework
         /// </summary>
         private void InitializeDataGridView()
         {
-            _courseTimeDataGridView.DataBindings.Add(BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, SOURCE_READ_ONLY_STATUS);
+            _courseTimeDataGridView.DataBindings.Add(CourseManageProperty.BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_READ_ONLY_STATUS);
             _courseTimeDataGridView.AutoGenerateColumns = false;
             _courseTimeDataGridView.RowHeadersVisible = false;
 
@@ -132,7 +149,6 @@ namespace homework
                 _courseTimeDataGridView.Columns.Add(columnCheck);
                 _courseTimeDataGridView.Columns[i + 1].HeaderText = (CourseProperty.Sunday + i).ToString();
             }
-
         }
 
         /// <summary>
@@ -140,16 +156,16 @@ namespace homework
         /// </summary>
         private void BindObjectWithData()
         {
-            _courseNumberTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Number");
-            _courseNameTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Name");
-            _courseStageTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Stage");
-            _courseCreditTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Credit");
-            _courseTeacherTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Teacher");
-            _courseRequiredOrElectiveComboBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "RequiredOrElective");
-            _courseTeachAssistantTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "TeachAssistant");
-            _courseLanguageTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Language");
-            _courseNoteTextBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Note");
-            _courseHourComboBox.DataBindings.Add(BINDING_TEXT, _courseManagementPresentationModel, "Hour");
+            _courseNumberTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Number");
+            _courseNameTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Name");
+            _courseStageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Stage");
+            _courseCreditTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Credit");
+            _courseTeacherTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Teacher");
+            _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "RequiredOrElective");
+            _courseTeachAssistantTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "TeachAssistant");
+            _courseLanguageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Language");
+            _courseNoteTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Note");
+            _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Hour");
         }
 
         /// <summary>
@@ -159,33 +175,38 @@ namespace homework
         {
             ListBox listBox = (ListBox)sender;
             int selectedIndex = listBox.SelectedIndex;
-            int previousIndex = _courseManagementPresentationModel.ListBoxSelectedIndex;
             DataItem item = (DataItem)listBox.SelectedItem;
 
-            if (selectedIndex != previousIndex)
-            {
-                SetWidgetStatus(selectedIndex);
-                _courseManagementPresentationModel.GetCourseByCourseNumber(item.Value);
-                RefreshWidgetStatus();
-            }
-
+            _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);
+            _courseManagementPresentationModel.GetCourseByCourseNumber(item.Value);
+            RefreshGroupBoxStatus();
+            RefreshButtonStatus();
         }
 
         /// <summary>
-        /// 重設元件狀態
+        /// 重整按鈕狀態
         /// </summary>
-        private void SetWidgetStatus(int index)
+        private void RefreshButtonStatus()
         {
-            _courseManagementPresentationModel.ListBoxSelectedIndex = index;
-            _courseManagementPresentationModel.IsCourseEditReadOnly = false;
-            _courseManagementPresentationModel.IsCourseComboBoxEnabled = true;
+            _buttonAddCourse.DataBindings[0].ReadValue();
+            _buttonConfirm.DataBindings[0].ReadValue();
         }
 
         /// <summary>
-        /// Initialize form status
+        /// 重整ListBox狀態
         /// </summary>
-        private void RefreshWidgetStatus()
+        private void RefreshListBoxStatus()
         {
+            _courseListBox.DataSource = _courseManagementPresentationModel.GetCurriculumAsItem();
+            _courseListBox.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// 重整GroupBox狀態
+        /// </summary>
+        private void RefreshGroupBoxStatus()
+        {
+            _courseGroupBox.DataBindings[0].ReadValue();
             _courseTimeDataGridView.DataBindings[0].ReadValue();
 
             foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
@@ -197,10 +218,25 @@ namespace homework
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
             {
                 c.DataBindings[0].ReadValue();
-                //MessageBox.Show(c.Name + c.DataBindings.Count.ToString() + Environment.NewLine);
             }
             _courseHourComboBox.DataBindings[1].ReadValue();
             _courseRequiredOrElectiveComboBox.DataBindings[1].ReadValue();
+        }
+
+        /// <summary>
+        /// 清除GroupBox狀態，回到預設值
+        /// </summary>
+        private void ClearGroupBoxStatus()
+        {
+            foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
+            {
+                c.Clear();
+            }
+
+            foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
+            {
+                c.SelectedIndex = -1;
+            }
         }
 
     }

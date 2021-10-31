@@ -22,9 +22,21 @@ namespace homework.PresentationModel
             IsButtonConfirmEnabled = false;
             ListBoxSelectedIndex = -1;
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
+            ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
+            CourseManageState = ((int)CourseManageAction.None);
+        }
+
+        public string ButtonConfirmText
+        {
+            get; set;
         }
 
         public string GroupBoxTitle
+        {
+            get; set;
+        }
+
+        public int CourseManageState
         {
             get; set;
         }
@@ -128,6 +140,56 @@ namespace homework.PresentationModel
             Language = _course.Language;
             Note = _course.Note;
             Hour = _course.Hour;
+        }
+
+        /// <summary>
+        /// 清除
+        /// </summary>
+        public void ClearCourse()
+        {
+            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = string.Empty;
+        }
+
+        /// <summary>
+        /// 點擊新增課程
+        /// </summary>
+        public void ClickAddCourse()
+        {
+            CourseManageState = ((int)CourseManageAction.Add);
+            GroupBoxTitle = CourseManageProperty.COURSE_ADD_GROUP_BOX_TITLE;
+            ButtonConfirmText = CourseManageProperty.BUTTON_ADD_TEXT;
+            IsButtonAddCourseEnabled = false;
+            IsButtonConfirmEnabled = false;
+            IsCourseEditReadOnly = false;
+            IsCourseComboBoxEnabled = true;
+        }
+
+        /// <summary>
+        /// 點擊新增/儲存
+        /// </summary>
+        public void ClickConfirm()
+        {
+            CourseManageState = ((int)CourseManageAction.Edit);
+            GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
+            IsButtonAddCourseEnabled = true;
+            IsButtonConfirmEnabled = false;
+            IsCourseEditReadOnly = true;
+            IsCourseComboBoxEnabled = false;
+        }
+
+        /// <summary>
+        /// 點擊新增/儲存
+        /// </summary>
+        public void SelectedIndexChanged(int selectedIndex)
+        {
+            ListBoxSelectedIndex = selectedIndex;
+            IsCourseEditReadOnly = false;
+            IsCourseComboBoxEnabled = true;
+            CourseManageState = ((int)CourseManageAction.Edit);
+            GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
+            ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
+            IsButtonAddCourseEnabled = true;
+            IsButtonConfirmEnabled = true;
         }
 
     }

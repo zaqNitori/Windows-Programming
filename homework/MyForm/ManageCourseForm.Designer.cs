@@ -117,11 +117,11 @@ namespace homework
             // 
             this._courseTimeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._courseTimeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._courseTimeDataGridView.Location = new System.Drawing.Point(253, 190);
+            this._courseTimeDataGridView.Location = new System.Drawing.Point(265, 190);
             this._courseTimeDataGridView.Name = "_courseTimeDataGridView";
             this._courseTimeDataGridView.RowHeadersWidth = 51;
             this._courseTimeDataGridView.RowTemplate.Height = 27;
-            this._courseTimeDataGridView.Size = new System.Drawing.Size(885, 279);
+            this._courseTimeDataGridView.Size = new System.Drawing.Size(867, 273);
             this._courseTimeDataGridView.TabIndex = 3;
             // 
             // _courseGroupBox
@@ -151,7 +151,7 @@ namespace homework
             this._courseGroupBox.Controls.Add(this._courseStatusComboBox);
             this._courseGroupBox.Location = new System.Drawing.Point(253, 6);
             this._courseGroupBox.Name = "_courseGroupBox";
-            this._courseGroupBox.Size = new System.Drawing.Size(885, 178);
+            this._courseGroupBox.Size = new System.Drawing.Size(885, 463);
             this._courseGroupBox.TabIndex = 2;
             this._courseGroupBox.TabStop = false;
             this._courseGroupBox.Text = "groupBox1";
@@ -376,7 +376,7 @@ namespace homework
             this._courseListBox.ItemHeight = 15;
             this._courseListBox.Location = new System.Drawing.Point(6, 0);
             this._courseListBox.Name = "_courseListBox";
-            this._courseListBox.Size = new System.Drawing.Size(241, 394);
+            this._courseListBox.Size = new System.Drawing.Size(241, 469);
             this._courseListBox.TabIndex = 0;
             // 
             // _tabPage2

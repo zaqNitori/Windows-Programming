@@ -4,6 +4,37 @@ namespace homework.ViewModel
 {
     public class Course
     {
+        public Course()
+        {
+
+        }
+
+        public Course(Course course)
+        {
+            Number = course.Number;
+            Name = course.Name;
+            Stage = course.Stage;
+            Credit = course.Credit;
+            Teacher = course.Teacher;
+            RequiredOrElective = course.RequiredOrElective;
+            TeachAssistant = course.TeachAssistant;
+            Language = course.Language;
+            Note = course.Note;
+            Hour = course.Hour;
+            Sunday = course.Sunday;
+            Monday = course.Monday;
+            Tuesday = course.Tuesday;
+            Wednesday = course.Wednesday;
+            Thursday = course.Thursday;
+            Friday = course.Friday;
+            Saturday = course.Saturday;
+            Classroom = course.Classroom;
+            NumberOfDropStudent = course.NumberOfDropStudent;
+            NumberOfStudent = course.NumberOfStudent;
+            Syllabus = course.Syllabus;
+            Audit = course.Audit;
+            Experiment = course.Experiment;
+        }
 
         public string Number
         {

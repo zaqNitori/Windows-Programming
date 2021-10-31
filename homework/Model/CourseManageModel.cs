@@ -40,7 +40,8 @@ namespace homework.Model
         /// </summary>
         public Course GetCourseByCourseNumber(string number)
         {
-            return _storeDataManager.GetCourseByCourseNumber(number);
+            Course course = _storeDataManager.GetCourseByCourseNumber(number);
+            return new Course(course);
         }
 
     }
