@@ -189,11 +189,11 @@
             <Smell>
               <Id>1</Id>
               <SmellType>Unsuitable naming(名不符實)-CheckExsistedCoursesConflict(exsisted)</SmellType>
-              <HashCode>UnsuitableNaming.CourseModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</HashCode>
+              <HashCode>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</HashCode>
               <Severity>Red</Severity>
               <Weight>1</Weight>
               <Project>homework</Project>
-              <File>CourseModel.cs</File>
+              <File>CourseSelectModel.cs</File>
               <Line>169</Line>
               <StartLine>0</StartLine>
               <StartCol>0</StartCol>
@@ -202,26 +202,10 @@
               <Comment />
               <Auto>false</Auto>
             </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>ICS(空白與空行-7)</SmellType>
-              <HashCode>SpacingAndNewLine7</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>ManageCourseForm.cs</File>
-              <Line>99</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(空白與空行-7) 二元運算子的前面與後面各加一個空白</Comment>
-              <Auto>false</Auto>
-            </Smell>
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
-            <string>UnsuitableNaming.CourseModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
+            <string>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
           </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
@@ -241,6 +225,11 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Data\DataItemManager.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Data\StoreDataManager.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -251,7 +240,12 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Model\CourseModel.cs</RelativePath>
+                <RelativePath>Model\CourseManageModel.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Model\CourseSelectModel.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -356,6 +350,11 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>ViewModel\CourseManageProperty.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>ViewModel\CourseProperty.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -366,13 +365,18 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>ViewModel\DataItem.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>ViewModel\Department.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2744</ProductionLoc>
+          <ProductionLoc>3342</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
