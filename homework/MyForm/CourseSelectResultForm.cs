@@ -25,7 +25,7 @@ namespace homework
             AddButton();
 
             _courseSelectResultPresentationModel = courseSelectResultPresentationModel;
-            _courseSelectResultDataGridView.DataSource = _courseSelectResultPresentationModel.GetSelectedCourses();
+            _courseSelectResultDataGridView.DataSource = _courseSelectResultPresentationModel.GetChosenCourses();
             _courseSelectResultDataGridView.CellContentClick += ClickCourseSelectResultDataGridViewCellContent;
             Common.ActivateDoubleBuffer(_courseSelectResultDataGridView);
         }

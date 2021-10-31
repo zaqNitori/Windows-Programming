@@ -20,15 +20,15 @@ namespace homework
         private CourseSelectResultForm _courseSelectResultForm;
         private const string BINDING_PROPERTY = "Enabled";
 
-        public SelectCourseForm(CourseSelectingPresentationModel coursePresentationModel)
+        public SelectCourseForm(CourseSelectingPresentationModel courseSelectingPresentationModel)
         {
             InitializeComponent();
 
-            _courseSelectingPresentationModel = coursePresentationModel;
+            _courseSelectingPresentationModel = courseSelectingPresentationModel;
             _courseSelectingPresentationModel._modelChanged += RefreshWidgetStatus;
             _courseSelectingPresentationModel._courseChanged += RefreshTabControl;
-            _courseDataGridViewComponent1.SetPresentationModel(coursePresentationModel);
-            _courseDataGridViewComponent2.SetPresentationModel(coursePresentationModel);
+            _courseDataGridViewComponent1.SetPresentationModel(courseSelectingPresentationModel);
+            _courseDataGridViewComponent2.SetPresentationModel(courseSelectingPresentationModel);
 
             InitializeButton();
             RefreshTabControl();
@@ -37,9 +37,6 @@ namespace homework
         /// <summary>
         /// Initial button
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private void InitializeButton()
         {
             _buttonShowSelectResult.DataBindings.Add(BINDING_PROPERTY, _courseSelectingPresentationModel, "IsButtonShowSelectResultEnable");
@@ -49,23 +46,8 @@ namespace homework
         }
 
         /// <summary>
-        /// 設定PresentationModel
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public void SetCourseSelectingResultPresentationModel(CourseSelectResultPresentationModel courseSelectingResultPresentationModel)
-        {
-            _courseSelectingResultPresentationModel = courseSelectingResultPresentationModel;
-        }
-
-        /// <summary>
         /// 重整畫面上button的狀態
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.16  create function
-        ///     2.  2021.10.24  相同功能，不同呼叫方式
-        /// </history>
         private void RefreshWidgetStatus()
         {
             _buttonSend.DataBindings[0].ReadValue();
@@ -75,9 +57,6 @@ namespace homework
         /// <summary>
         /// 初始化TabControl設定
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private void RefreshTabControl()
         {
             string controlName = "_courseDataGridViewComponent";
@@ -95,11 +74,9 @@ namespace homework
         /// <summary>
         /// 監聽選課結果form關閉事件
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
         private void OpenCourseSelectResultForm(object sender, EventArgs e)
         {
+            _courseSelectingResultPresentationModel = new CourseSelectResultPresentationModel(_courseSelectingPresentationModel.GetCourseSelectModel());
             _courseSelectResultForm = new CourseSelectResultForm(_courseSelectingResultPresentationModel);
             _courseSelectResultForm.FormClosed += ListenCourseSelectResultFormClosed;
             _courseSelectingPresentationModel.IsButtonShowSelectResultEnable = false;
@@ -110,9 +87,6 @@ namespace homework
         /// <summary>
         /// 送出選取課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
         private void SendSelectedCourses(object sender, EventArgs e)
         {
             _courseSelectingPresentationModel.SendSelectedCourses();
@@ -121,9 +95,6 @@ namespace homework
         /// <summary>
         /// 顯示選課結果button 點擊事件
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
         private void ListenCourseSelectResultFormClosed(object sender, FormClosedEventArgs e)
         {
             _courseSelectingPresentationModel.IsButtonShowSelectResultEnable = true;

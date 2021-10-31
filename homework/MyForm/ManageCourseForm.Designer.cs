@@ -158,6 +158,7 @@ namespace homework
             // 
             // _courseRequiredOrElective
             // 
+            this._courseRequiredOrElective.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._courseRequiredOrElective.FormattingEnabled = true;
             this._courseRequiredOrElective.Items.AddRange(new object[] {
             "○",
@@ -173,7 +174,12 @@ namespace homework
             // 
             // _courseHourComboBox
             // 
+            this._courseHourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._courseHourComboBox.FormattingEnabled = true;
+            this._courseHourComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this._courseHourComboBox.Location = new System.Drawing.Point(69, 148);
             this._courseHourComboBox.Name = "_courseHourComboBox";
             this._courseHourComboBox.Size = new System.Drawing.Size(127, 23);
@@ -190,6 +196,7 @@ namespace homework
             // 
             // _courseDepartmentComboBox
             // 
+            this._courseDepartmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._courseDepartmentComboBox.FormattingEnabled = true;
             this._courseDepartmentComboBox.Location = new System.Drawing.Point(311, 148);
             this._courseDepartmentComboBox.Name = "_courseDepartmentComboBox";
@@ -344,7 +351,11 @@ namespace homework
             // 
             // _courseStatusComboBox
             // 
+            this._courseStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._courseStatusComboBox.FormattingEnabled = true;
+            this._courseStatusComboBox.Items.AddRange(new object[] {
+            "開課",
+            "停開"});
             this._courseStatusComboBox.Location = new System.Drawing.Point(6, 24);
             this._courseStatusComboBox.Name = "_courseStatusComboBox";
             this._courseStatusComboBox.Size = new System.Drawing.Size(121, 23);
@@ -365,7 +376,7 @@ namespace homework
             this._courseListBox.ItemHeight = 15;
             this._courseListBox.Location = new System.Drawing.Point(6, 0);
             this._courseListBox.Name = "_courseListBox";
-            this._courseListBox.Size = new System.Drawing.Size(241, 469);
+            this._courseListBox.Size = new System.Drawing.Size(241, 259);
             this._courseListBox.TabIndex = 0;
             // 
             // _tabPage2

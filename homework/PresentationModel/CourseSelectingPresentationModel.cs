@@ -39,6 +39,14 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
+        /// 取得model
+        /// </summary>
+        public CourseModel GetCourseSelectModel()
+        {
+            return _courseModel;
+        }
+
+        /// <summary>
         /// GridCheckBox點擊事件trigger 
         /// </summary>
         /// <history>

@@ -20,22 +20,18 @@ namespace homework.Model
         public const string SAME_COURSE_NAME_TEXT = "課程名稱相同 : ";
         public const string SAME_COURSE_TIME_TEXT = "課程衝堂 : ";
 
-        public CourseModel()
+        public CourseModel(StoreDataManager storeDataManager)
         {
             _courseCrawler = new CourseCrawler();
             _courseAnalyzer = new CourseAnalyzer();
-            _storeDataManager = new StoreDataManager();
+            _storeDataManager = storeDataManager;
 
         }
 
         #region Public
-
         /// <summary>
         /// 爬取課程資訊並儲存
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public void FetchCourseInfo(List<string> courseUrl)
         {
             List<Course> courses;
@@ -54,13 +50,9 @@ namespace homework.Model
         }
 
         #region Get
-
         /// <summary>
         /// 取得所有班級名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public List<string> GetAllDepartmentName()
         {
             List<Department> departments = _storeDataManager.GetAllDepartment();
@@ -75,9 +67,6 @@ namespace homework.Model
         /// <summary>
         /// 用班級名稱取得可顯示的課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public List<Course> GetCourseByDepartmentName(string name)
         {
             List<Course> allCourses = _storeDataManager.GetCourseByDepartmentName(name);
@@ -93,38 +82,11 @@ namespace homework.Model
         }
 
         /// <summary>
-        /// 用課號取得課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public Course GetCurriculumByCourseId(string id)
-        {
-            return _storeDataManager.GetCourseByCourseId(id);
-        }
-
-        /// <summary>
         /// 取得以選取的課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public BindingList<Course> GetSelectedCourses()
+        public BindingList<Course> GetChosenCourses()
         {
             return _storeDataManager.GetChosenCourses();
-        }
-
-        /// <summary>
-        /// 取得Item型態的所有課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
-        public List<DataItem> GetCurriculumAsItem()
-        {
-            Dictionary<string, Course> curriculum = _storeDataManager.GetCurriculumCourses();
-
-            return DataItemManager.GetDataItems(curriculum);
         }
 
         #endregion
@@ -132,9 +94,6 @@ namespace homework.Model
         /// <summary>
         /// 退選課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history> 
         public void DropCourse(int index)
         {
             _storeDataManager.DropCourse(index);
@@ -144,9 +103,6 @@ namespace homework.Model
         /// <summary>
         /// 驗證所有已選取跟正被選取的課程是否有衝突
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.30  create function
-        /// </history> 
         public string CheckCoursesConflict(List<String> courses)
         {
             string errorMessage = string.Empty;
@@ -161,9 +117,6 @@ namespace homework.Model
         /// <summary>
         /// 將選取課程放入課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public void AddSelectedCourses()
         {
             _storeDataManager.AddSelectedCourses(_selectedCourses);
@@ -176,9 +129,6 @@ namespace homework.Model
         /// <summary>
         /// 把已經選取的課號從總課表上移除
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private bool IsCourseNumberConflict(Course course)
         {
             BindingList<Course> chosenCourses = _storeDataManager.GetChosenCourses();
@@ -195,9 +145,6 @@ namespace homework.Model
         /// <summary>
         /// 驗證正被選取的課程是否有衝突
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.30  create function
-        /// </history> 
         private string CheckSelectedCoursesConflict()
         {
             string courseNameConflictErrorMessage = string.Empty;
@@ -219,10 +166,6 @@ namespace homework.Model
         /// <summary>
         /// 驗證選取課程是否跟現在課表是否有衝突
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        ///     2.  2021.10.30  修復同時選取有問題的課程時也要阻擋
-        /// </history> 
         private string CheckExsistedCoursesConflict()
         {
             string courseNameConflictErrorMessage = string.Empty;
@@ -244,17 +187,13 @@ namespace homework.Model
         /// <summary>
         /// 藉由課號清單轉換成課程清單
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        ///     2.  2021.10.30  取消回傳，直接修改再private成員，方便共用
-        /// </history>
         private void ConvertSelectedCourses(List<String> courses)
         {
             _selectedCourses = new List<Course>();
 
             foreach (var c in courses)
             {
-                _selectedCourses.Add(GetCurriculumByCourseId(c));
+                _selectedCourses.Add(GetCourseByCourseNumber(c));
             }
 
         }
@@ -262,9 +201,6 @@ namespace homework.Model
         /// <summary>
         /// 判別課程名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private string CheckIfCourseNameConflict(Course course1, Course course2)
         {
             string errorMessage = "";
@@ -276,9 +212,6 @@ namespace homework.Model
         /// <summary>
         /// 取得課程名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private string GetCourseName(Course course)
         {
             return course.Name;
@@ -287,20 +220,22 @@ namespace homework.Model
         /// <summary>
         /// 取得課程編號
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private string GetCourseNumber(Course course)
         {
             return course.Number;
         }
 
         /// <summary>
+        /// 用課號取得課程
+        /// </summary>
+        private Course GetCourseByCourseNumber(string id)
+        {
+            return _storeDataManager.GetCourseByCourseNumber(id);
+        }
+
+        /// <summary>
         /// 判別衝堂
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private string CheckIfCourseTimeComplicated(Course course1, Course course2)
         {
             string errorMessage = "";
@@ -318,9 +253,6 @@ namespace homework.Model
         /// <summary>
         /// 衝堂
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private bool CheckTimeDuplicate(string courseTime1, string courseTime2)
         {
             string[] courseTimeArray = courseTime1.Split();
@@ -335,9 +267,6 @@ namespace homework.Model
         /// <summary>
         /// Drop事件要觸發畫面更新 
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private void NotifyCourseDropped()
         {
             if (_courseDropped != null)

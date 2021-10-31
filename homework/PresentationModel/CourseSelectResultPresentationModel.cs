@@ -24,9 +24,9 @@ namespace homework.PresentationModel
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history> 
-        public BindingList<Course> GetSelectedCourses()
+        public BindingList<Course> GetChosenCourses()
         {
-            return _courseModel.GetSelectedCourses();
+            return _courseModel.GetChosenCourses();
         }
 
         /// <summary>

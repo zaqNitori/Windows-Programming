@@ -15,12 +15,10 @@ namespace homework
     public partial class ManageCourseForm : Form
     {
         private CourseManagementPresentationModel _courseManagementPresentationModel;
-        private List<int> _courseTime;
-        const int COLUMN_WIDTH = 40;
+        private const string BINDING_PROPERTY = "ReadOnly";
+        private const string SOURCE_PROPERTY = "IsCourseEditReadOnly";
         const string COLUMN_NAME = "courseHour";
         const string COLUMN_TITLE = "節數";
-        const string COURSE_MANAGE_TITLE = "課程管理";
-        const string CLASS_MANAGE_TITLE = "班級管理";
 
         public ManageCourseForm(CourseManagementPresentationModel courseManagementPresentationModel)
         {
@@ -28,20 +26,13 @@ namespace homework
             InitializeComponent();
             InitializeTabControl();
             InitializeListBox();
-            _courseTime = new List<int>();
-            for (var i = 1; i < 9; i++)
-            {
-                _courseTime.Add(i);
-            }
             InitializeDataGridView();
+            SetGroupBoxControlsStatus(_courseGroupBox.Controls);
         }
 
         /// <summary>
         /// 初始化TabControl
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         private void InitializeTabControl()
         {
             _tabPage1.Text = CourseManageProperty.COURSE_MANAGE_TAB_PAGE_TITLE;
@@ -51,9 +42,6 @@ namespace homework
         /// <summary>
         /// 初始化TabControl
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         private void InitializeListBox()
         {
             _courseListBox.DataSource = _courseManagementPresentationModel.GetCurriculumAsItem();
@@ -64,15 +52,12 @@ namespace homework
         /// <summary>
         /// 初始化Grid
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         private void InitializeDataGridView()
         {
+            _courseTimeDataGridView.DataBindings.Add(BINDING_PROPERTY, _courseManagementPresentationModel, SOURCE_PROPERTY);
             _courseTimeDataGridView.AutoGenerateColumns = false;
             _courseTimeDataGridView.RowHeadersVisible = false;
 
-            _courseTimeDataGridView.DataSource = _courseTime;
             AddRowNumber();
             AddCheckBox();
         }
@@ -80,12 +65,14 @@ namespace homework
         /// <summary>
         /// 節數欄位生成
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         private void AddRowNumber()
         {
             _courseTimeDataGridView.Columns.Add(COLUMN_NAME, COLUMN_TITLE);
+
+            for (var i = 1; i < 9; i++) 
+            {
+                _courseTimeDataGridView.Rows.Add();
+            }
 
             //int i = 1;
             //foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
@@ -99,9 +86,6 @@ namespace homework
         /// <summary>
         /// Grid CheckBox生成
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         private void AddCheckBox()
         {
 
@@ -116,12 +100,45 @@ namespace homework
 
         }
 
+        /// <summary>
+        /// 監聽ListBox 選取事件
+        /// </summary>
         private void ListenCourseListBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            ListBox cmb = (ListBox)sender;
-            DataItem item = (DataItem)cmb.SelectedItem;
+            //ListBox cmb = (ListBox)sender;
+            //DataItem item = (DataItem)cmb.SelectedItem;
+            //MessageBox.Show(item.Value + '-' + item.Text);
+            _courseManagementPresentationModel.IsCourseEditReadOnly = false;
+            RefreshWidgetStatus();
+        }
 
-            MessageBox.Show(item.Value + '-' + item.Text);
+        /// <summary>
+        /// 設定groupBox 內的元件的狀態
+        /// </summary>
+        private void SetGroupBoxControlsStatus(Control.ControlCollection controlCollection)
+        {
+
+            if (controlCollection == null)
+            {
+                return;
+            }
+            
+            foreach (TextBoxBase c in controlCollection.OfType<TextBoxBase>())
+            {
+                c.DataBindings.Add(BINDING_PROPERTY, _courseManagementPresentationModel, SOURCE_PROPERTY);
+            }
+        }
+
+        /// <summary>
+        /// Initialize form status
+        /// </summary>
+        private void RefreshWidgetStatus()
+        {
+            _courseTimeDataGridView.DataBindings[0].ReadValue();
+            foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
+            {
+                c.DataBindings[0].ReadValue();
+            }
         }
 
     }

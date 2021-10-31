@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using homework.PresentationModel;
 using homework.Model;
+using homework.Data;
 
 namespace homework
 {
@@ -8,18 +9,16 @@ namespace homework
     {
         private List<string> _coursesUrl;
         private CourseModel _courseModel;
-        private CourseSelectingPresentationModel _courseSelectingPresentationModel;
-        private CourseSelectResultPresentationModel _courseSelectingResultPresentationModel;
-        private CourseManagementPresentationModel _courseManagementPresentationModel;
+        private CourseManageModel _courseManageModel;
         private StartUpPresentationModel _startUpPresentationModel;
+        private StoreDataManager _storeDataManager;
 
         public StartUp()
         {
             _coursesUrl = new List<string>();
-            _courseModel = new CourseModel();
-            _courseSelectingPresentationModel = new CourseSelectingPresentationModel(_courseModel);
-            _courseSelectingResultPresentationModel = new CourseSelectResultPresentationModel(_courseModel);
-            _courseManagementPresentationModel = new CourseManagementPresentationModel(_courseModel);
+            _storeDataManager = new StoreDataManager();
+            _courseModel = new CourseModel(_storeDataManager);
+            _courseManageModel = new CourseManageModel(_storeDataManager);
             _startUpPresentationModel = new StartUpPresentationModel(_courseModel);
             startUpForm = new StartUpForm(_startUpPresentationModel);
             SetCoursesUrl();
@@ -55,9 +54,8 @@ namespace homework
         {
             _courseModel.FetchCourseInfo(_coursesUrl);
 
-            startUpForm.SetCourseSelectingPresentationModel(_courseSelectingPresentationModel);
-            startUpForm.SetCourseSelectingResultPresentationModel(_courseSelectingResultPresentationModel);
-            startUpForm.SetCourseManagementPresentationModel(_courseManagementPresentationModel);
+            startUpForm.SetCourseManageModel(_courseManageModel);
+            startUpForm.SetCourseSelectModel(_courseModel);
         }
 
     }
