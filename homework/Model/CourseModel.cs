@@ -67,9 +67,9 @@ namespace homework.Model
         /// <summary>
         /// 用班級名稱取得可顯示的課表
         /// </summary>
-        public List<Course> GetCourseByDepartmentName(string name)
+        public List<Course> GetCoursesByDepartmentName(string name)
         {
-            List<Course> allCourses = _storeDataManager.GetCourseByDepartmentName(name);
+            List<Course> allCourses = _storeDataManager.GetCoursesByDepartmentName(name);
             List<Course> showCourses = new List<Course>();
             foreach (var ac in allCourses)
             {
@@ -228,9 +228,9 @@ namespace homework.Model
         /// <summary>
         /// 用課號取得課程
         /// </summary>
-        private Course GetCourseByCourseNumber(string id)
+        private Course GetCourseByCourseNumber(string number)
         {
-            return _storeDataManager.GetCourseByCourseNumber(id);
+            return _storeDataManager.GetCourseByCourseNumber(number);
         }
 
         /// <summary>

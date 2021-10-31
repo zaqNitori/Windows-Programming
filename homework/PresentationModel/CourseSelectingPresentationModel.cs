@@ -118,7 +118,7 @@ namespace homework.PresentationModel
         /// </history>
         public List<Course> GetCourseByDepartmentName(string name)
         {
-            return _courseModel.GetCourseByDepartmentName(name);
+            return _courseModel.GetCoursesByDepartmentName(name);
         }
 
         /// <summary>

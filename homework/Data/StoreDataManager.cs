@@ -100,7 +100,7 @@ namespace homework.Data
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
-        public List<Course> GetCourseByDepartmentName(string name)
+        public List<Course> GetCoursesByDepartmentName(string name)
         {
             foreach (var dep in _departments)
             {
