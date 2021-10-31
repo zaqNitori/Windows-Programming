@@ -125,7 +125,7 @@ namespace homework
         /// </history>
         private void OpenCourseManageForm(object sender, EventArgs e)
         {
-            _manageCourseForm = new ManageCourseForm();
+            _manageCourseForm = new ManageCourseForm(_courseManagementPresentationModel);
             _startUpPresentationModel.IsButtonCourseManagementEnabled = false;
             _manageCourseForm.FormClosed += ListenCourseManagementFormClosed;
             RefreshWidgetStatus();

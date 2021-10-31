@@ -28,6 +28,8 @@ namespace homework.Model
 
         }
 
+        #region Public
+
         /// <summary>
         /// 爬取課程資訊並儲存
         /// </summary>
@@ -50,6 +52,8 @@ namespace homework.Model
             }
 
         }
+
+        #region Get
 
         /// <summary>
         /// 取得所有班級名稱
@@ -89,6 +93,87 @@ namespace homework.Model
         }
 
         /// <summary>
+        /// 用課號取得課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public Course GetCurriculumByCourseId(string id)
+        {
+            return _storeDataManager.GetCourseByCourseId(id);
+        }
+
+        /// <summary>
+        /// 取得以選取的課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public BindingList<Course> GetSelectedCourses()
+        {
+            return _storeDataManager.GetChosenCourses();
+        }
+
+        /// <summary>
+        /// 取得Item型態的所有課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.31  create function
+        /// </history>
+        public List<DataItem> GetCurriculumAsItem()
+        {
+            Dictionary<string, Course> curriculum = _storeDataManager.GetCurriculumCourses();
+
+            return DataItemManager.GetDataItems(curriculum);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 退選課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history> 
+        public void DropCourse(int index)
+        {
+            _storeDataManager.DropCourse(index);
+            NotifyCourseDropped();
+        }
+
+        /// <summary>
+        /// 驗證所有已選取跟正被選取的課程是否有衝突
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.30  create function
+        /// </history> 
+        public string CheckCoursesConflict(List<String> courses)
+        {
+            string errorMessage = string.Empty;
+            ConvertSelectedCourses(courses);
+
+            errorMessage += CheckSelectedCoursesConflict();
+            errorMessage += CheckExsistedCoursesConflict();
+
+            return errorMessage;
+        }
+
+        /// <summary>
+        /// 將選取課程放入課表
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public void AddSelectedCourses()
+        {
+            _storeDataManager.AddSelectedCourses(_selectedCourses);
+        }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
         /// 把已經選取的課號從總課表上移除
         /// </summary>
         /// <history>
@@ -108,34 +193,6 @@ namespace homework.Model
         }
 
         /// <summary>
-        /// 用課號取得課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public Course GetCurriculumByCourseId(string id)
-        {
-            return _storeDataManager.GetCourseByCourseId(id);
-        }
-
-        /// <summary>
-        /// 驗證所有已選取跟正被選取的課程是否有衝突
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.30  create function
-        /// </history> 
-        public string CheckCoursesConflict(List<String> courses)
-        {
-            string errorMessage = string.Empty;
-            ConvertSelectedCourses(courses);
-            
-            errorMessage += CheckSelectedCoursesConflict();
-            errorMessage += CheckExsistedCoursesConflict();
-            
-            return errorMessage;
-        }
-
-        /// <summary>
         /// 驗證正被選取的課程是否有衝突
         /// </summary>
         /// <history>
@@ -149,7 +206,7 @@ namespace homework.Model
 
             for (var i = 0; i < length; i++)
             {
-                for (var j = i + 1; j < length; j++) 
+                for (var j = i + 1; j < length; j++)
                 {
                     courseNameConflictErrorMessage += CheckIfCourseNameConflict(_selectedCourses[i], _selectedCourses[j]);
                     courseTimeConflictErrorMessage += CheckIfCourseTimeComplicated(_selectedCourses[i], _selectedCourses[j]);
@@ -182,17 +239,6 @@ namespace homework.Model
             }
 
             return courseNameConflictErrorMessage + courseTimeConflictErrorMessage;
-        }
-
-        /// <summary>
-        /// 將選取課程放入課表
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public void AddSelectedCourses()
-        {
-            _storeDataManager.AddSelectedCourses(_selectedCourses);
         }
 
         /// <summary>
@@ -287,29 +333,6 @@ namespace homework.Model
         }
 
         /// <summary>
-        /// 取得以選取的課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public BindingList<Course> GetSelectedCourses()
-        {
-            return _storeDataManager.GetChosenCourses();
-        }
-
-        /// <summary>
-        /// 退選課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history> 
-        public void DropCourse(int index)
-        {
-            _storeDataManager.DropCourse(index);
-            NotifyCourseDropped();
-        }
-
-        /// <summary>
         /// Drop事件要觸發畫面更新 
         /// </summary>
         /// <history>
@@ -320,6 +343,8 @@ namespace homework.Model
             if (_courseDropped != null)
                 _courseDropped();
         }
+
+        #endregion
 
     }
 }

@@ -42,12 +42,12 @@ namespace homework.Data
         }
 
         /// <summary>
-        /// 取得科系名稱
+        /// 取得所有課程
         /// </summary>
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history>
-        private Dictionary<string, Course> GetCurriculumCourses()
+        public Dictionary<string, Course> GetCurriculumCourses()
         {
             return _curriculum.Courses;
         }

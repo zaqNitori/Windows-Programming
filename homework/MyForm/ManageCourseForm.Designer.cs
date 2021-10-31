@@ -32,13 +32,14 @@ namespace homework
             this._alertText = new System.Windows.Forms.Label();
             this._courseTabControl = new System.Windows.Forms.TabControl();
             this._tabPage1 = new System.Windows.Forms.TabPage();
-            this._button2 = new System.Windows.Forms.Button();
+            this._buttonConfirm = new System.Windows.Forms.Button();
             this._courseTimeDataGridView = new System.Windows.Forms.DataGridView();
             this._courseGroupBox = new System.Windows.Forms.GroupBox();
+            this._courseRequiredOrElective = new System.Windows.Forms.ComboBox();
+            this._courseHourComboBox = new System.Windows.Forms.ComboBox();
             this._courseDepartmentLabel = new System.Windows.Forms.Label();
             this._courseDepartmentComboBox = new System.Windows.Forms.ComboBox();
             this._courseHourLabel = new System.Windows.Forms.Label();
-            this._courseHourTextBox = new System.Windows.Forms.TextBox();
             this._courseNoteLabel = new System.Windows.Forms.Label();
             this._courseNoteTextBox = new System.Windows.Forms.TextBox();
             this._courseLanguageLabel = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@ namespace homework
             this._courseTeachAssistantLabel = new System.Windows.Forms.Label();
             this._courseTeachAssistantTextBox = new System.Windows.Forms.TextBox();
             this._courseRequiredOrElectiveLabel = new System.Windows.Forms.Label();
-            this._courseRequiredOrElectiveTextBox = new System.Windows.Forms.TextBox();
             this._courseTeacherLabel = new System.Windows.Forms.Label();
             this._courseTeacherTextBox = new System.Windows.Forms.TextBox();
             this._courseCreditLabel = new System.Windows.Forms.Label();
@@ -58,7 +58,7 @@ namespace homework
             this._courseNumberLabel = new System.Windows.Forms.Label();
             this._courseNumberTextBox = new System.Windows.Forms.TextBox();
             this._courseStatusComboBox = new System.Windows.Forms.ComboBox();
-            this._button1 = new System.Windows.Forms.Button();
+            this._buttonAddCourse = new System.Windows.Forms.Button();
             this._courseListBox = new System.Windows.Forms.ListBox();
             this._tabPage2 = new System.Windows.Forms.TabPage();
             this._courseTabControl.SuspendLayout();
@@ -91,10 +91,10 @@ namespace homework
             // 
             // _tabPage1
             // 
-            this._tabPage1.Controls.Add(this._button2);
+            this._tabPage1.Controls.Add(this._buttonConfirm);
             this._tabPage1.Controls.Add(this._courseTimeDataGridView);
             this._tabPage1.Controls.Add(this._courseGroupBox);
-            this._tabPage1.Controls.Add(this._button1);
+            this._tabPage1.Controls.Add(this._buttonAddCourse);
             this._tabPage1.Controls.Add(this._courseListBox);
             this._tabPage1.Location = new System.Drawing.Point(4, 25);
             this._tabPage1.Name = "_tabPage1";
@@ -104,14 +104,14 @@ namespace homework
             this._tabPage1.Text = "tabPage1";
             this._tabPage1.UseVisualStyleBackColor = true;
             // 
-            // _button2
+            // _buttonConfirm
             // 
-            this._button2.Location = new System.Drawing.Point(897, 475);
-            this._button2.Name = "_button2";
-            this._button2.Size = new System.Drawing.Size(241, 61);
-            this._button2.TabIndex = 4;
-            this._button2.Text = "button2";
-            this._button2.UseVisualStyleBackColor = true;
+            this._buttonConfirm.Location = new System.Drawing.Point(897, 475);
+            this._buttonConfirm.Name = "_buttonConfirm";
+            this._buttonConfirm.Size = new System.Drawing.Size(241, 61);
+            this._buttonConfirm.TabIndex = 4;
+            this._buttonConfirm.Text = "button2";
+            this._buttonConfirm.UseVisualStyleBackColor = true;
             // 
             // _courseTimeDataGridView
             // 
@@ -126,10 +126,11 @@ namespace homework
             // 
             // _courseGroupBox
             // 
+            this._courseGroupBox.Controls.Add(this._courseRequiredOrElective);
+            this._courseGroupBox.Controls.Add(this._courseHourComboBox);
             this._courseGroupBox.Controls.Add(this._courseDepartmentLabel);
             this._courseGroupBox.Controls.Add(this._courseDepartmentComboBox);
             this._courseGroupBox.Controls.Add(this._courseHourLabel);
-            this._courseGroupBox.Controls.Add(this._courseHourTextBox);
             this._courseGroupBox.Controls.Add(this._courseNoteLabel);
             this._courseGroupBox.Controls.Add(this._courseNoteTextBox);
             this._courseGroupBox.Controls.Add(this._courseLanguageLabel);
@@ -137,7 +138,6 @@ namespace homework
             this._courseGroupBox.Controls.Add(this._courseTeachAssistantLabel);
             this._courseGroupBox.Controls.Add(this._courseTeachAssistantTextBox);
             this._courseGroupBox.Controls.Add(this._courseRequiredOrElectiveLabel);
-            this._courseGroupBox.Controls.Add(this._courseRequiredOrElectiveTextBox);
             this._courseGroupBox.Controls.Add(this._courseTeacherLabel);
             this._courseGroupBox.Controls.Add(this._courseTeacherTextBox);
             this._courseGroupBox.Controls.Add(this._courseCreditLabel);
@@ -155,6 +155,29 @@ namespace homework
             this._courseGroupBox.TabIndex = 2;
             this._courseGroupBox.TabStop = false;
             this._courseGroupBox.Text = "groupBox1";
+            // 
+            // _courseRequiredOrElective
+            // 
+            this._courseRequiredOrElective.FormattingEnabled = true;
+            this._courseRequiredOrElective.Items.AddRange(new object[] {
+            "○",
+            "△",
+            "☆",
+            "●",
+            "▲",
+            "★"});
+            this._courseRequiredOrElective.Location = new System.Drawing.Point(691, 55);
+            this._courseRequiredOrElective.Name = "_courseRequiredOrElective";
+            this._courseRequiredOrElective.Size = new System.Drawing.Size(122, 23);
+            this._courseRequiredOrElective.TabIndex = 24;
+            // 
+            // _courseHourComboBox
+            // 
+            this._courseHourComboBox.FormattingEnabled = true;
+            this._courseHourComboBox.Location = new System.Drawing.Point(69, 148);
+            this._courseHourComboBox.Name = "_courseHourComboBox";
+            this._courseHourComboBox.Size = new System.Drawing.Size(127, 23);
+            this._courseHourComboBox.TabIndex = 23;
             // 
             // _courseDepartmentLabel
             // 
@@ -181,13 +204,6 @@ namespace homework
             this._courseHourLabel.Size = new System.Drawing.Size(54, 15);
             this._courseHourLabel.TabIndex = 20;
             this._courseHourLabel.Text = "時數(*)";
-            // 
-            // _courseHourTextBox
-            // 
-            this._courseHourTextBox.Location = new System.Drawing.Point(69, 146);
-            this._courseHourTextBox.Name = "_courseHourTextBox";
-            this._courseHourTextBox.Size = new System.Drawing.Size(159, 25);
-            this._courseHourTextBox.TabIndex = 19;
             // 
             // _courseNoteLabel
             // 
@@ -245,13 +261,6 @@ namespace homework
             this._courseRequiredOrElectiveLabel.Size = new System.Drawing.Size(39, 15);
             this._courseRequiredOrElectiveLabel.TabIndex = 12;
             this._courseRequiredOrElectiveLabel.Text = "修(*)";
-            // 
-            // _courseRequiredOrElectiveTextBox
-            // 
-            this._courseRequiredOrElectiveTextBox.Location = new System.Drawing.Point(691, 53);
-            this._courseRequiredOrElectiveTextBox.Name = "_courseRequiredOrElectiveTextBox";
-            this._courseRequiredOrElectiveTextBox.Size = new System.Drawing.Size(122, 25);
-            this._courseRequiredOrElectiveTextBox.TabIndex = 11;
             // 
             // _courseTeacherLabel
             // 
@@ -341,14 +350,14 @@ namespace homework
             this._courseStatusComboBox.Size = new System.Drawing.Size(121, 23);
             this._courseStatusComboBox.TabIndex = 0;
             // 
-            // _button1
+            // _buttonAddCourse
             // 
-            this._button1.Location = new System.Drawing.Point(6, 475);
-            this._button1.Name = "_button1";
-            this._button1.Size = new System.Drawing.Size(241, 61);
-            this._button1.TabIndex = 1;
-            this._button1.Text = "button1";
-            this._button1.UseVisualStyleBackColor = true;
+            this._buttonAddCourse.Location = new System.Drawing.Point(6, 475);
+            this._buttonAddCourse.Name = "_buttonAddCourse";
+            this._buttonAddCourse.Size = new System.Drawing.Size(241, 61);
+            this._buttonAddCourse.TabIndex = 1;
+            this._buttonAddCourse.Text = "新增課程";
+            this._buttonAddCourse.UseVisualStyleBackColor = true;
             // 
             // _courseListBox
             // 
@@ -398,7 +407,7 @@ namespace homework
         private System.Windows.Forms.Label _courseNumberLabel;
         private System.Windows.Forms.TextBox _courseNumberTextBox;
         private System.Windows.Forms.ComboBox _courseStatusComboBox;
-        private System.Windows.Forms.Button _button1;
+        private System.Windows.Forms.Button _buttonAddCourse;
         private System.Windows.Forms.ListBox _courseListBox;
         private System.Windows.Forms.TabPage _tabPage2;
         private System.Windows.Forms.Label _courseCreditLabel;
@@ -410,7 +419,6 @@ namespace homework
         private System.Windows.Forms.Label _courseTeacherLabel;
         private System.Windows.Forms.TextBox _courseTeacherTextBox;
         private System.Windows.Forms.Label _courseRequiredOrElectiveLabel;
-        private System.Windows.Forms.TextBox _courseRequiredOrElectiveTextBox;
         private System.Windows.Forms.Label _courseTeachAssistantLabel;
         private System.Windows.Forms.TextBox _courseTeachAssistantTextBox;
         private System.Windows.Forms.Label _courseLanguageLabel;
@@ -418,10 +426,11 @@ namespace homework
         private System.Windows.Forms.Label _courseNoteLabel;
         private System.Windows.Forms.TextBox _courseNoteTextBox;
         private System.Windows.Forms.Label _courseHourLabel;
-        private System.Windows.Forms.TextBox _courseHourTextBox;
         private System.Windows.Forms.Label _courseDepartmentLabel;
         private System.Windows.Forms.ComboBox _courseDepartmentComboBox;
-        private System.Windows.Forms.Button _button2;
+        private System.Windows.Forms.Button _buttonConfirm;
         private System.Windows.Forms.DataGridView _courseTimeDataGridView;
+        private System.Windows.Forms.ComboBox _courseHourComboBox;
+        private System.Windows.Forms.ComboBox _courseRequiredOrElective;
     }
 }
