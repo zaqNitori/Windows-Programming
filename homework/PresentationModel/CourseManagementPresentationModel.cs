@@ -10,22 +10,25 @@ namespace homework.PresentationModel
 {
     public class CourseManagementPresentationModel
     {
-        private CourseModel _courseModel;
+        private CourseManageModel _courseManageModel;
 
-        public CourseManagementPresentationModel(CourseModel courseModel)
+        public CourseManagementPresentationModel(CourseManageModel courseManageModel)
         {
-            _courseModel = courseModel;
+            _courseManageModel = courseManageModel;
+            IsCourseEditReadOnly = true;
+        }
+
+        public bool IsCourseEditReadOnly
+        {
+            get; set;
         }
 
         /// <summary>
         /// 取得Item型態的所有課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
         public List<DataItem> GetCurriculumAsItem()
         {
-            return _courseModel.GetCurriculumAsItem();
+            return _courseManageModel.GetCurriculumAsItem();
         }
 
     }

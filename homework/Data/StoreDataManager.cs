@@ -23,6 +23,8 @@ namespace homework.Data
 
         }
 
+        #region Public
+
         /// <summary>
         /// 新增各班課程表
         /// </summary>
@@ -40,6 +42,35 @@ namespace homework.Data
                 }
             }
         }
+
+        /// <summary>
+        /// 把選取的課程加入課表
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public void AddSelectedCourses(List<Course> courses)
+        {
+
+            foreach (var c in courses)
+            {
+                _chosenCourses.Add(c);
+            }
+        }
+
+        /// <summary>
+        /// 退選課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history> 
+        public void DropCourse(int index)
+        {
+            if (_chosenCourses.Count > index)
+                _chosenCourses.RemoveAt(index);
+        }
+
+        #region Get
 
         /// <summary>
         /// 取得所有課程
@@ -82,6 +113,36 @@ namespace homework.Data
         }
 
         /// <summary>
+        /// 用班級名稱取得課表
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public Course GetCourseByCourseNumber(string number)
+        {
+            return _curriculum.Courses[number];
+        }
+
+        /// <summary>
+        /// 取得以選取的課程
+        /// </summary>
+        /// <history>
+        ///     1.  2021.10.25  create function
+        /// </history>
+        public BindingList<Course> GetChosenCourses()
+        {
+            return _chosenCourses;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Private
+
+        #region Get
+
+        /// <summary>
         /// 取得科系名稱
         /// </summary>
         /// <history>
@@ -104,53 +165,29 @@ namespace homework.Data
         }
 
         /// <summary>
-        /// 用班級名稱取得課表
+        /// 用課號取得班級名稱
         /// </summary>
         /// <history>
-        ///     1.  2021.10.25  create function
+        ///     1.  2021.10.31  create function
         /// </history>
-        public Course GetCourseByCourseId(string id)
+        public string GetDepartmentNameByCourseNumber(string number)
         {
-            return _curriculum.Courses[id];
-        }
-
-        /// <summary>
-        /// 取得以選取的課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public BindingList<Course> GetChosenCourses()
-        {
-            return _chosenCourses;
-        }
-
-        /// <summary>
-        /// 把選取的課程加入課表
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public void AddSelectedCourses(List<Course> courses)
-        {
-
-            foreach (var c in courses)
+            foreach (var dep in _departments)
             {
-                _chosenCourses.Add(c);
+                foreach (var c in dep.Courses)
+                {
+                    if (c.Number.Equals(number))
+                    {
+                        return dep.DepartmentName;
+                    }
+                }
             }
+            return string.Empty;
         }
 
-        /// <summary>
-        /// 退選課程
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history> 
-        public void DropCourse(int index)
-        {
-            if (_chosenCourses.Count > index)
-                _chosenCourses.RemoveAt(index);
-        }
+        #endregion
+
+        #endregion
 
     }
 }

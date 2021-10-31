@@ -52,7 +52,9 @@
     <Compile Include="Builder\CourseBuilder.cs" />
     <Compile Include="Builder\CourseAnalyzer.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Data\DataItemManager.cs" />
     <Compile Include="Data\StoreDataManager.cs" />
+    <Compile Include="Model\CourseManageModel.cs" />
     <Compile Include="MyForm\CourseSelectResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +84,7 @@
     <Compile Include="PresentationModel\CourseSelectResultPresentationModel.cs" />
     <Compile Include="PresentationModel\StartUpPresentationModel.cs" />
     <Compile Include="StartUp.cs" />
+    <Compile Include="ViewModel\CourseManageProperty.cs" />
     <Compile Include="ViewModel\CourseProperty.cs" />
     <Compile Include="PresentationModel\CourseSelectingPresentationModel.cs" />
     <Compile Include="MyForm\SelectCourseForm.cs">
@@ -95,6 +98,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Curriculum.cs" />
+    <Compile Include="ViewModel\DataItem.cs" />
     <Compile Include="ViewModel\Department.cs" />
     <EmbeddedResource Include="MyController\CourseDataGridViewComponent.resx">
       <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
