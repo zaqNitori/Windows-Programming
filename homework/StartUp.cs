@@ -8,7 +8,7 @@ namespace homework
     public class StartUp
     {
         private List<string> _coursesUrl;
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
         private CourseManageModel _courseManageModel;
         private StartUpPresentationModel _startUpPresentationModel;
         private StoreDataManager _storeDataManager;
@@ -17,7 +17,7 @@ namespace homework
         {
             _coursesUrl = new List<string>();
             _storeDataManager = new StoreDataManager();
-            _courseModel = new CourseModel(_storeDataManager);
+            _courseModel = new CourseSelectModel(_storeDataManager);
             _courseManageModel = new CourseManageModel(_storeDataManager);
             _startUpPresentationModel = new StartUpPresentationModel(_courseModel);
             startUpForm = new StartUpForm(_startUpPresentationModel);

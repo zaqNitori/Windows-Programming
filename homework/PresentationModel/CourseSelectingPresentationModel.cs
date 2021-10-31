@@ -14,12 +14,12 @@ namespace homework.PresentationModel
         public event CourseChangedEventHandler _courseChanged;
         public delegate void CourseChangedEventHandler();
 
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
         private HashSet<string> _courseSelectData;
         private const string ADD_COURSE_SUCCESS = "加選成功";
         private const string ADD_COURSE_FAIL = "加選失敗";
 
-        public CourseSelectingPresentationModel(CourseModel courseModel)
+        public CourseSelectingPresentationModel(CourseSelectModel courseModel)
         {
             _courseModel = courseModel;
             _courseSelectData = new HashSet<string>();
@@ -41,7 +41,7 @@ namespace homework.PresentationModel
         /// <summary>
         /// 取得model
         /// </summary>
-        public CourseModel GetCourseSelectModel()
+        public CourseSelectModel GetCourseSelectModel()
         {
             return _courseModel;
         }

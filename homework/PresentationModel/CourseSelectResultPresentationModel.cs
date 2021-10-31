@@ -11,9 +11,9 @@ namespace homework.PresentationModel
 {
     public class CourseSelectResultPresentationModel
     {
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
 
-        public CourseSelectResultPresentationModel(CourseModel courseModel)
+        public CourseSelectResultPresentationModel(CourseSelectModel courseModel)
         {
             _courseModel = courseModel;
         }

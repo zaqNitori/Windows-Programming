@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace homework.Model
 {
-    public class CourseModel
+    public class CourseSelectModel
     {
         public event CourseChangedEventHandler _courseDropped;
         public delegate void CourseChangedEventHandler();
@@ -20,7 +20,7 @@ namespace homework.Model
         public const string SAME_COURSE_NAME_TEXT = "課程名稱相同 : ";
         public const string SAME_COURSE_TIME_TEXT = "課程衝堂 : ";
 
-        public CourseModel(StoreDataManager storeDataManager)
+        public CourseSelectModel(StoreDataManager storeDataManager)
         {
             _courseCrawler = new CourseCrawler();
             _courseAnalyzer = new CourseAnalyzer();

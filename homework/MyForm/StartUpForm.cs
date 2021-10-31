@@ -19,7 +19,7 @@ namespace homework
         private ManageCourseForm _manageCourseForm;
         private CourseManagementPresentationModel _courseManagementPresentationModel;
         private StartUpPresentationModel _startUpPresentationModel;
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
         private CourseManageModel _courseManageModel;
         private const string BINDING_PROPERTY = "Enabled";
 
@@ -34,7 +34,7 @@ namespace homework
         /// <summary>
         /// 設定PresentationModel
         /// </summary>
-        public void SetCourseSelectModel(CourseModel courseModel)
+        public void SetCourseSelectModel(CourseSelectModel courseModel)
         {
             _courseModel = courseModel;
         }
