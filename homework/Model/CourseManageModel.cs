@@ -28,6 +28,16 @@ namespace homework.Model
         }
 
         /// <summary>
+        /// 取得Item型態的所有班級名稱
+        /// </summary>
+        public List<DataItem> GetDepartmentNameAsItem()
+        {
+            List<Department> departments = _storeDataManager.GetAllDepartment();
+
+            return DataItemManager.GetDataItems(departments);
+        }
+
+        /// <summary>
         /// 用課號取得班級名稱
         /// </summary>
         public string GetDepartmentNameByCourseNumber(string number)

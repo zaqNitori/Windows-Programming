@@ -11,7 +11,7 @@ namespace homework.PresentationModel
     public class CourseManagementPresentationModel
     {
         private CourseManageModel _courseManageModel;
-        private Course _course;
+        private Course _originalCourse;
 
         public CourseManagementPresentationModel(CourseManageModel courseManageModel)
         {
@@ -66,6 +66,11 @@ namespace homework.PresentationModel
             get; set;
         }
 
+        public string CourseStatus
+        {
+            get; set;
+        }
+
         public string Number
         {
             get; set;
@@ -116,6 +121,11 @@ namespace homework.PresentationModel
             get; set;
         }
 
+        public string DepartmentName
+        {
+            get; set;
+        }
+
         /// <summary>
         /// 取得Item型態的所有課程
         /// </summary>
@@ -125,21 +135,31 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
+        /// 取得Item型態的班級名稱
+        /// </summary>
+        public List<DataItem> GetDepartmentNameAsItem()
+        {
+            return _courseManageModel.GetDepartmentNameAsItem();
+        }
+
+        /// <summary>
         /// 以課號取得課程
         /// </summary>
         public void GetCourseByCourseNumber(string number)
         {
-            _course = _courseManageModel.GetCourseByCourseNumber(number);
-            Number = _course.Number;
-            Name = _course.Name;
-            Stage = _course.Stage;
-            Credit = _course.Credit;
-            Teacher = _course.Teacher;
-            RequiredOrElective = _course.RequiredOrElective;
-            TeachAssistant = _course.TeachAssistant;
-            Language = _course.Language;
-            Note = _course.Note;
-            Hour = _course.Hour;
+            _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
+            DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
+            CourseStatus = string.Empty;
+            Number = _originalCourse.Number;
+            Name = _originalCourse.Name;
+            Stage = _originalCourse.Stage;
+            Credit = _originalCourse.Credit;
+            Teacher = _originalCourse.Teacher;
+            RequiredOrElective = _originalCourse.RequiredOrElective;
+            TeachAssistant = _originalCourse.TeachAssistant;
+            Language = _originalCourse.Language;
+            Note = _originalCourse.Note;
+            Hour = _originalCourse.Hour;
         }
 
         /// <summary>
@@ -147,7 +167,7 @@ namespace homework.PresentationModel
         /// </summary>
         public void ClearCourse()
         {
-            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = string.Empty;
+            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = DepartmentName = string.Empty;
         }
 
         /// <summary>
@@ -162,6 +182,7 @@ namespace homework.PresentationModel
             IsButtonConfirmEnabled = false;
             IsCourseEditReadOnly = false;
             IsCourseComboBoxEnabled = true;
+            ClearCourse();
         }
 
         /// <summary>
@@ -175,6 +196,7 @@ namespace homework.PresentationModel
             IsButtonConfirmEnabled = false;
             IsCourseEditReadOnly = true;
             IsCourseComboBoxEnabled = false;
+            ClearCourse();
         }
 
         /// <summary>
