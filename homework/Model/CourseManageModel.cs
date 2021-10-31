@@ -35,5 +35,13 @@ namespace homework.Model
             return _storeDataManager.GetDepartmentNameByCourseNumber(number);
         }
 
+        /// <summary>
+        /// 用課號取得課程
+        /// </summary>
+        public Course GetCourseByCourseNumber(string number)
+        {
+            return _storeDataManager.GetCourseByCourseNumber(number);
+        }
+
     }
 }

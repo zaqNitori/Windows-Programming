@@ -35,7 +35,7 @@ namespace homework
             this._buttonConfirm = new System.Windows.Forms.Button();
             this._courseTimeDataGridView = new System.Windows.Forms.DataGridView();
             this._courseGroupBox = new System.Windows.Forms.GroupBox();
-            this._courseRequiredOrElective = new System.Windows.Forms.ComboBox();
+            this._courseRequiredOrElectiveComboBox = new System.Windows.Forms.ComboBox();
             this._courseHourComboBox = new System.Windows.Forms.ComboBox();
             this._courseDepartmentLabel = new System.Windows.Forms.Label();
             this._courseDepartmentComboBox = new System.Windows.Forms.ComboBox();
@@ -126,7 +126,7 @@ namespace homework
             // 
             // _courseGroupBox
             // 
-            this._courseGroupBox.Controls.Add(this._courseRequiredOrElective);
+            this._courseGroupBox.Controls.Add(this._courseRequiredOrElectiveComboBox);
             this._courseGroupBox.Controls.Add(this._courseHourComboBox);
             this._courseGroupBox.Controls.Add(this._courseDepartmentLabel);
             this._courseGroupBox.Controls.Add(this._courseDepartmentComboBox);
@@ -156,21 +156,21 @@ namespace homework
             this._courseGroupBox.TabStop = false;
             this._courseGroupBox.Text = "groupBox1";
             // 
-            // _courseRequiredOrElective
+            // _courseRequiredOrElectiveComboBox
             // 
-            this._courseRequiredOrElective.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._courseRequiredOrElective.FormattingEnabled = true;
-            this._courseRequiredOrElective.Items.AddRange(new object[] {
+            this._courseRequiredOrElectiveComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._courseRequiredOrElectiveComboBox.FormattingEnabled = true;
+            this._courseRequiredOrElectiveComboBox.Items.AddRange(new object[] {
             "○",
             "△",
             "☆",
             "●",
             "▲",
             "★"});
-            this._courseRequiredOrElective.Location = new System.Drawing.Point(691, 55);
-            this._courseRequiredOrElective.Name = "_courseRequiredOrElective";
-            this._courseRequiredOrElective.Size = new System.Drawing.Size(122, 23);
-            this._courseRequiredOrElective.TabIndex = 24;
+            this._courseRequiredOrElectiveComboBox.Location = new System.Drawing.Point(691, 55);
+            this._courseRequiredOrElectiveComboBox.Name = "_courseRequiredOrElectiveComboBox";
+            this._courseRequiredOrElectiveComboBox.Size = new System.Drawing.Size(122, 23);
+            this._courseRequiredOrElectiveComboBox.TabIndex = 24;
             // 
             // _courseHourComboBox
             // 
@@ -376,7 +376,7 @@ namespace homework
             this._courseListBox.ItemHeight = 15;
             this._courseListBox.Location = new System.Drawing.Point(6, 0);
             this._courseListBox.Name = "_courseListBox";
-            this._courseListBox.Size = new System.Drawing.Size(241, 259);
+            this._courseListBox.Size = new System.Drawing.Size(241, 394);
             this._courseListBox.TabIndex = 0;
             // 
             // _tabPage2
@@ -442,6 +442,6 @@ namespace homework
         private System.Windows.Forms.Button _buttonConfirm;
         private System.Windows.Forms.DataGridView _courseTimeDataGridView;
         private System.Windows.Forms.ComboBox _courseHourComboBox;
-        private System.Windows.Forms.ComboBox _courseRequiredOrElective;
+        private System.Windows.Forms.ComboBox _courseRequiredOrElectiveComboBox;
     }
 }
