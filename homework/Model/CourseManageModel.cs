@@ -72,5 +72,13 @@ namespace homework.Model
             _storeDataManager.AddCourse(course, className);
         }
 
+        /// <summary>
+        /// 確認課號是否存在
+        /// </summary>
+        public bool CheckIsCourseNumberConfict(string courseNumber)
+        {
+            return _storeDataManager.IsCourseNumberExist(courseNumber);
+        }
+
     }
 }

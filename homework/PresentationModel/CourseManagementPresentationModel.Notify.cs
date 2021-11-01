@@ -80,7 +80,7 @@ namespace homework.PresentationModel
         public void ClickConfirm()
         {
             Course course = BuildCourse();
-            if (CourseStatus.Equals(CourseManageAction.Add))
+            if (CourseManageState.Equals(((int)CourseManageAction.Add)))
             {
                 _courseManageModel.AddCourse(course, DepartmentName);
             }
@@ -160,7 +160,23 @@ namespace homework.PresentationModel
         /// <summary>
         /// 檢測有限制輸入的欄位
         /// </summary>
-        public string CheckIsNumeric()
+        public string CheckIsNumericInputValid()
+        {
+            string errorMessage = string.Empty;
+
+            errorMessage += CheckIsNumeric();
+            if (CourseManageState.Equals(((int)CourseManageAction.Add)))
+            {
+                errorMessage += CheckIsCourseNumberConflict();
+            }
+
+            return errorMessage;
+        }
+
+        /// <summary>
+        /// 檢測數字輸入
+        /// </summary>
+        private string CheckIsNumeric()
         {
             string errorMessage = string.Empty;
             if (!IsNumeric(Number))
@@ -174,7 +190,19 @@ namespace homework.PresentationModel
             {
                 errorMessage += nameof(Stage) + Environment.NewLine;
             }
-            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER);
+            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine);
+        }
+
+        /// <summary>
+        /// 檢測課號是否重複
+        /// </summary>
+        private string CheckIsCourseNumberConflict()
+        {
+            if (_courseManageModel.CheckIsCourseNumberConfict(Number))
+            {
+                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
+            }
+            return string.Empty;
         }
 
         /// <summary>

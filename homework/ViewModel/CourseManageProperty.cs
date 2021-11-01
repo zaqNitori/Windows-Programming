@@ -27,6 +27,8 @@ namespace homework.ViewModel
         public const string COLUMN_TITLE = "節數";
 
         public const string ERROR_MESSAGE_NOT_NUMBER = "請輸入整數數字";
+        public const string ERROR_MESSAGE_COURSE_NUMBER_CONFLICT = "課號重複，請重新輸入。";
+
         public const string COURSE_MANAGE_TAB_PAGE_TITLE = "課程管理";
         public const string CLASS_MANAGE_TAB_PAGE_TITLE = "班級管理";
         public const string COURSE_ADD_GROUP_BOX_TITLE = "新增課程";

@@ -94,7 +94,7 @@ namespace homework
         /// </summary>
         private void ListenButtonConfirmClicked(object sender, EventArgs e)
         {
-            string errorMessage = _courseManagementPresentationModel.CheckIsNumeric();
+            string errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
             if (string.IsNullOrEmpty(errorMessage))
             {
                 _courseManagementPresentationModel.ClickConfirm();

@@ -90,21 +90,6 @@ namespace homework.Data
         }
 
         /// <summary>
-        /// 移除課程
-        /// </summary>
-        private void RemoveCourse(List<Course> courses , string courseNumber)
-        {
-            foreach (var c in courses)
-            {
-                if (c.Number.Equals(courseNumber))
-                {
-                    courses.Remove(c);
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
         /// 退選課程
         /// </summary>
         /// <history>
@@ -114,6 +99,14 @@ namespace homework.Data
         {
             if (_chosenCourses.Count > index)
                 _chosenCourses.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// 確認課號是否已存在
+        /// </summary>
+        public bool IsCourseNumberExist(string courseNumber)
+        {
+            return _curriculum.Courses.ContainsKey(courseNumber);
         }
 
         #region Get
@@ -232,6 +225,21 @@ namespace homework.Data
         }
 
         #endregion
+
+        /// <summary>
+        /// 移除課程
+        /// </summary>
+        private void RemoveCourse(List<Course> courses, string courseNumber)
+        {
+            foreach (var c in courses)
+            {
+                if (c.Number.Equals(courseNumber))
+                {
+                    courses.Remove(c);
+                    return;
+                }
+            }
+        }
 
         #endregion
 
