@@ -11,11 +11,14 @@ namespace homework.PresentationModel
 {
     public class CourseSelectResultPresentationModel
     {
-        private CourseModel _courseModel;
+        public event CourseChangedEventHandler _courseChanged;
+        public delegate void CourseChangedEventHandler();
+        private CourseSelectModel _courseModel;
 
-        public CourseSelectResultPresentationModel(CourseModel courseModel)
+        public CourseSelectResultPresentationModel(CourseSelectModel courseModel)
         {
             _courseModel = courseModel;
+            _courseModel._courseChanged += NotifyCourseChanged;
         }
 
         /// <summary>
@@ -24,9 +27,9 @@ namespace homework.PresentationModel
         /// <history>
         ///     1.  2021.10.25  create function
         /// </history> 
-        public BindingList<Course> GetSelectedCourses()
+        public BindingList<Course> GetChosenCourses()
         {
-            return _courseModel.GetSelectedCourses();
+            return _courseModel.GetChosenCourses();
         }
 
         /// <summary>
@@ -40,5 +43,13 @@ namespace homework.PresentationModel
             _courseModel.DropCourse(index);
         }
 
+        /// <summary>
+        /// 課程送出後，重整畫面 
+        /// </summary>
+        private void NotifyCourseChanged()
+        {
+            if (_courseChanged != null)
+                _courseChanged();
+        }
     }
 }

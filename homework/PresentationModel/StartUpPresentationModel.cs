@@ -11,9 +11,9 @@ namespace homework.PresentationModel
     public class StartUpPresentationModel
     {
         private List<String> _courseUrl;
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
 
-        public StartUpPresentationModel(CourseModel courseModel)
+        public StartUpPresentationModel(CourseSelectModel courseModel)
         {
             IsButtonCourseManagementEnabled = true;
             IsButtonCourseSelectingEnabled = true;

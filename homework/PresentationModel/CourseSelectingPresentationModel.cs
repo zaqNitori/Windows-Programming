@@ -14,18 +14,18 @@ namespace homework.PresentationModel
         public event CourseChangedEventHandler _courseChanged;
         public delegate void CourseChangedEventHandler();
 
-        private CourseModel _courseModel;
+        private CourseSelectModel _courseModel;
         private HashSet<string> _courseSelectData;
         private const string ADD_COURSE_SUCCESS = "加選成功";
         private const string ADD_COURSE_FAIL = "加選失敗";
 
-        public CourseSelectingPresentationModel(CourseModel courseModel)
+        public CourseSelectingPresentationModel(CourseSelectModel courseModel)
         {
             _courseModel = courseModel;
             _courseSelectData = new HashSet<string>();
             IsButtonSendEnable = false;
             IsButtonShowSelectResultEnable = true;
-            _courseModel._courseDropped += NotifyCourseChanged;
+            _courseModel._courseChanged += NotifyCourseChanged;
         }
 
         public bool IsButtonSendEnable
@@ -36,6 +36,14 @@ namespace homework.PresentationModel
         public bool IsButtonShowSelectResultEnable
         {
             get; set;
+        }
+
+        /// <summary>
+        /// 取得model
+        /// </summary>
+        public CourseSelectModel GetCourseSelectModel()
+        {
+            return _courseModel;
         }
 
         /// <summary>
@@ -110,7 +118,7 @@ namespace homework.PresentationModel
         /// </history>
         public List<Course> GetCourseByDepartmentName(string name)
         {
-            return _courseModel.GetCourseByDepartmentName(name);
+            return _courseModel.GetCoursesByDepartmentName(name);
         }
 
         /// <summary>
