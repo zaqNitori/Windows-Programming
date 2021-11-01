@@ -202,10 +202,27 @@
               <Comment />
               <Auto>false</Auto>
             </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>260 目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>D:\Ntut\Windows-Programming\homework\homework\MyForm\ManageCourseForm.cs</File>
+              <Line>260</Line>
+              <StartLine>259</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>260</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</Comment>
+              <Auto>false</Auto>
+            </Smell>
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
             <string>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
+            <string>260 目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</string>
           </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
@@ -376,7 +393,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3342</ProductionLoc>
+          <ProductionLoc>3376</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

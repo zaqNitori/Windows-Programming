@@ -211,7 +211,29 @@ namespace homework.PresentationModel
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
             IsButtonAddCourseEnabled = true;
-            IsButtonConfirmEnabled = true;
+            IsButtonConfirmEnabled = false;
+        }
+
+        /// <summary>
+        /// 驗證輸入
+        /// </summary>
+        public void IsCourseInputValid()
+        {
+            if (!string.IsNullOrEmpty(Name)
+                && !string.IsNullOrEmpty(Number)
+                && !string.IsNullOrEmpty(Stage)
+                && !string.IsNullOrEmpty(Credit)
+                && !string.IsNullOrEmpty(Teacher)
+                && !string.IsNullOrEmpty(RequiredOrElective)
+                && !string.IsNullOrEmpty(Hour)
+                && !string.IsNullOrEmpty(DepartmentName))
+            {
+                IsButtonConfirmEnabled = true;
+            }
+            else
+            {
+                IsButtonConfirmEnabled = false;
+            }
         }
 
     }

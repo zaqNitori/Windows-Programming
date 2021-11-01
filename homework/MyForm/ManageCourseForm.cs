@@ -167,19 +167,19 @@ namespace homework
             _courseNumberTextBox.KeyPress += ListenTextBoxKeyPress;
             _courseStageTextBox.KeyPress += ListenTextBoxKeyPress;
             _courseCreditTextBox.KeyPress += ListenTextBoxKeyPress;
-            //_courseNumberTextBox.TextChanged += ListenTextChanged;
-            //_courseNameTextBox.TextChanged += ListenTextChanged;
-            //_courseStageTextBox.TextChanged += ListenTextChanged;
-            //_courseCreditTextBox.TextChanged += ListenTextChanged;
-            //_courseTeacherTextBox.TextChanged += ListenTextChanged;
-            //_courseRequiredOrElectiveComboBox.TextChanged += ListenTextChanged;
-            //_courseTeachAssistantTextBox.TextChanged += ListenTextChanged;
-            //_courseLanguageTextBox.TextChanged += ListenTextChanged;
-            //_courseNoteTextBox.TextChanged += ListenTextChanged;
-            //_courseHourComboBox.TextChanged += ListenTextChanged;
-            //_courseStatusComboBox.TextChanged += ListenTextChanged;
-            //_courseDepartmentComboBox.TextChanged += ListenTextChanged;
-
+            _courseNumberTextBox.MouseDown += ListenLeaveEvent;
+            _courseNameTextBox.MouseLeave += ListenLeaveEvent;
+            _courseStageTextBox.MouseLeave += ListenLeaveEvent;
+            _courseCreditTextBox.MouseLeave += ListenLeaveEvent;
+            _courseTeacherTextBox.MouseLeave += ListenLeaveEvent;
+            _courseRequiredOrElectiveComboBox.MouseLeave += ListenLeaveEvent;
+            _courseTeachAssistantTextBox.MouseLeave += ListenLeaveEvent;
+            _courseLanguageTextBox.MouseLeave += ListenLeaveEvent;
+            _courseNoteTextBox.MouseLeave += ListenLeaveEvent;
+            _courseHourComboBox.MouseLeave += ListenLeaveEvent;
+            _courseStatusComboBox.MouseLeave += ListenLeaveEvent;
+            _courseDepartmentComboBox.MouseLeave += ListenLeaveEvent;
+            _courseGroupBox.MouseCaptureChanged += ListenGroupBoxMouseCaptureChanged;
         }
 
         /// <summary>
@@ -252,21 +252,33 @@ namespace homework
         /// <summary>
         /// 監聽TextChanged事件， 處理button顯示
         /// </summary>
-        private void ListenTextChanged(object sender, EventArgs e)
+        private void ListenLeaveEvent(object sender, EventArgs e)
         {
-            //    _courseManagementPresentationModel.Number = _courseNumberTextBox.Text;
-            //    _courseManagementPresentationModel.Name = _courseNameTextBox.Text;
-            //    _courseManagementPresentationModel.Stage = _courseStageTextBox.Text;
-            //    _courseManagementPresentationModel.Credit = _courseCreditTextBox.Text;
-            //    _courseManagementPresentationModel.Teacher = _courseTeacherTextBox.Text;
-            //    _courseManagementPresentationModel.RequiredOrElective = _courseRequiredOrElectiveComboBox.Text;
-            //    _courseManagementPresentationModel.TeachAssistant = _courseTeachAssistantTextBox.Text;
-            //    _courseManagementPresentationModel.Language = _courseLanguageTextBox.Text;
-            //    _courseManagementPresentationModel.Note = _courseNoteTextBox.Text;
-            //    _courseManagementPresentationModel.Hour = _courseHourComboBox.Text;
-            //    _courseManagementPresentationModel.CourseStatus = _courseStatusComboBox.Text;
-            //    _courseManagementPresentationModel.DepartmentName = _courseDepartmentComboBox.Text;
+            if (!_courseManagementPresentationModel.IsCourseEditReadOnly)
+            {
+                ListenGroupBoxMouseCaptureChanged(sender, e);
+                _courseManagementPresentationModel.IsCourseInputValid();
+                RefreshButtonStatus();
+            }
         }
 
+        /// <summary>
+        /// 監聽MouseCaptureChanged事件， 處理資料修改顯示
+        /// </summary>
+        private void ListenGroupBoxMouseCaptureChanged(object sender, EventArgs e)
+        {
+            _courseManagementPresentationModel.Number = _courseNumberTextBox.Text;
+            _courseManagementPresentationModel.Name = _courseNameTextBox.Text;
+            _courseManagementPresentationModel.Stage = _courseStageTextBox.Text;
+            _courseManagementPresentationModel.Credit = _courseCreditTextBox.Text;
+            _courseManagementPresentationModel.Teacher = _courseTeacherTextBox.Text;
+            _courseManagementPresentationModel.RequiredOrElective = _courseRequiredOrElectiveComboBox.Text;
+            _courseManagementPresentationModel.TeachAssistant = _courseTeachAssistantTextBox.Text;
+            _courseManagementPresentationModel.Language = _courseLanguageTextBox.Text;
+            _courseManagementPresentationModel.Note = _courseNoteTextBox.Text;
+            _courseManagementPresentationModel.Hour = _courseHourComboBox.Text;
+            _courseManagementPresentationModel.CourseStatus = _courseStatusComboBox.Text;
+            _courseManagementPresentationModel.DepartmentName = _courseDepartmentComboBox.Text;
+        }
     }
 }

@@ -415,60 +415,60 @@ namespace homework
             this._courseSection.Name = "_courseSection";
             this._courseSection.ReadOnly = true;
             // 
-            // Sunday
+            // _sunday
             // 
             this._sunday.FalseValue = "false";
             this._sunday.HeaderText = "日";
             this._sunday.MinimumWidth = 6;
-            this._sunday.Name = "Sunday";
+            this._sunday.Name = "_sunday";
             this._sunday.TrueValue = "true";
             // 
-            // Monday
+            // _monday
             // 
             this._monday.FalseValue = "false";
             this._monday.HeaderText = "一";
             this._monday.MinimumWidth = 6;
-            this._monday.Name = "Monday";
+            this._monday.Name = "_monday";
             this._monday.TrueValue = "true";
             // 
-            // Tuesday
+            // _tuesday
             // 
             this._tuesday.FalseValue = "false";
             this._tuesday.HeaderText = "二";
             this._tuesday.MinimumWidth = 6;
-            this._tuesday.Name = "Tuesday";
+            this._tuesday.Name = "_tuesday";
             this._tuesday.TrueValue = "true";
             // 
-            // Wednesday
+            // _wednesday
             // 
             this._wednesday.FalseValue = "false";
             this._wednesday.HeaderText = "三";
             this._wednesday.MinimumWidth = 6;
-            this._wednesday.Name = "Wednesday";
+            this._wednesday.Name = "_wednesday";
             this._wednesday.TrueValue = "true";
             // 
-            // Thursday
+            // _thursday
             // 
             this._thursday.FalseValue = "false";
             this._thursday.HeaderText = "四";
             this._thursday.MinimumWidth = 6;
-            this._thursday.Name = "Thursday";
+            this._thursday.Name = "_thursday";
             this._thursday.TrueValue = "true";
             // 
-            // Friday
+            // _friday
             // 
             this._friday.FalseValue = "false";
             this._friday.HeaderText = "五";
             this._friday.MinimumWidth = 6;
-            this._friday.Name = "Friday";
+            this._friday.Name = "_friday";
             this._friday.TrueValue = "true";
             // 
-            // Saturday
+            // _saturday
             // 
             this._saturday.FalseValue = "false";
             this._saturday.HeaderText = "六";
             this._saturday.MinimumWidth = 6;
-            this._saturday.Name = "Saturday";
+            this._saturday.Name = "_saturday";
             this._saturday.TrueValue = "true";
             // 
             // ManageCourseForm
