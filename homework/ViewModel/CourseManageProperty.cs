@@ -16,6 +16,13 @@ namespace homework.ViewModel
     static class CourseManageProperty
     {
         public const int COLUMN_WIDTH = 40;
+        public const int FIFTY_SEVEN_NUMBER = 57;
+        public const int FORTY_EIGHT_NUMBER = 48;
+        public const int EIGHT_NUMBER = 8;
+
+        public const char ZERO = '0';
+        public const char NINE = '9';
+
         public const string COLUMN_NAME = "courseHour";
         public const string COLUMN_TITLE = "節數";
 

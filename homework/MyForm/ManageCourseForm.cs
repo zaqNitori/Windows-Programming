@@ -19,7 +19,8 @@ namespace homework
             InitializeListBox();
             SetGroupBoxControlsStatus();
             BindObjectWithData();
-            BindObjectEvent();
+            BindControlEvent();
+            BindNotifyEvent();
         }
 
         /// <summary>
@@ -44,49 +45,12 @@ namespace homework
         }
 
         /// <summary>
-        /// 點擊新增/儲存按鈕
-        /// </summary>
-        private void ListenButtonConfirmClicked(object sender, EventArgs e)
-        {
-            _courseManagementPresentationModel.ClickConfirm();
-            ClearGroupBoxStatus();
-            RefreshGroupBoxStatus();
-            RefreshButtonStatus();
-        }
-
-        /// <summary>
-        /// 點擊新增課程按鈕
-        /// </summary>
-        private void ListenButtonAddCourseClicked(object sender, EventArgs e)
-        {
-            _courseManagementPresentationModel.ClickAddCourse();
-            ClearGroupBoxStatus();
-            RefreshGroupBoxStatus();
-            RefreshButtonStatus();
-        }
-
-        /// <summary>
         /// 初始化TabControl
         /// </summary>
         private void InitializeListBox()
         {
             RefreshListBoxStatus();
             _courseListBox.SelectedIndexChanged += ListenCourseListBoxSelectedIndexChanged;
-        }
-
-        /// <summary>
-        /// 監聽ListBox 選取事件
-        /// </summary>
-        private void ListenCourseListBoxSelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListBox listBox = (ListBox)sender;
-            int selectedIndex = listBox.SelectedIndex;
-            DataItem item = (DataItem)listBox.SelectedItem;
-
-            _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);
-            _courseManagementPresentationModel.GetCourseByCourseNumber(item.Value);
-            RefreshGroupBoxStatus();
-            RefreshButtonStatus();
         }
 
         /// <summary>
@@ -100,11 +64,13 @@ namespace homework
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
             {
+                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_COMBO_BOX_ENABLED);
             }
 
             foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
             {
+                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_READ_ONLY_STATUS);
             }
             ClearGroupBoxStatus();
@@ -138,48 +104,6 @@ namespace homework
                 row.Cells[0].Value = index.ToString();
                 index++;
             }
-        }
-
-        /// <summary>
-        /// GroupBox 資料綁定
-        /// </summary>
-        private void BindObjectWithData()
-        {
-            _courseNumberTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Number");
-            _courseNameTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Name");
-            _courseStageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Stage");
-            _courseCreditTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Credit");
-            _courseTeacherTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Teacher");
-            _courseTeachAssistantTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "TeachAssistant");
-            _courseLanguageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Language");
-            _courseNoteTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Note");
-            _courseStatusComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "CourseStatus");
-            _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "RequiredOrElective");
-            _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "Hour");
-            _courseDepartmentComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, "DepartmentName");
-        }
-
-        /// <summary>
-        /// GroupBox 事件綁定
-        /// </summary>
-        private void BindObjectEvent()
-        {
-            _courseNumberTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseStageTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseCreditTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseNumberTextBox.MouseDown += ListenLeaveEvent;
-            _courseNameTextBox.MouseLeave += ListenLeaveEvent;
-            _courseStageTextBox.MouseLeave += ListenLeaveEvent;
-            _courseCreditTextBox.MouseLeave += ListenLeaveEvent;
-            _courseTeacherTextBox.MouseLeave += ListenLeaveEvent;
-            _courseRequiredOrElectiveComboBox.MouseLeave += ListenLeaveEvent;
-            _courseTeachAssistantTextBox.MouseLeave += ListenLeaveEvent;
-            _courseLanguageTextBox.MouseLeave += ListenLeaveEvent;
-            _courseNoteTextBox.MouseLeave += ListenLeaveEvent;
-            _courseHourComboBox.MouseLeave += ListenLeaveEvent;
-            _courseStatusComboBox.MouseLeave += ListenLeaveEvent;
-            _courseDepartmentComboBox.MouseLeave += ListenLeaveEvent;
-            _courseGroupBox.MouseCaptureChanged += ListenGroupBoxMouseCaptureChanged;
         }
 
         /// <summary>
@@ -238,47 +162,5 @@ namespace homework
             }
         }
 
-        /// <summary>
-        /// 監聽KeyPress事件， 限制數字輸入
-        /// </summary>
-        private void ListenTextBoxKeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
-            {
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// 監聽TextChanged事件， 處理button顯示
-        /// </summary>
-        private void ListenLeaveEvent(object sender, EventArgs e)
-        {
-            if (!_courseManagementPresentationModel.IsCourseEditReadOnly)
-            {
-                ListenGroupBoxMouseCaptureChanged(sender, e);
-                _courseManagementPresentationModel.IsCourseInputValid();
-                RefreshButtonStatus();
-            }
-        }
-
-        /// <summary>
-        /// 監聽MouseCaptureChanged事件， 處理資料修改顯示
-        /// </summary>
-        private void ListenGroupBoxMouseCaptureChanged(object sender, EventArgs e)
-        {
-            _courseManagementPresentationModel.Number = _courseNumberTextBox.Text;
-            _courseManagementPresentationModel.Name = _courseNameTextBox.Text;
-            _courseManagementPresentationModel.Stage = _courseStageTextBox.Text;
-            _courseManagementPresentationModel.Credit = _courseCreditTextBox.Text;
-            _courseManagementPresentationModel.Teacher = _courseTeacherTextBox.Text;
-            _courseManagementPresentationModel.RequiredOrElective = _courseRequiredOrElectiveComboBox.Text;
-            _courseManagementPresentationModel.TeachAssistant = _courseTeachAssistantTextBox.Text;
-            _courseManagementPresentationModel.Language = _courseLanguageTextBox.Text;
-            _courseManagementPresentationModel.Note = _courseNoteTextBox.Text;
-            _courseManagementPresentationModel.Hour = _courseHourComboBox.Text;
-            _courseManagementPresentationModel.CourseStatus = _courseStatusComboBox.Text;
-            _courseManagementPresentationModel.DepartmentName = _courseDepartmentComboBox.Text;
-        }
     }
 }

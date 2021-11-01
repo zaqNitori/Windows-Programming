@@ -8,10 +8,15 @@ using homework.ViewModel;
 
 namespace homework.PresentationModel
 {
-    public class CourseManagementPresentationModel
+    public partial class CourseManagementPresentationModel
     {
+        public event ListBoxChangedEventHandler _listBoxChanged;
+        public delegate void ListBoxChangedEventHandler();
+        public event GroupBoxAndButtonChangedEventHandler _groupBoxAndButtonChanged; 
+        public delegate void GroupBoxAndButtonChangedEventHandler();
         private CourseManageModel _courseManageModel;
         private Course _originalCourse;
+        private string _originalDepartmentName;
 
         public CourseManagementPresentationModel(CourseManageModel courseManageModel)
         {
@@ -140,100 +145,6 @@ namespace homework.PresentationModel
         public List<DataItem> GetDepartmentNameAsItem()
         {
             return _courseManageModel.GetDepartmentNameAsItem();
-        }
-
-        /// <summary>
-        /// 以課號取得課程
-        /// </summary>
-        public void GetCourseByCourseNumber(string number)
-        {
-            _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
-            DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
-            CourseStatus = string.Empty;
-            Number = _originalCourse.Number;
-            Name = _originalCourse.Name;
-            Stage = _originalCourse.Stage;
-            Credit = _originalCourse.Credit;
-            Teacher = _originalCourse.Teacher;
-            RequiredOrElective = _originalCourse.RequiredOrElective;
-            TeachAssistant = _originalCourse.TeachAssistant;
-            Language = _originalCourse.Language;
-            Note = _originalCourse.Note;
-            Hour = _originalCourse.Hour;
-        }
-
-        /// <summary>
-        /// 清除
-        /// </summary>
-        public void ClearCourse()
-        {
-            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = DepartmentName = string.Empty;
-        }
-
-        /// <summary>
-        /// 點擊新增課程
-        /// </summary>
-        public void ClickAddCourse()
-        {
-            CourseManageState = ((int)CourseManageAction.Add);
-            GroupBoxTitle = CourseManageProperty.COURSE_ADD_GROUP_BOX_TITLE;
-            ButtonConfirmText = CourseManageProperty.BUTTON_ADD_TEXT;
-            IsButtonAddCourseEnabled = false;
-            IsButtonConfirmEnabled = false;
-            IsCourseEditReadOnly = false;
-            IsCourseComboBoxEnabled = true;
-            ClearCourse();
-        }
-
-        /// <summary>
-        /// 點擊新增/儲存
-        /// </summary>
-        public void ClickConfirm()
-        {
-            CourseManageState = ((int)CourseManageAction.Edit);
-            GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
-            IsButtonAddCourseEnabled = true;
-            IsButtonConfirmEnabled = false;
-            IsCourseEditReadOnly = true;
-            IsCourseComboBoxEnabled = false;
-            ClearCourse();
-        }
-
-        /// <summary>
-        /// 點擊新增/儲存
-        /// </summary>
-        public void SelectedIndexChanged(int selectedIndex)
-        {
-            ListBoxSelectedIndex = selectedIndex;
-            IsCourseEditReadOnly = false;
-            IsCourseComboBoxEnabled = true;
-            CourseManageState = ((int)CourseManageAction.Edit);
-            GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
-            ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
-            IsButtonAddCourseEnabled = true;
-            IsButtonConfirmEnabled = false;
-        }
-
-        /// <summary>
-        /// 驗證輸入
-        /// </summary>
-        public void IsCourseInputValid()
-        {
-            if (!string.IsNullOrEmpty(Name)
-                && !string.IsNullOrEmpty(Number)
-                && !string.IsNullOrEmpty(Stage)
-                && !string.IsNullOrEmpty(Credit)
-                && !string.IsNullOrEmpty(Teacher)
-                && !string.IsNullOrEmpty(RequiredOrElective)
-                && !string.IsNullOrEmpty(Hour)
-                && !string.IsNullOrEmpty(DepartmentName))
-            {
-                IsButtonConfirmEnabled = true;
-            }
-            else
-            {
-                IsButtonConfirmEnabled = false;
-            }
         }
 
     }

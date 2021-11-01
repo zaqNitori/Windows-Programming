@@ -54,6 +54,9 @@
     <Compile Include="Common.cs" />
     <Compile Include="Data\DataItemManager.cs" />
     <Compile Include="Data\StoreDataManager.cs" />
+    <Compile Include="ManageCourseForm.Event.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Model\CourseManageModel.cs" />
     <Compile Include="MyForm\CourseSelectResultForm.cs">
       <SubType>Form</SubType>
@@ -81,6 +84,7 @@
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationModel\CourseManagementPresentationModel.cs" />
+    <Compile Include="PresentationModel\CourseManagementPresentationModel.Notify.cs" />
     <Compile Include="PresentationModel\CourseSelectResultPresentationModel.cs" />
     <Compile Include="PresentationModel\StartUpPresentationModel.cs" />
     <Compile Include="StartUp.cs" />

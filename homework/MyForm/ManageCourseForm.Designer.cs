@@ -34,6 +34,14 @@ namespace homework
             this._tabPage1 = new System.Windows.Forms.TabPage();
             this._buttonConfirm = new System.Windows.Forms.Button();
             this._courseTimeDataGridView = new System.Windows.Forms.DataGridView();
+            this._courseSection = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._sunday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._monday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._tuesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._wednesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._thursday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._friday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this._saturday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this._courseGroupBox = new System.Windows.Forms.GroupBox();
             this._courseRequiredOrElectiveComboBox = new System.Windows.Forms.ComboBox();
             this._courseHourComboBox = new System.Windows.Forms.ComboBox();
@@ -61,14 +69,6 @@ namespace homework
             this._buttonAddCourse = new System.Windows.Forms.Button();
             this._courseListBox = new System.Windows.Forms.ListBox();
             this._tabPage2 = new System.Windows.Forms.TabPage();
-            this._courseSection = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._sunday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._monday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._tuesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._wednesday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._thursday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._friday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this._saturday = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this._courseTabControl.SuspendLayout();
             this._tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._courseTimeDataGridView)).BeginInit();
@@ -141,6 +141,69 @@ namespace homework
             this._courseTimeDataGridView.RowTemplate.Height = 27;
             this._courseTimeDataGridView.Size = new System.Drawing.Size(867, 273);
             this._courseTimeDataGridView.TabIndex = 3;
+            // 
+            // _courseSection
+            // 
+            this._courseSection.HeaderText = "節數";
+            this._courseSection.MinimumWidth = 6;
+            this._courseSection.Name = "_courseSection";
+            this._courseSection.ReadOnly = true;
+            // 
+            // _sunday
+            // 
+            this._sunday.FalseValue = "false";
+            this._sunday.HeaderText = "日";
+            this._sunday.MinimumWidth = 6;
+            this._sunday.Name = "_sunday";
+            this._sunday.TrueValue = "true";
+            // 
+            // _monday
+            // 
+            this._monday.FalseValue = "false";
+            this._monday.HeaderText = "一";
+            this._monday.MinimumWidth = 6;
+            this._monday.Name = "_monday";
+            this._monday.TrueValue = "true";
+            // 
+            // _tuesday
+            // 
+            this._tuesday.FalseValue = "false";
+            this._tuesday.HeaderText = "二";
+            this._tuesday.MinimumWidth = 6;
+            this._tuesday.Name = "_tuesday";
+            this._tuesday.TrueValue = "true";
+            // 
+            // _wednesday
+            // 
+            this._wednesday.FalseValue = "false";
+            this._wednesday.HeaderText = "三";
+            this._wednesday.MinimumWidth = 6;
+            this._wednesday.Name = "_wednesday";
+            this._wednesday.TrueValue = "true";
+            // 
+            // _thursday
+            // 
+            this._thursday.FalseValue = "false";
+            this._thursday.HeaderText = "四";
+            this._thursday.MinimumWidth = 6;
+            this._thursday.Name = "_thursday";
+            this._thursday.TrueValue = "true";
+            // 
+            // _friday
+            // 
+            this._friday.FalseValue = "false";
+            this._friday.HeaderText = "五";
+            this._friday.MinimumWidth = 6;
+            this._friday.Name = "_friday";
+            this._friday.TrueValue = "true";
+            // 
+            // _saturday
+            // 
+            this._saturday.FalseValue = "false";
+            this._saturday.HeaderText = "六";
+            this._saturday.MinimumWidth = 6;
+            this._saturday.Name = "_saturday";
+            this._saturday.TrueValue = "true";
             // 
             // _courseGroupBox
             // 
@@ -407,69 +470,6 @@ namespace homework
             this._tabPage2.TabIndex = 1;
             this._tabPage2.Text = "tabPage2";
             this._tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // _courseSection
-            // 
-            this._courseSection.HeaderText = "節數";
-            this._courseSection.MinimumWidth = 6;
-            this._courseSection.Name = "_courseSection";
-            this._courseSection.ReadOnly = true;
-            // 
-            // _sunday
-            // 
-            this._sunday.FalseValue = "false";
-            this._sunday.HeaderText = "日";
-            this._sunday.MinimumWidth = 6;
-            this._sunday.Name = "_sunday";
-            this._sunday.TrueValue = "true";
-            // 
-            // _monday
-            // 
-            this._monday.FalseValue = "false";
-            this._monday.HeaderText = "一";
-            this._monday.MinimumWidth = 6;
-            this._monday.Name = "_monday";
-            this._monday.TrueValue = "true";
-            // 
-            // _tuesday
-            // 
-            this._tuesday.FalseValue = "false";
-            this._tuesday.HeaderText = "二";
-            this._tuesday.MinimumWidth = 6;
-            this._tuesday.Name = "_tuesday";
-            this._tuesday.TrueValue = "true";
-            // 
-            // _wednesday
-            // 
-            this._wednesday.FalseValue = "false";
-            this._wednesday.HeaderText = "三";
-            this._wednesday.MinimumWidth = 6;
-            this._wednesday.Name = "_wednesday";
-            this._wednesday.TrueValue = "true";
-            // 
-            // _thursday
-            // 
-            this._thursday.FalseValue = "false";
-            this._thursday.HeaderText = "四";
-            this._thursday.MinimumWidth = 6;
-            this._thursday.Name = "_thursday";
-            this._thursday.TrueValue = "true";
-            // 
-            // _friday
-            // 
-            this._friday.FalseValue = "false";
-            this._friday.HeaderText = "五";
-            this._friday.MinimumWidth = 6;
-            this._friday.Name = "_friday";
-            this._friday.TrueValue = "true";
-            // 
-            // _saturday
-            // 
-            this._saturday.FalseValue = "false";
-            this._saturday.HeaderText = "六";
-            this._saturday.MinimumWidth = 6;
-            this._saturday.Name = "_saturday";
-            this._saturday.TrueValue = "true";
             // 
             // ManageCourseForm
             // 
