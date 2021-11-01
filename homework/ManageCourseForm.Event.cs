@@ -90,8 +90,16 @@ namespace homework
         /// </summary>
         private void ListenButtonConfirmClicked(object sender, EventArgs e)
         {
-            ClearGroupBoxStatus();
-            _courseManagementPresentationModel.ClickConfirm();
+            string errorMessage = _courseManagementPresentationModel.CheckIsNumeric();
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                _courseManagementPresentationModel.ClickConfirm();
+                ClearGroupBoxStatus();
+            }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
         }
 
         /// <summary>

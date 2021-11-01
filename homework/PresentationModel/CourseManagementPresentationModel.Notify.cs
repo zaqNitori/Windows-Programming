@@ -113,14 +113,14 @@ namespace homework.PresentationModel
         /// </summary>
         public void CheckIsCourseInputValid()
         {
-            if (!string.IsNullOrEmpty(Name)
-                && !string.IsNullOrEmpty(Number)
-                && !string.IsNullOrEmpty(Stage)
-                && !string.IsNullOrEmpty(Credit)
-                && !string.IsNullOrEmpty(Teacher)
-                && !string.IsNullOrEmpty(RequiredOrElective)
-                && !string.IsNullOrEmpty(Hour)
-                && !string.IsNullOrEmpty(DepartmentName)
+            if (!string.IsNullOrWhiteSpace(Name)
+                && !string.IsNullOrWhiteSpace(Number)
+                && !string.IsNullOrWhiteSpace(Stage)
+                && !string.IsNullOrWhiteSpace(Credit)
+                && !string.IsNullOrWhiteSpace(Teacher)
+                && !string.IsNullOrWhiteSpace(RequiredOrElective)
+                && !string.IsNullOrWhiteSpace(Hour)
+                && !string.IsNullOrWhiteSpace(DepartmentName)
                 && IsCourseComboBoxEnabled)
             {
                 CheckIsCoursePropertyChanged();
@@ -144,48 +144,57 @@ namespace homework.PresentationModel
                 || Credit != _originalCourse.Credit
                 || Teacher != _originalCourse.Teacher
                 || RequiredOrElective != _originalCourse.RequiredOrElective
-                || TeachAssistant != _originalCourse.TeachAssistant
-                || Note != _originalCourse.Note
+                || TeachAssistant.Trim() != _originalCourse.TeachAssistant
+                || Note.Trim() != _originalCourse.Note
                 || Hour != _originalCourse.Hour
-                || Language != _originalCourse.Language
+                || Language.Trim() != _originalCourse.Language
                 || DepartmentName != _originalDepartmentName) ? true : false;
         }
 
         /// <summary>
         /// 檢測有限制輸入的欄位
         /// </summary>
-        private string CheckIsNumeric()
+        public string CheckIsNumeric()
         {
             string errorMessage = string.Empty;
-            if (IsNumeric(Number))
+            if (!IsNumeric(Number))
             {
-                errorMessage += nameof(Number);
+                errorMessage += nameof(Number) + Environment.NewLine;
             }
 
-            try
-            {
-                Convert.ToInt32(Credit);
-            }
-            catch
-            {
-                errorMessage += nameof(Credit);
-            }
+            errorMessage += CheckIsCreditNumeric();
 
-            if (IsNumeric(Stage))
+            if (!IsNumeric(Stage))
             {
-                errorMessage += nameof(Credit);
+                errorMessage += nameof(Stage) + Environment.NewLine;
             }
-            return errorMessage;
+            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER);
         }
 
         /// <summary>
-        /// 是否為數字
+        /// Credit是否為數字
+        /// </summary>
+        private string CheckIsCreditNumeric()
+        {
+            try
+            {
+                int.Parse(Credit, System.Globalization.NumberStyles.AllowDecimalPoint);
+            }
+            catch
+            {
+                return nameof(Credit) + Environment.NewLine;
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 輸入是否為數字
         /// </summary>
         private bool IsNumeric(string text)
         {
             foreach (char c in text)
             {
-                if (c >= CourseManageProperty.ZERO && c <= CourseManageProperty.NINE)
+                if (c < CourseManageProperty.ZERO || c > CourseManageProperty.NINE)
                 {
                     return false;
                 }
