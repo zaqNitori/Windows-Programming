@@ -37,7 +37,7 @@ namespace homework.PresentationModel
             DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
             _originalDepartmentName = DepartmentName;
             CourseStatus = string.Empty;
-            Number = _originalCourse.Number;
+            Number = OriginalCourseNumber = _originalCourse.Number;
             Name = _originalCourse.Name;
             Stage = _originalCourse.Stage;
             Credit = _originalCourse.Credit;
@@ -47,8 +47,6 @@ namespace homework.PresentationModel
             Language = _originalCourse.Language;
             Note = _originalCourse.Note;
             Hour = _originalCourse.Hour;
-            IsCourseEditReadOnly = false;
-            IsCourseComboBoxEnabled = true;
             NotifyGroupBoxAndButtonChanged();
         }
 
@@ -81,14 +79,22 @@ namespace homework.PresentationModel
         /// </summary>
         public void ClickConfirm()
         {
-            CheckIsNumeric();
-            //CourseManageState = ((int)CourseManageAction.Edit);
-            //GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
-            //IsButtonAddCourseEnabled = true;
-            //IsButtonConfirmEnabled = false;
-            //IsCourseEditReadOnly = true;
-            //IsCourseComboBoxEnabled = false;
-            //ClearCourse();
+            Course course = BuildCourse();
+            if (CourseStatus.Equals(CourseManageAction.Add))
+            {
+                _courseManageModel.AddCourse(course, DepartmentName);
+            }
+            else
+            {
+                _courseManageModel.EditCourse(course, DepartmentName, OriginalCourseNumber);
+            }
+
+            IsButtonAddCourseEnabled = true;
+            IsButtonConfirmEnabled = false;
+            IsCourseEditReadOnly = true;
+            IsCourseComboBoxEnabled = false;
+            ClearCourse();
+            NotifyListBoxChanged();
         }
 
         /// <summary>
@@ -97,8 +103,8 @@ namespace homework.PresentationModel
         public void SelectedIndexChanged(int selectedIndex)
         {
             ListBoxSelectedIndex = selectedIndex;
-            IsCourseEditReadOnly = true;
-            IsCourseComboBoxEnabled = false;
+            IsCourseEditReadOnly = false;
+            IsCourseComboBoxEnabled = true;
             CourseManageState = ((int)CourseManageAction.Edit);
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
@@ -200,6 +206,25 @@ namespace homework.PresentationModel
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// 建立課程
+        /// </summary>
+        private Course BuildCourse()
+        {
+            Course course = new Course(_originalCourse);
+            course.Name = Name;
+            course.Number = Number;
+            course.Stage = Stage;
+            course.Credit = Credit;
+            course.Teacher = Teacher;
+            course.RequiredOrElective = RequiredOrElective;
+            course.TeachAssistant = TeachAssistant;
+            course.Language = Language;
+            course.Note = Note;
+            course.Hour = Hour;
+            return course;
         }
 
     }

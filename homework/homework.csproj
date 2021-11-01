@@ -54,7 +54,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Data\DataItemManager.cs" />
     <Compile Include="Data\StoreDataManager.cs" />
-    <Compile Include="ManageCourseForm.Event.cs">
+    <Compile Include="MyForm\ManageCourseForm.Event.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\CourseManageModel.cs" />

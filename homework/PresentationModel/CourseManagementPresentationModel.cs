@@ -131,6 +131,11 @@ namespace homework.PresentationModel
             get; set;
         }
 
+        private string OriginalCourseNumber
+        {
+            get; set;
+        }
+
         /// <summary>
         /// 取得Item型態的所有課程
         /// </summary>

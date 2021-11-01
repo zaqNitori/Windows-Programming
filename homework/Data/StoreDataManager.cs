@@ -59,6 +59,52 @@ namespace homework.Data
         }
 
         /// <summary>
+        /// 新增課程到指定班級
+        /// </summary>
+        public void AddCourse(Course course, string className)
+        {
+            foreach (var dep in _departments)
+            {
+                if (dep.DepartmentName.Equals(className))
+                {
+                    GetDepartmentCourses(dep).Add(course);
+                }
+            }
+            _curriculum.Courses.Add(course.Number, course);
+        }
+
+        /// <summary>
+        /// 用舊的班級名稱取得課程，再呼叫刪除功能
+        /// </summary>
+        public void RemoveCourse(string className, string courseNumber)
+        {
+            foreach (var dep in _departments)
+            {
+                if (dep.DepartmentName.Equals(className))
+                {
+                    RemoveCourse(GetDepartmentCourses(dep), courseNumber);
+                    break;
+                }
+            }
+            _curriculum.Courses.Remove(courseNumber);
+        }
+
+        /// <summary>
+        /// 移除課程
+        /// </summary>
+        private void RemoveCourse(List<Course> courses , string courseNumber)
+        {
+            foreach (var c in courses)
+            {
+                if (c.Number.Equals(courseNumber))
+                {
+                    courses.Remove(c);
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
         /// 退選課程
         /// </summary>
         /// <history>

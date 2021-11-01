@@ -59,6 +59,7 @@ namespace homework
         {
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
+            _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
         /// <summary>
@@ -81,8 +82,11 @@ namespace homework
             int selectedIndex = listBox.SelectedIndex;
             DataItem item = (DataItem)listBox.SelectedItem;
 
-            _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);
-            _courseManagementPresentationModel.GetCourseByCourseNumber(item.Value);
+            if (selectedIndex != -1)
+            {
+                _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);
+                _courseManagementPresentationModel.GetCourseByCourseNumber(item.Value);
+            }
         }
 
         /// <summary>

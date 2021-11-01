@@ -54,5 +54,23 @@ namespace homework.Model
             return new Course(course);
         }
 
+        /// <summary>
+        /// 新增課程到指定班級
+        /// </summary>
+        public void AddCourse(Course course, string className)
+        {
+            _storeDataManager.AddCourse(course, className);
+        }
+
+        /// <summary>
+        /// 修改課程，先刪除，再新增
+        /// </summary>
+        public void EditCourse(Course course, string className, string originalCourseNumber)
+        {
+            string originClassName = GetDepartmentNameByCourseNumber(originalCourseNumber);
+            _storeDataManager.RemoveCourse(originClassName, originalCourseNumber);
+            _storeDataManager.AddCourse(course, className);
+        }
+
     }
 }
