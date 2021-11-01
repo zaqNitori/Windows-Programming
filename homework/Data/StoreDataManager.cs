@@ -10,7 +10,8 @@ namespace homework.Data
 {
     public class StoreDataManager
     {
-
+        public event CourseChangedEventHandler _courseChanged;
+        public delegate void CourseChangedEventHandler();
         private Curriculum _curriculum;
         private BindingList<Course> _chosenCourses;
         private List<Department> _departments;
@@ -20,7 +21,7 @@ namespace homework.Data
             _curriculum = new Curriculum();
             _chosenCourses = new BindingList<Course>();
             _departments = new List<Department>();
-
+            _courseChanged += RefreshSelectedResult;
         }
 
         #region Public
@@ -71,6 +72,7 @@ namespace homework.Data
                 }
             }
             _curriculum.Courses.Add(course.Number, course);
+            NotifyCourseChanged();
         }
 
         /// <summary>
@@ -239,6 +241,29 @@ namespace homework.Data
                     return;
                 }
             }
+        }
+
+        /// <summary>
+        /// 課程修改事件，觸發bindingList重新拉值 
+        /// </summary>
+        private void RefreshSelectedResult()
+        {
+            BindingList<Course> courses = new BindingList<Course>();
+            foreach (var c in _chosenCourses)
+            {
+                courses.Add(_curriculum.Courses[c.Number]);
+            }
+
+            _chosenCourses = courses;
+        }
+
+        /// <summary>
+        /// 課程修改事件要觸發畫面更新 
+        /// </summary>
+        private void NotifyCourseChanged()
+        {
+            if (_courseChanged != null)
+                _courseChanged();
         }
 
         #endregion

@@ -198,7 +198,7 @@ namespace homework.PresentationModel
         /// </summary>
         private string CheckIsCourseNumberConflict()
         {
-            if (_courseManageModel.CheckIsCourseNumberConfict(Number))
+            if (_courseManageModel.CheckIsCourseNumberConflict(Number))
             {
                 return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
             }

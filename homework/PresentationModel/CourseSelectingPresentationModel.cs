@@ -25,7 +25,7 @@ namespace homework.PresentationModel
             _courseSelectData = new HashSet<string>();
             IsButtonSendEnable = false;
             IsButtonShowSelectResultEnable = true;
-            _courseModel._courseDropped += NotifyCourseChanged;
+            _courseModel._courseChanged += NotifyCourseChanged;
         }
 
         public bool IsButtonSendEnable

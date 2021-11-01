@@ -25,7 +25,8 @@ namespace homework
             AddButton();
 
             _courseSelectResultPresentationModel = courseSelectResultPresentationModel;
-            _courseSelectResultDataGridView.DataSource = _courseSelectResultPresentationModel.GetChosenCourses();
+            _courseSelectResultPresentationModel._courseChanged += RefreshSelectResultDataGridView;
+            RefreshSelectResultDataGridView();
             _courseSelectResultDataGridView.CellContentClick += ClickCourseSelectResultDataGridViewCellContent;
             Common.ActivateDoubleBuffer(_courseSelectResultDataGridView);
         }
@@ -60,6 +61,14 @@ namespace homework
             {
                 _courseSelectResultPresentationModel.DropCourse(e.ColumnIndex);
             }
+        }
+
+        /// <summary>
+        /// 重新拉取選課結果
+        /// </summary>
+        private void RefreshSelectResultDataGridView()
+        {
+            _courseSelectResultDataGridView.DataSource = _courseSelectResultPresentationModel.GetChosenCourses();
         }
 
     }

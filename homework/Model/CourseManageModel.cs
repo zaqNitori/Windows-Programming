@@ -75,7 +75,7 @@ namespace homework.Model
         /// <summary>
         /// 確認課號是否存在
         /// </summary>
-        public bool CheckIsCourseNumberConfict(string courseNumber)
+        public bool CheckIsCourseNumberConflict(string courseNumber)
         {
             return _storeDataManager.IsCourseNumberExist(courseNumber);
         }

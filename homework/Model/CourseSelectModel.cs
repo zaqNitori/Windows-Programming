@@ -10,7 +10,7 @@ namespace homework.Model
 {
     public class CourseSelectModel
     {
-        public event CourseChangedEventHandler _courseDropped;
+        public event CourseChangedEventHandler _courseChanged;
         public delegate void CourseChangedEventHandler();
         private CourseCrawler _courseCrawler;
         private CourseAnalyzer _courseAnalyzer;
@@ -25,7 +25,7 @@ namespace homework.Model
             _courseCrawler = new CourseCrawler();
             _courseAnalyzer = new CourseAnalyzer();
             _storeDataManager = storeDataManager;
-
+            _storeDataManager._courseChanged += NotifyCourseChanged;
         }
 
         #region Public
@@ -97,7 +97,7 @@ namespace homework.Model
         public void DropCourse(int index)
         {
             _storeDataManager.DropCourse(index);
-            NotifyCourseDropped();
+            NotifyCourseChanged();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace homework.Model
             ConvertSelectedCourses(courses);
 
             errorMessage += CheckSelectedCoursesConflict();
-            errorMessage += CheckExsistedCoursesConflict();
+            errorMessage += CheckExistedCoursesConflict();
 
             return errorMessage;
         }
@@ -166,7 +166,7 @@ namespace homework.Model
         /// <summary>
         /// 驗證選取課程是否跟現在課表是否有衝突
         /// </summary>
-        private string CheckExsistedCoursesConflict()
+        private string CheckExistedCoursesConflict()
         {
             string courseNameConflictErrorMessage = string.Empty;
             string courseTimeConflictErrorMessage = string.Empty;
@@ -267,10 +267,10 @@ namespace homework.Model
         /// <summary>
         /// Drop事件要觸發畫面更新 
         /// </summary>
-        private void NotifyCourseDropped()
+        private void NotifyCourseChanged()
         {
-            if (_courseDropped != null)
-                _courseDropped();
+            if (_courseChanged != null)
+                _courseChanged();
         }
 
         #endregion

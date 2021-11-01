@@ -185,44 +185,10 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews>
-            <Smell>
-              <Id>1</Id>
-              <SmellType>Unsuitable naming(名不符實)-CheckExsistedCoursesConflict(exsisted)</SmellType>
-              <HashCode>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>CourseSelectModel.cs</File>
-              <Line>169</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>Feature Envy(依戀情節)</SmellType>
-              <HashCode>260 目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</HashCode>
-              <Severity>Warning</Severity>
-              <Weight>1</Weight>
-              <Project>homework</Project>
-              <File>D:\Ntut\Windows-Programming\homework\homework\MyForm\ManageCourseForm.cs</File>
-              <Line>260</Line>
-              <StartLine>259</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>260</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</Comment>
-              <Auto>false</Auto>
-            </Smell>
-          </Reviews>
+          <Reviews />
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
             <string>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
-            <string>260 目前物件 homework.ManageCourseForm，使用物件的方法或屬性次數：0次，Envy到對象物件 homework.PresentationModel.CourseManagementPresentationModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：homework.PresentationModel.CourseManagementPresentationModel.IsCourseInputValid() 以及 homework.PresentationModel.CourseManagementPresentationModel.IsCourseEditReadOnly</string>
           </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
@@ -297,6 +263,11 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>MyForm\ManageCourseForm.Event.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>MyForm\SelectCourseForm.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>ViewOrController</AnalysisFileType>
@@ -318,6 +289,11 @@
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>PresentationModel\CourseManagementPresentationModel.cs</RelativePath>
+                <ProjectName>homework</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModel\CourseManagementPresentationModel.Notify.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -393,7 +369,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3376</ProductionLoc>
+          <ProductionLoc>3797</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

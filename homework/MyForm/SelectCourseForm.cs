@@ -59,16 +59,18 @@ namespace homework
         /// </summary>
         private void RefreshTabControl()
         {
-            string controlName = "_courseDataGridViewComponent";
+            //string controlName = "_courseDataGridViewComponent";
             _department = _courseSelectingPresentationModel.GetAllDepartment();
-            foreach (var dep in _department.Select((value, index) => new 
-            { 
-                value, index 
-            }))
-            {
-                _tabControl.TabPages[dep.index].Text = dep.value;
-                ((CourseDataGridViewComponent)this.Controls.Find(controlName + (dep.index + 1).ToString(), true)[0]).SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(dep.value));
-            }
+            _courseDataGridViewComponent1.SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(_department[0]));
+            _courseDataGridViewComponent2.SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(_department[1]));
+            //foreach (var dep in _department.Select((value, index) => new 
+            //{ 
+            //    value, index 
+            //}))
+            //{
+            //    _tabControl.TabPages[dep.index].Text = dep.value;
+            //    ((CourseDataGridViewComponent)this.Controls.Find(controlName + (dep.index + 1).ToString(), true)[0]).SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(dep.value));
+            //}
         }
 
         /// <summary>
