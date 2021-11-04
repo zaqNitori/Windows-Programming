@@ -9,6 +9,7 @@ namespace homework
     public partial class ManageCourseForm : Form
     {
         private CourseManagementPresentationModel _courseManagementPresentationModel;
+        private bool _isDataGridViewEditing = false;
 
         public ManageCourseForm(CourseManagementPresentationModel courseManagementPresentationModel)
         {
@@ -64,13 +65,11 @@ namespace homework
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
             {
-                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_COMBO_BOX_ENABLED);
             }
 
             foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
             {
-                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_READ_ONLY_STATUS);
             }
             ClearGroupBoxStatus();
@@ -93,7 +92,7 @@ namespace homework
         /// </summary>
         private void AddRowNumber()
         {
-            for (var j = 1; j < 9; j++)
+            for (var j = 1; j < 10; j++)
             {
                 _courseTimeDataGridView.Rows.Add();
             }
@@ -114,6 +113,39 @@ namespace homework
             _buttonAddCourse.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[1].ReadValue();
+        }
+
+        /// <summary>
+        /// 重整Grid內容狀態
+        /// </summary>
+        private void RefreshDataGridViewStatus()
+        {
+            string dayOfWeek;
+            string[] courseTime;
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                dayOfWeek = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(_courseManagementPresentationModel, null);
+                ResetDataGridViewCheckBox(day);
+                if (!string.IsNullOrEmpty(dayOfWeek))
+                {
+                    courseTime = dayOfWeek.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
+                    foreach (var s in courseTime)
+                    {
+                        _courseTimeDataGridView.Rows[int.Parse(s) - 1].Cells[((int)day) + 1].Value = true;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 清除checkbox的狀態
+        /// </summary>
+        private void ResetDataGridViewCheckBox(DayOfWeek day)
+        {
+            foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
+            {
+                row.Cells[((int)day) + 1].Value = false;
+            }
         }
 
         /// <summary>

@@ -50,6 +50,8 @@ namespace homework
             _courseHourComboBox.SelectedIndexChanged += ListenCourseHourTextChanged;
             _courseStatusComboBox.SelectedIndexChanged += ListenCourseStatusTextChanged;
             _courseDepartmentComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
+            _courseTimeDataGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
+            _courseTimeDataGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
         }
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace homework
         {
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
+            _courseManagementPresentationModel._gridContentChanged += RefreshDataGridViewStatus;
             _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
@@ -81,7 +84,6 @@ namespace homework
             ListBox listBox = (ListBox)sender;
             int selectedIndex = listBox.SelectedIndex;
             DataItem item = (DataItem)listBox.SelectedItem;
-
             if (selectedIndex != -1)
             {
                 _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);
@@ -221,6 +223,51 @@ namespace homework
         {
             _courseManagementPresentationModel.CourseStatus = _courseStatusComboBox.Text;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
+        }
+
+        /// <summary>
+        /// 監聽滑鼠點擊釋放
+        /// </summary>
+        private void ListenCourseDataGridOnCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            _isDataGridViewEditing = true;
+            if (e.RowIndex != -1)
+            {
+                _courseTimeDataGridView.EndEdit();
+            }
+        }
+
+        /// <summary>
+        /// 監聽數值變動
+        /// </summary>
+        private void ListenCourseDataGridOnCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int columnIndex = e.ColumnIndex;
+            int rowIndex = e.RowIndex + 1;
+            if (e.RowIndex != -1 && _isDataGridViewEditing)
+            {
+                int time = (columnIndex - 1) * CourseManageProperty.TEN_NUMBER + (rowIndex);
+                SetUpCourseTimeString(columnIndex, rowIndex);
+                _courseManagementPresentationModel.RecordCourseTime(time);
+                _courseManagementPresentationModel.CheckIsCourseInputValid();
+            }
+            _isDataGridViewEditing = false;
+        }
+
+        /// <summary>
+        /// 根據Grid 變動欄位，生成新的字串
+        /// </summary>
+        private void SetUpCourseTimeString(int columnIndex, int rowIndex)
+        {
+            string courseTime = string.Empty;
+            foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[columnIndex].Value))
+                {
+                    courseTime += string.IsNullOrEmpty(courseTime) ? rowIndex.ToString() : (CourseManageProperty.SPACE + rowIndex.ToString());
+                }
+            }
+            typeof(CourseManagementPresentationModel).GetProperty((DayOfWeek.Sunday + columnIndex - 1).ToString()).SetValue(_courseManagementPresentationModel, courseTime);
         }
 
     }

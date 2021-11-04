@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using homework.Model;
 using homework.ViewModel;
+using System.Reflection;
 
 namespace homework.PresentationModel
 {
@@ -29,13 +30,21 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 以課號取得課程
+        /// Grid CheckBox點擊事件觸發 
+        /// </summary>
+        private void NotifyGridContentChanged()
+        {
+            if (_gridContentChanged != null)
+                _gridContentChanged();
+        }
+
+        /// <summary>
+        /// 以課號取得課程，處理資料的取得
         /// </summary>
         public void GetCourseByCourseNumber(string number)
         {
             _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
-            DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
-            _originalDepartmentName = DepartmentName;
+            _originalDepartmentName = DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
             CourseStatus = string.Empty;
             Number = OriginalCourseNumber = _originalCourse.Number;
             Name = _originalCourse.Name;
@@ -47,7 +56,32 @@ namespace homework.PresentationModel
             Language = _originalCourse.Language;
             Note = _originalCourse.Note;
             Hour = _originalCourse.Hour;
+            SetCourseTime();
             NotifyGroupBoxAndButtonChanged();
+            NotifyGridContentChanged();
+        }
+
+        /// <summary>
+        /// 綁定課程時間
+        /// </summary>
+        private void SetCourseTime()
+        {
+            _courseTimeRecord.Clear();
+            string[] courseTime;
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                string property = (string)typeof(Course).GetProperty(day.ToString()).GetValue(_originalCourse, null);
+                typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).SetValue(this, property);
+                if (!string.IsNullOrEmpty(property))
+                {
+                    courseTime = property.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
+                    foreach (var s in courseTime)
+                    {
+                        _courseTimeRecord.Add(((int)day) * CourseManageProperty.TEN_NUMBER + int.Parse(s));
+                    }
+                }
+            }
+
         }
 
         /// <summary>
@@ -98,7 +132,7 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 點擊新增/儲存
+        /// 變更點選課程，處理畫面物件的狀態
         /// </summary>
         public void SelectedIndexChanged(int selectedIndex)
         {
@@ -111,7 +145,21 @@ namespace homework.PresentationModel
             IsButtonAddCourseEnabled = true;
             IsButtonConfirmEnabled = false;
             ClearCourse();
-            //NotifyGroupBoxAndButtonChanged();
+        }
+
+        /// <summary>
+        /// 紀錄課程時間
+        /// </summary>
+        public void RecordCourseTime(int time)
+        {
+            if (_courseTimeRecord.Contains(time))
+            {
+                _courseTimeRecord.Remove(time);
+            }
+            else
+            {
+                _courseTimeRecord.Add(time);
+            }
         }
 
         /// <summary>
@@ -119,15 +167,11 @@ namespace homework.PresentationModel
         /// </summary>
         public void CheckIsCourseInputValid()
         {
-            if (!string.IsNullOrWhiteSpace(Name)
-                && !string.IsNullOrWhiteSpace(Number)
-                && !string.IsNullOrWhiteSpace(Stage)
-                && !string.IsNullOrWhiteSpace(Credit)
-                && !string.IsNullOrWhiteSpace(Teacher)
-                && !string.IsNullOrWhiteSpace(RequiredOrElective)
-                && !string.IsNullOrWhiteSpace(Hour)
-                && !string.IsNullOrWhiteSpace(DepartmentName)
-                && IsCourseComboBoxEnabled)
+            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Number)
+                && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
+                && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
+                && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(DepartmentName)
+                && IsCourseComboBoxEnabled && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
                 CheckIsCoursePropertyChanged();
             }
@@ -154,86 +198,25 @@ namespace homework.PresentationModel
                 || Note.Trim() != _originalCourse.Note
                 || Hour != _originalCourse.Hour
                 || Language.Trim() != _originalCourse.Language
-                || DepartmentName != _originalDepartmentName) ? true : false;
+                || DepartmentName != _originalDepartmentName
+                || CheckIsCourseTimeChanged()) ? true : false;
         }
 
         /// <summary>
-        /// 檢測有限制輸入的欄位
+        /// 課程時間是否修改
         /// </summary>
-        public string CheckIsNumericInputValid()
+        private bool CheckIsCourseTimeChanged()
         {
-            string errorMessage = string.Empty;
-
-            errorMessage += CheckIsNumeric();
-            if (CourseManageState.Equals(((int)CourseManageAction.Add)))
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
             {
-                errorMessage += CheckIsCourseNumberConflict();
-            }
-
-            return errorMessage;
-        }
-
-        /// <summary>
-        /// 檢測數字輸入
-        /// </summary>
-        private string CheckIsNumeric()
-        {
-            string errorMessage = string.Empty;
-            if (!IsNumeric(Number))
-            {
-                errorMessage += nameof(Number) + Environment.NewLine;
-            }
-
-            errorMessage += CheckIsCreditNumeric();
-
-            if (!IsNumeric(Stage))
-            {
-                errorMessage += nameof(Stage) + Environment.NewLine;
-            }
-            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine);
-        }
-
-        /// <summary>
-        /// 檢測課號是否重複
-        /// </summary>
-        private string CheckIsCourseNumberConflict()
-        {
-            if (_courseManageModel.CheckIsCourseNumberConflict(Number))
-            {
-                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
-            }
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Credit是否為數字
-        /// </summary>
-        private string CheckIsCreditNumeric()
-        {
-            try
-            {
-                int.Parse(Credit, System.Globalization.NumberStyles.AllowDecimalPoint);
-            }
-            catch
-            {
-                return nameof(Credit) + Environment.NewLine;
-            }
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// 輸入是否為數字
-        /// </summary>
-        private bool IsNumeric(string text)
-        {
-            foreach (char c in text)
-            {
-                if (c < CourseManageProperty.ZERO || c > CourseManageProperty.NINE)
+                string oldTime = (string)typeof(Course).GetProperty(day.ToString()).GetValue(_originalCourse, null);
+                string newTime = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(this, null);
+                if (!oldTime.Equals(newTime))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -241,7 +224,7 @@ namespace homework.PresentationModel
         /// </summary>
         private Course BuildCourse()
         {
-            Course course = new Course(_originalCourse);
+            Course course = new Course();
             course.Name = Name;
             course.Number = Number;
             course.Stage = Stage;
@@ -252,6 +235,11 @@ namespace homework.PresentationModel
             course.Language = Language;
             course.Note = Note;
             course.Hour = Hour;
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                string property = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(this, null);
+                typeof(Course).GetProperty(day.ToString()).SetValue(course, property);
+            }
             return course;
         }
 

@@ -19,9 +19,12 @@ namespace homework.ViewModel
         public const int FIFTY_SEVEN_NUMBER = 57;
         public const int FORTY_EIGHT_NUMBER = 48;
         public const int EIGHT_NUMBER = 8;
+        public const int TEN_NUMBER = 10;
 
         public const char ZERO = '0';
         public const char NINE = '9';
+        public const char NEW_LINE = '\n';
+        public const char SPACE = ' ';
 
         public const string COLUMN_NAME = "courseHour";
         public const string COLUMN_TITLE = "節數";
