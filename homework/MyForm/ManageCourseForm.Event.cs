@@ -61,7 +61,7 @@ namespace homework
         {
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshDataGridViewStatus;
+            _courseManagementPresentationModel._gridContentChanged += RefreshDataGridViewStatus;
             _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
@@ -230,6 +230,7 @@ namespace homework
         /// </summary>
         private void ListenCourseDataGridOnCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
+            _isDataGridViewEditing = true;
             if (e.RowIndex != -1)
             {
                 _courseTimeDataGridView.EndEdit();
@@ -243,20 +244,30 @@ namespace homework
         {
             int columnIndex = e.ColumnIndex;
             int rowIndex = e.RowIndex + 1;
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1 && _isDataGridViewEditing)
             {
                 int time = (columnIndex - 1) * CourseManageProperty.TEN_NUMBER + (rowIndex);
-                string courseTime = string.Empty;
-                foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
-                {
-                    if (Convert.ToBoolean(row.Cells[columnIndex].Value))
-                    {
-                        courseTime += string.IsNullOrEmpty(courseTime) ? rowIndex.ToString() : (CourseManageProperty.SPACE + rowIndex.ToString());
-                    }
-                }
+                SetUpCourseTimeString(columnIndex, rowIndex);
                 _courseManagementPresentationModel.RecordCourseTime(time);
                 _courseManagementPresentationModel.CheckIsCourseInputValid();
             }
+            _isDataGridViewEditing = false;
+        }
+
+        /// <summary>
+        /// 根據Grid 變動欄位，生成新的字串
+        /// </summary>
+        private void SetUpCourseTimeString(int columnIndex, int rowIndex)
+        {
+            string courseTime = string.Empty;
+            foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[columnIndex].Value))
+                {
+                    courseTime += string.IsNullOrEmpty(courseTime) ? rowIndex.ToString() : (CourseManageProperty.SPACE + rowIndex.ToString());
+                }
+            }
+            typeof(CourseManagementPresentationModel).GetProperty((DayOfWeek.Sunday + columnIndex - 1).ToString()).SetValue(_courseManagementPresentationModel, courseTime);
         }
 
     }

@@ -30,6 +30,15 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
+        /// Grid CheckBox點擊事件觸發 
+        /// </summary>
+        private void NotifyGridContentChanged()
+        {
+            if (_gridContentChanged != null)
+                _gridContentChanged();
+        }
+
+        /// <summary>
         /// 以課號取得課程，處理資料的取得
         /// </summary>
         public void GetCourseByCourseNumber(string number)
@@ -49,6 +58,7 @@ namespace homework.PresentationModel
             Hour = _originalCourse.Hour;
             SetCourseTime();
             NotifyGroupBoxAndButtonChanged();
+            NotifyGridContentChanged();
         }
 
         /// <summary>
@@ -157,15 +167,11 @@ namespace homework.PresentationModel
         /// </summary>
         public void CheckIsCourseInputValid()
         {
-            if (!string.IsNullOrWhiteSpace(Name)
-                && !string.IsNullOrWhiteSpace(Number)
-                && !string.IsNullOrWhiteSpace(Stage)
-                && !string.IsNullOrWhiteSpace(Credit)
-                && !string.IsNullOrWhiteSpace(Teacher)
-                && !string.IsNullOrWhiteSpace(RequiredOrElective)
-                && !string.IsNullOrWhiteSpace(Hour)
-                && !string.IsNullOrWhiteSpace(DepartmentName)
-                && IsCourseComboBoxEnabled)
+            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Number)
+                && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
+                && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
+                && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(DepartmentName)
+                && IsCourseComboBoxEnabled && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
                 CheckIsCoursePropertyChanged();
             }
@@ -192,7 +198,25 @@ namespace homework.PresentationModel
                 || Note.Trim() != _originalCourse.Note
                 || Hour != _originalCourse.Hour
                 || Language.Trim() != _originalCourse.Language
-                || DepartmentName != _originalDepartmentName) ? true : false;
+                || DepartmentName != _originalDepartmentName
+                || CheckIsCourseTimeChanged()) ? true : false;
+        }
+
+        /// <summary>
+        /// 課程時間是否修改
+        /// </summary>
+        private bool CheckIsCourseTimeChanged()
+        {
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                string oldTime = (string)typeof(Course).GetProperty(day.ToString()).GetValue(_originalCourse, null);
+                string newTime = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(this, null);
+                if (!oldTime.Equals(newTime))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

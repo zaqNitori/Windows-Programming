@@ -14,6 +14,8 @@ namespace homework.PresentationModel
         public delegate void ListBoxChangedEventHandler();
         public event GroupBoxAndButtonChangedEventHandler _groupBoxAndButtonChanged; 
         public delegate void GroupBoxAndButtonChangedEventHandler();
+        public event GridChangedEventHandler _gridContentChanged;
+        public delegate void GridChangedEventHandler();
         private CourseManageModel _courseManageModel;
         private Course _originalCourse;
         private string _originalDepartmentName;

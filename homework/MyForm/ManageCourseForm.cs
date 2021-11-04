@@ -9,6 +9,7 @@ namespace homework
     public partial class ManageCourseForm : Form
     {
         private CourseManagementPresentationModel _courseManagementPresentationModel;
+        private bool _isDataGridViewEditing = false;
 
         public ManageCourseForm(CourseManagementPresentationModel courseManagementPresentationModel)
         {
@@ -64,13 +65,11 @@ namespace homework
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
             {
-                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_COMBO_BOX_ENABLED);
             }
 
             foreach (TextBoxBase c in _courseGroupBox.Controls.OfType<TextBoxBase>())
             {
-                c.CausesValidation = false;
                 c.DataBindings.Add(CourseManageProperty.BINDING_READ_ONLY_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_READ_ONLY_STATUS);
             }
             ClearGroupBoxStatus();
