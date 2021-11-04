@@ -22,6 +22,8 @@ namespace homework.ViewModel
 
         public const char ZERO = '0';
         public const char NINE = '9';
+        public const char NEW_LINE = '\n';
+        public const char SPACE = ' ';
 
         public const string COLUMN_NAME = "courseHour";
         public const string COLUMN_TITLE = "節數";

@@ -187,9 +187,7 @@
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
           <Reviews />
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList>
-            <string>UnsuitableNaming.CourseSelectModel.CheckExsistedCoursesConflict.CheckExsistedCoursesConflict</string>
-          </HashCodeRequestIgnoreList>
+          <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
@@ -369,7 +367,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3797</ProductionLoc>
+          <ProductionLoc>3879</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

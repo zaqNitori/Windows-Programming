@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using homework.Model;
 using homework.ViewModel;
+using System.Reflection;
 
 namespace homework.PresentationModel
 {
@@ -29,13 +30,12 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 以課號取得課程
+        /// 以課號取得課程，處理資料的取得
         /// </summary>
         public void GetCourseByCourseNumber(string number)
         {
             _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
-            DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
-            _originalDepartmentName = DepartmentName;
+            _originalDepartmentName = DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
             CourseStatus = string.Empty;
             Number = OriginalCourseNumber = _originalCourse.Number;
             Name = _originalCourse.Name;
@@ -47,7 +47,20 @@ namespace homework.PresentationModel
             Language = _originalCourse.Language;
             Note = _originalCourse.Note;
             Hour = _originalCourse.Hour;
+            SetClassTime();
             NotifyGroupBoxAndButtonChanged();
+        }
+
+        /// <summary>
+        /// 綁定課程時間
+        /// </summary>
+        private void SetClassTime()
+        {
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                string property = (string)typeof(Course).GetProperty(day.ToString()).GetValue(_originalCourse, null);
+                typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).SetValue(this, property);
+            }
         }
 
         /// <summary>
@@ -98,7 +111,7 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 點擊新增/儲存
+        /// 變更點選課程，處理畫面物件的狀態
         /// </summary>
         public void SelectedIndexChanged(int selectedIndex)
         {
@@ -111,7 +124,6 @@ namespace homework.PresentationModel
             IsButtonAddCourseEnabled = true;
             IsButtonConfirmEnabled = false;
             ClearCourse();
-            //NotifyGroupBoxAndButtonChanged();
         }
 
         /// <summary>

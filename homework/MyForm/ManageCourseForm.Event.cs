@@ -59,6 +59,7 @@ namespace homework
         {
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
             _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
+            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshDataGridViewStatus;
             _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
@@ -81,7 +82,6 @@ namespace homework
             ListBox listBox = (ListBox)sender;
             int selectedIndex = listBox.SelectedIndex;
             DataItem item = (DataItem)listBox.SelectedItem;
-
             if (selectedIndex != -1)
             {
                 _courseManagementPresentationModel.SelectedIndexChanged(selectedIndex);

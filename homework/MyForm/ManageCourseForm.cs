@@ -93,7 +93,7 @@ namespace homework
         /// </summary>
         private void AddRowNumber()
         {
-            for (var j = 1; j < 9; j++)
+            for (var j = 1; j < 10; j++)
             {
                 _courseTimeDataGridView.Rows.Add();
             }
@@ -114,6 +114,39 @@ namespace homework
             _buttonAddCourse.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[1].ReadValue();
+        }
+
+        /// <summary>
+        /// 重整Grid內容狀態
+        /// </summary>
+        private void RefreshDataGridViewStatus()
+        {
+            string dayOfWeek;
+            string[] classTime;
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                dayOfWeek = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(_courseManagementPresentationModel, null);
+                ResetDataGridViewCheckBox(day);
+                if (!string.IsNullOrEmpty(dayOfWeek))
+                {
+                    classTime = dayOfWeek.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
+                    foreach (var s in classTime)
+                    {
+                        _courseTimeDataGridView.Rows[int.Parse(s) - 1].Cells[((int)day) + 1].Value = true;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 清除checkbox的狀態
+        /// </summary>
+        private void ResetDataGridViewCheckBox(DayOfWeek day)
+        {
+            foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
+            {
+                row.Cells[((int)day) + 1].Value = false;
+            }
         }
 
         /// <summary>
