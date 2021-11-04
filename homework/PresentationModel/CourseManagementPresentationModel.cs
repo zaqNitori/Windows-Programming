@@ -17,6 +17,7 @@ namespace homework.PresentationModel
         private CourseManageModel _courseManageModel;
         private Course _originalCourse;
         private string _originalDepartmentName;
+        private HashSet<int> _courseTimeRecord;
 
         public CourseManagementPresentationModel(CourseManageModel courseManageModel)
         {
@@ -29,6 +30,7 @@ namespace homework.PresentationModel
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
             CourseManageState = ((int)CourseManageAction.None);
+            _courseTimeRecord = new HashSet<int>();
         }
 
         public string ButtonConfirmText
@@ -185,6 +187,85 @@ namespace homework.PresentationModel
         public List<DataItem> GetDepartmentNameAsItem()
         {
             return _courseManageModel.GetDepartmentNameAsItem();
+        }
+
+        /// <summary>
+        /// 檢測有限制輸入的欄位
+        /// </summary>
+        public string CheckIsNumericInputValid()
+        {
+            string errorMessage = string.Empty;
+
+            errorMessage += CheckIsNumeric();
+            if (CourseManageState.Equals(((int)CourseManageAction.Add)))
+            {
+                errorMessage += CheckIsCourseNumberConflict();
+            }
+
+            return errorMessage;
+        }
+
+        /// <summary>
+        /// 檢測數字輸入
+        /// </summary>
+        private string CheckIsNumeric()
+        {
+            string errorMessage = string.Empty;
+            if (!IsNumeric(Number))
+            {
+                errorMessage += nameof(Number) + Environment.NewLine;
+            }
+
+            errorMessage += CheckIsCreditNumeric();
+
+            if (!IsNumeric(Stage))
+            {
+                errorMessage += nameof(Stage) + Environment.NewLine;
+            }
+            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine);
+        }
+
+        /// <summary>
+        /// 檢測課號是否重複
+        /// </summary>
+        private string CheckIsCourseNumberConflict()
+        {
+            if (_courseManageModel.CheckIsCourseNumberConflict(Number))
+            {
+                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Credit是否為數字
+        /// </summary>
+        private string CheckIsCreditNumeric()
+        {
+            try
+            {
+                int.Parse(Credit, System.Globalization.NumberStyles.AllowDecimalPoint);
+            }
+            catch
+            {
+                return nameof(Credit) + Environment.NewLine;
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 輸入是否為數字
+        /// </summary>
+        private bool IsNumeric(string text)
+        {
+            foreach (char c in text)
+            {
+                if (c < CourseManageProperty.ZERO || c > CourseManageProperty.NINE)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

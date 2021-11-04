@@ -47,20 +47,31 @@ namespace homework.PresentationModel
             Language = _originalCourse.Language;
             Note = _originalCourse.Note;
             Hour = _originalCourse.Hour;
-            SetClassTime();
+            SetCourseTime();
             NotifyGroupBoxAndButtonChanged();
         }
 
         /// <summary>
         /// 綁定課程時間
         /// </summary>
-        private void SetClassTime()
+        private void SetCourseTime()
         {
+            _courseTimeRecord.Clear();
+            string[] courseTime;
             for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
             {
                 string property = (string)typeof(Course).GetProperty(day.ToString()).GetValue(_originalCourse, null);
                 typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).SetValue(this, property);
+                if (!string.IsNullOrEmpty(property))
+                {
+                    courseTime = property.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
+                    foreach (var s in courseTime)
+                    {
+                        _courseTimeRecord.Add(((int)day) * CourseManageProperty.TEN_NUMBER + int.Parse(s));
+                    }
+                }
             }
+
         }
 
         /// <summary>
@@ -127,6 +138,21 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
+        /// 紀錄課程時間
+        /// </summary>
+        public void RecordCourseTime(int time)
+        {
+            if (_courseTimeRecord.Contains(time))
+            {
+                _courseTimeRecord.Remove(time);
+            }
+            else
+            {
+                _courseTimeRecord.Add(time);
+            }
+        }
+
+        /// <summary>
         /// 驗證輸入
         /// </summary>
         public void CheckIsCourseInputValid()
@@ -170,90 +196,11 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 檢測有限制輸入的欄位
-        /// </summary>
-        public string CheckIsNumericInputValid()
-        {
-            string errorMessage = string.Empty;
-
-            errorMessage += CheckIsNumeric();
-            if (CourseManageState.Equals(((int)CourseManageAction.Add)))
-            {
-                errorMessage += CheckIsCourseNumberConflict();
-            }
-
-            return errorMessage;
-        }
-
-        /// <summary>
-        /// 檢測數字輸入
-        /// </summary>
-        private string CheckIsNumeric()
-        {
-            string errorMessage = string.Empty;
-            if (!IsNumeric(Number))
-            {
-                errorMessage += nameof(Number) + Environment.NewLine;
-            }
-
-            errorMessage += CheckIsCreditNumeric();
-
-            if (!IsNumeric(Stage))
-            {
-                errorMessage += nameof(Stage) + Environment.NewLine;
-            }
-            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine);
-        }
-
-        /// <summary>
-        /// 檢測課號是否重複
-        /// </summary>
-        private string CheckIsCourseNumberConflict()
-        {
-            if (_courseManageModel.CheckIsCourseNumberConflict(Number))
-            {
-                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
-            }
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Credit是否為數字
-        /// </summary>
-        private string CheckIsCreditNumeric()
-        {
-            try
-            {
-                int.Parse(Credit, System.Globalization.NumberStyles.AllowDecimalPoint);
-            }
-            catch
-            {
-                return nameof(Credit) + Environment.NewLine;
-            }
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// 輸入是否為數字
-        /// </summary>
-        private bool IsNumeric(string text)
-        {
-            foreach (char c in text)
-            {
-                if (c < CourseManageProperty.ZERO || c > CourseManageProperty.NINE)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
         /// 建立課程
         /// </summary>
         private Course BuildCourse()
         {
-            Course course = new Course(_originalCourse);
+            Course course = new Course();
             course.Name = Name;
             course.Number = Number;
             course.Stage = Stage;
@@ -264,6 +211,11 @@ namespace homework.PresentationModel
             course.Language = Language;
             course.Note = Note;
             course.Hour = Hour;
+            for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
+            {
+                string property = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(this, null);
+                typeof(Course).GetProperty(day.ToString()).SetValue(course, property);
+            }
             return course;
         }
 

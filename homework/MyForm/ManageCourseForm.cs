@@ -122,15 +122,15 @@ namespace homework
         private void RefreshDataGridViewStatus()
         {
             string dayOfWeek;
-            string[] classTime;
+            string[] courseTime;
             for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
             {
                 dayOfWeek = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(_courseManagementPresentationModel, null);
                 ResetDataGridViewCheckBox(day);
                 if (!string.IsNullOrEmpty(dayOfWeek))
                 {
-                    classTime = dayOfWeek.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
-                    foreach (var s in classTime)
+                    courseTime = dayOfWeek.Split(CourseManageProperty.SPACE, CourseManageProperty.NEW_LINE);
+                    foreach (var s in courseTime)
                     {
                         _courseTimeDataGridView.Rows[int.Parse(s) - 1].Cells[((int)day) + 1].Value = true;
                     }

@@ -50,6 +50,8 @@ namespace homework
             _courseHourComboBox.SelectedIndexChanged += ListenCourseHourTextChanged;
             _courseStatusComboBox.SelectedIndexChanged += ListenCourseStatusTextChanged;
             _courseDepartmentComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
+            _courseTimeDataGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
+            _courseTimeDataGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
         }
 
         /// <summary>
@@ -221,6 +223,40 @@ namespace homework
         {
             _courseManagementPresentationModel.CourseStatus = _courseStatusComboBox.Text;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
+        }
+
+        /// <summary>
+        /// 監聽滑鼠點擊釋放
+        /// </summary>
+        private void ListenCourseDataGridOnCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                _courseTimeDataGridView.EndEdit();
+            }
+        }
+
+        /// <summary>
+        /// 監聽數值變動
+        /// </summary>
+        private void ListenCourseDataGridOnCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int columnIndex = e.ColumnIndex;
+            int rowIndex = e.RowIndex + 1;
+            if (e.RowIndex != -1)
+            {
+                int time = (columnIndex - 1) * CourseManageProperty.TEN_NUMBER + (rowIndex);
+                string courseTime = string.Empty;
+                foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
+                {
+                    if (Convert.ToBoolean(row.Cells[columnIndex].Value))
+                    {
+                        courseTime += string.IsNullOrEmpty(courseTime) ? rowIndex.ToString() : (CourseManageProperty.SPACE + rowIndex.ToString());
+                    }
+                }
+                _courseManagementPresentationModel.RecordCourseTime(time);
+                _courseManagementPresentationModel.CheckIsCourseInputValid();
+            }
         }
 
     }
