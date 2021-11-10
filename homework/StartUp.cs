@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using homework.PresentationModel;
 using homework.Model;
-using homework.Data;
+using homework.Manager;
 
 namespace homework
 {

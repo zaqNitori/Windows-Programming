@@ -185,7 +185,24 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Unresolved warnings(忽視警告)-函式 Initialize 缺乏註解</SmellType>
+              <HashCode>homeworkUnitTest\homeworkUnitTest.StoreDataManagerTest.cs.Unresolved warnings(忽視警告)-函式 Initialize 缺乏註解.14</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homeworkUnitTest\homeworkUnitTest</Project>
+              <File>StoreDataManagerTest.cs</File>
+              <Line>14</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -206,12 +223,12 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Data\DataItemManager.cs</RelativePath>
+                <RelativePath>Manager\DataItemManager.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Data\StoreDataManager.cs</RelativePath>
+                <RelativePath>Manager\StoreDataManager.cs</RelativePath>
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -365,10 +382,25 @@
                 <ProjectName>homework</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ManagerTest\DataItemManagerTest.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ManagerTest\StoreDataManagerTest.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Properties\AssemblyInfo.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3985</ProductionLoc>
-          <TestLoc>0</TestLoc>
+          <ProductionLoc>3979</ProductionLoc>
+          <TestLoc>74</TestLoc>
         </CodeReview>
       </Data>
     </div>

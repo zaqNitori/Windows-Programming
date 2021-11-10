@@ -52,8 +52,8 @@
     <Compile Include="Builder\CourseBuilder.cs" />
     <Compile Include="Builder\CourseAnalyzer.cs" />
     <Compile Include="Common.cs" />
-    <Compile Include="Data\DataItemManager.cs" />
-    <Compile Include="Data\StoreDataManager.cs" />
+    <Compile Include="Manager\DataItemManager.cs" />
+    <Compile Include="Manager\StoreDataManager.cs" />
     <Compile Include="MyForm\ManageCourseForm.Event.cs">
       <SubType>Form</SubType>
     </Compile>

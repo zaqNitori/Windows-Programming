@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using homework.Data;
+using homework.Manager;
 using homework.ViewModel;
 
 namespace homework.Model

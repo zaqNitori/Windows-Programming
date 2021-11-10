@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HtmlAgilityPack;
 using homework.Builder;
 using homework.ViewModel;
-using homework.Data;
+using homework.Manager;
 using System.ComponentModel;
 
 namespace homework.Model
@@ -44,7 +44,8 @@ namespace homework.Model
 
                 courses = _courseAnalyzer.GetCourses();
                 departmentName = _courseCrawler.DepartmentName;
-                _storeDataManager.AddCurriculum(departmentName, courses);
+                _storeDataManager.AddCurriculum(courses);
+                _storeDataManager.AddDepartmentCourse(departmentName, courses);
             }
 
         }
