@@ -236,7 +236,7 @@ namespace homework
             if (e.RowIndex != -1 && _isDataGridViewEditing)
             {
                 int time = (columnIndex - 1) * CourseManageProperty.TEN_NUMBER + (rowIndex);
-                SetUpCourseTimeString(columnIndex, rowIndex);
+                SetUpCourseTimeString(columnIndex);
                 _courseManagementPresentationModel.RecordCourseTime(time);
                 _courseManagementPresentationModel.CheckIsCourseInputValid();
             }
@@ -246,14 +246,14 @@ namespace homework
         /// <summary>
         /// 根據Grid 變動欄位，生成新的字串
         /// </summary>
-        private void SetUpCourseTimeString(int columnIndex, int rowIndex)
+        private void SetUpCourseTimeString(int columnIndex)
         {
             string courseTime = string.Empty;
             foreach (DataGridViewRow row in _courseTimeDataGridView.Rows)
             {
                 if (Convert.ToBoolean(row.Cells[columnIndex].Value))
                 {
-                    courseTime += string.IsNullOrEmpty(courseTime) ? rowIndex.ToString() : (CourseManageProperty.SPACE + rowIndex.ToString());
+                    courseTime += string.IsNullOrEmpty(courseTime) ? (row.Index + 1).ToString() : (CourseManageProperty.SPACE + (row.Index + 1).ToString());
                 }
             }
             typeof(CourseManagementPresentationModel).GetProperty((DayOfWeek.Sunday + columnIndex - 1).ToString()).SetValue(_courseManagementPresentationModel, courseTime);
