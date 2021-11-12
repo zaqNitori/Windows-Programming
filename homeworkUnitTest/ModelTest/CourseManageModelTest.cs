@@ -42,10 +42,10 @@ namespace homeworkUnitTest.ModelTest
         [TestMethod]
         public void TestGetCurriculumAsItem()
         {
-            var curriculum = _courseManageModel.GetClassNameAsItem();
+            var curriculum = _courseManageModel.GetCurriculumAsItem();
             Assert.AreEqual(0, curriculum.Count);
             _courseManageModel.AddCourse(_course, _courseName);
-            curriculum = _courseManageModel.GetClassNameAsItem();
+            curriculum = _courseManageModel.GetCurriculumAsItem();
             Assert.AreEqual(1, curriculum.Count);
         }
 

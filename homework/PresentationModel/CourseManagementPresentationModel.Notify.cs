@@ -44,7 +44,7 @@ namespace homework.PresentationModel
         public void GetCourseByCourseNumber(string number)
         {
             _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
-            _originalDepartmentName = DepartmentName = _courseManageModel.GetClassNameByCourseNumber(number);
+            _originalDepartmentName = ClassName = _courseManageModel.GetClassNameByCourseNumber(number);
             CourseStatus = string.Empty;
             Number = OriginalCourseNumber = _originalCourse.Number;
             Name = _originalCourse.Name;
@@ -89,7 +89,7 @@ namespace homework.PresentationModel
         /// </summary>
         private void ClearCourse()
         {
-            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = DepartmentName = string.Empty;
+            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = ClassName = string.Empty;
             NotifyGroupBoxAndButtonChanged();
         }
 
@@ -116,11 +116,11 @@ namespace homework.PresentationModel
             Course course = BuildCourse();
             if (CourseManageState.Equals(((int)CourseManageAction.Add)))
             {
-                _courseManageModel.AddCourse(course, DepartmentName);
+                _courseManageModel.AddCourse(course, ClassName);
             }
             else
             {
-                _courseManageModel.EditCourse(course, DepartmentName, OriginalCourseNumber);
+                _courseManageModel.EditCourse(course, ClassName, OriginalCourseNumber);
             }
 
             IsButtonAddCourseEnabled = true;
@@ -170,7 +170,7 @@ namespace homework.PresentationModel
             if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Number)
                 && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
                 && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
-                && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(DepartmentName)
+                && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(ClassName)
                 && IsCourseComboBoxEnabled && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
                 CheckIsCoursePropertyChanged();
@@ -198,7 +198,7 @@ namespace homework.PresentationModel
                 || Note.Trim() != _originalCourse.Note
                 || Hour != _originalCourse.Hour
                 || Language.Trim() != _originalCourse.Language
-                || DepartmentName != _originalDepartmentName
+                || ClassName != _originalDepartmentName
                 || CheckIsCourseTimeChanged()) ? true : false;
         }
 

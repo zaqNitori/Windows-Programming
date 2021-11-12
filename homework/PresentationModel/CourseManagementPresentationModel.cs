@@ -130,7 +130,7 @@ namespace homework.PresentationModel
             get; set;
         }
 
-        public string DepartmentName
+        public string ClassName
         {
             get; set;
         }
@@ -186,7 +186,7 @@ namespace homework.PresentationModel
         /// <summary>
         /// 取得Item型態的班級名稱
         /// </summary>
-        public List<DataItem> GetDepartmentNameAsItem()
+        public List<DataItem> GetClassNameAsItem()
         {
             return _courseManageModel.GetClassNameAsItem();
         }

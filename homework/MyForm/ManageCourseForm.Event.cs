@@ -27,7 +27,7 @@ namespace homework
             _courseStatusComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.CourseStatus));
             _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.RequiredOrElective));
             _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Hour));
-            _courseDepartmentComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.DepartmentName));
+            _courseDepartmentComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.ClassName));
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace homework
         /// </summary>
         private void ListenCourseClassNameTextChanged(object sender, EventArgs e)
         {
-            _courseManagementPresentationModel.DepartmentName = _courseDepartmentComboBox.Text;
+            _courseManagementPresentationModel.ClassName = _courseDepartmentComboBox.Text;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
         }
 

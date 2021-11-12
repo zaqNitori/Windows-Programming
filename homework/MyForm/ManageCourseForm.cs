@@ -60,7 +60,7 @@ namespace homework
         private void SetGroupBoxControlsStatus()
         {
             InitializeDataGridView();
-            _courseDepartmentComboBox.DataSource = _courseManagementPresentationModel.GetDepartmentNameAsItem();
+            _courseDepartmentComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
             _courseGroupBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, CourseManageProperty.SOURCE_GROUP_BOX_TITLE);
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())

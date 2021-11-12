@@ -52,6 +52,7 @@
     <Compile Include="ManagerTest\DataItemManagerTest.cs" />
     <Compile Include="ManagerTest\StoreDataManagerTest.cs" />
     <Compile Include="ModelTest\CourseManageModelTest.cs" />
+    <Compile Include="PresentationModelTest\CourseManagementPresentationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BuilderTest\" />
-    <Folder Include="PresentationModelTest\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\homework\homework.csproj">
