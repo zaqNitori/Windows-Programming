@@ -48,7 +48,7 @@ namespace homeworkUnitTest.ManagerTest
         {
             var curriculum = _storeDataManager.GetCurriculumCourses();
             Assert.AreEqual(0, curriculum.Count);
-            _storeDataManager.AddCurriculum(courses);
+            _storeDataManager.AddCourse(_courseName, courses);
             curriculum = _storeDataManager.GetCurriculumCourses();
             Assert.AreEqual(_courseName, curriculum[_courseNumber].Name);
             Assert.AreEqual(_courseNumber, curriculum[_courseNumber].Number);
@@ -58,11 +58,11 @@ namespace homeworkUnitTest.ManagerTest
         /// 測試將許多課程加入到指定班級下
         /// </summary>
         [TestMethod]
-        public void TestAddDepartmentCourse()
+        public void TestAddClassCourse()
         {
             var classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
-            _storeDataManager.AddClassCourse(_courseName, courses);
+            _storeDataManager.AddCourse(_courseName, courses);
             classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(_courseName, classCourse[0].Name);
             Assert.AreEqual(_courseNumber, classCourse[0].Number);

@@ -27,9 +27,18 @@ namespace homework.Manager
         #region Public
 
         /// <summary>
-        /// 新增所有程表
+        /// 新增課程到班級及課程總表
         /// </summary>
-        public void AddCurriculum(List<Course> courses)
+        public void AddCourse(string name, List<Course> courses)
+        {
+            AddCurriculum(courses);
+            AddClassCourse(name, courses);
+        }
+
+        /// <summary>
+        /// 新增課程總表
+        /// </summary>
+        private void AddCurriculum(List<Course> courses)
         {
             foreach (var course in courses)
             {
@@ -43,7 +52,7 @@ namespace homework.Manager
         /// <summary>
         /// 新增各班課程表
         /// </summary>s
-        public void AddClassCourse(string name, List<Course> courses)
+        private void AddClassCourse(string name, List<Course> courses)
         {
             _departments.Add(new Department(name, courses));
         }
