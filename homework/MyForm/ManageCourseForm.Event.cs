@@ -55,17 +55,6 @@ namespace homework
         }
 
         /// <summary>
-        /// Notify 事件綁定
-        /// </summary>
-        private void BindNotifyEvent()
-        {
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
-            _courseManagementPresentationModel._gridContentChanged += RefreshDataGridViewStatus;
-            _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
-        }
-
-        /// <summary>
         /// 監聽KeyPress事件， 限制數字輸入
         /// </summary>
         private void ListenTextBoxKeyPress(object sender, KeyPressEventArgs e)

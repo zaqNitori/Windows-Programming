@@ -194,5 +194,16 @@ namespace homework
             }
         }
 
+        /// <summary>
+        /// Notify 事件綁定
+        /// </summary>
+        private void BindNotifyEvent()
+        {
+            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
+            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
+            _courseManagementPresentationModel._gridContentChanged += RefreshDataGridViewStatus;
+            _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
+        }
+
     }
 }

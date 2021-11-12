@@ -150,7 +150,7 @@ namespace homework.PresentationModel
         /// <summary>
         /// 紀錄課程時間
         /// </summary>
-        public void RecordCourseTime(int time)
+        public int RecordCourseTime(int time)
         {
             if (_courseTimeRecord.Contains(time))
             {
@@ -160,6 +160,7 @@ namespace homework.PresentationModel
             {
                 _courseTimeRecord.Add(time);
             }
+            return _courseTimeRecord.Count;
         }
 
         /// <summary>
@@ -171,7 +172,7 @@ namespace homework.PresentationModel
                 && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
                 && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
                 && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(ClassName)
-                && IsCourseComboBoxEnabled && int.Parse(Hour).Equals(_courseTimeRecord.Count))
+                /*&& IsCourseComboBoxEnabled*/ && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
                 CheckIsCoursePropertyChanged();
             }
