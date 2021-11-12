@@ -41,31 +41,10 @@ namespace homework.Manager
         }
 
         /// <summary>
-        /// 新增所有程表
-        /// </summary>
-        public void AddCurriculum(Course course)
-        {
-            if (!GetCurriculumCourses().ContainsKey(course.Number))
-            {
-                GetCurriculumCourses().Add(course.Number, course);
-            }
-        }
-
-        /// <summary>
         /// 新增各班課程表
         /// </summary>s
         public void AddClassCourse(string name, List<Course> courses)
         {
-            _departments.Add(new Department(name, courses));
-        }
-
-        /// <summary>
-        /// 新增各班課程表
-        /// </summary>s
-        public void AddClassCourse(string name, Course course)
-        {
-            List<Course> courses = new List<Course>();
-            courses.Add(course);
             _departments.Add(new Department(name, courses));
         }
 
@@ -90,7 +69,7 @@ namespace homework.Manager
             {
                 if (dep.DepartmentName.Equals(className))
                 {
-                    GetDepartmentCourses(dep).Add(course);
+                    GetClassCourses(dep).Add(course);
                     isBreak = true;
                     break;
                 }
@@ -112,7 +91,7 @@ namespace homework.Manager
             {
                 if (dep.DepartmentName.Equals(className))
                 {
-                    RemoveCourseFromClass(GetDepartmentCourses(dep), courseNumber);
+                    RemoveCourseFromClass(GetClassCourses(dep), courseNumber);
                     break;
                 }
             }
@@ -149,7 +128,7 @@ namespace homework.Manager
         /// <summary>
         /// 取得所有班級名稱
         /// </summary>
-        public List<Department> GetAllDepartment()
+        public List<Department> GetAllClass()
         {
             return _departments;
         }
@@ -157,13 +136,13 @@ namespace homework.Manager
         /// <summary>
         /// 用班級名稱取得課表
         /// </summary>
-        public List<Course> GetCoursesByDepartmentName(string name)
+        public List<Course> GetCoursesByClassName(string name)
         {
             foreach (var dep in _departments)
             {
-                if (GetDepartmentName(dep).Equals(name))
+                if (GetClassName(dep).Equals(name))
                 {
-                    return GetDepartmentCourses(dep);
+                    return GetClassCourses(dep);
                 }
             }
             return new List<Course>();
@@ -196,7 +175,7 @@ namespace homework.Manager
         /// <summary>
         /// 取得科系名稱
         /// </summary>
-        private string GetDepartmentName(Department department)
+        private string GetClassName(Department department)
         {
             return department.DepartmentName;
         }
@@ -204,7 +183,7 @@ namespace homework.Manager
         /// <summary>
         /// 取得科系名稱
         /// </summary>
-        private List<Course> GetDepartmentCourses(Department department)
+        private List<Course> GetClassCourses(Department department)
         {
             return department.Courses;
         }
@@ -212,7 +191,7 @@ namespace homework.Manager
         /// <summary>
         /// 用課號取得班級名稱
         /// </summary>
-        public string GetDepartmentNameByCourseNumber(string number)
+        public string GetClassNameByCourseNumber(string number)
         {
             foreach (var dep in _departments)
             {
@@ -228,6 +207,16 @@ namespace homework.Manager
         }
 
         #endregion
+
+        /// <summary>
+        /// 新增各班課程表
+        /// </summary>s
+        private void AddClassCourse(string name, Course course)
+        {
+            List<Course> courses = new List<Course>();
+            courses.Add(course);
+            _departments.Add(new Department(name, courses));
+        }
 
         /// <summary>
         /// 移除課程

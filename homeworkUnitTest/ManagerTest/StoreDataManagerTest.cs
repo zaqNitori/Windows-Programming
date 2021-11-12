@@ -60,10 +60,10 @@ namespace homeworkUnitTest.ManagerTest
         [TestMethod]
         public void TestAddDepartmentCourse()
         {
-            var classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            var classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
             _storeDataManager.AddClassCourse(_courseName, courses);
-            classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(_courseName, classCourse[0].Name);
             Assert.AreEqual(_courseNumber, classCourse[0].Number);
         }
@@ -88,10 +88,10 @@ namespace homeworkUnitTest.ManagerTest
         [TestMethod]
         public void TestAddCourseToClass()
         {
-            var classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            var classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
             _storeDataManager.AddCourseToClass(_course, _courseName);
-            classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(1, classCourse.Count);
             Assert.AreEqual(_courseName, classCourse[0].Name);
             Assert.AreEqual(_courseNumber, classCourse[0].Number);
@@ -104,10 +104,10 @@ namespace homeworkUnitTest.ManagerTest
         public void TestRemoveCourse()
         {
             _storeDataManager.AddCourseToClass(_course, _courseName);
-            var classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            var classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(1, classCourse.Count);
             _storeDataManager.RemoveCourse(_courseName, _courseNumber);
-            classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
         }
 
@@ -132,8 +132,7 @@ namespace homeworkUnitTest.ManagerTest
         {
             var number = _storeDataManager.IsCourseNumberExist(_courseNumber);
             Assert.AreEqual(false, number);
-            _storeDataManager.AddClassCourse(_courseName, _course);
-            _storeDataManager.AddCurriculum(_course);
+            _storeDataManager.AddCourseToClass(_course, _courseName);
             number = _storeDataManager.IsCourseNumberExist(_courseNumber);
             Assert.AreEqual(true, number);
         }
@@ -146,10 +145,10 @@ namespace homeworkUnitTest.ManagerTest
         public void TestRemoveCourseFromClass()
         {
             _storeDataManager.AddCourseToClass(_course, _courseName);
-            var classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            var classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(1, classCourse.Count);
             _privateObject.Invoke("RemoveCourseFromClass", new object[] { classCourse, _courseNumber });
-            classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
         }
     }
