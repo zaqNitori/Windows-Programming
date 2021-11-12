@@ -41,6 +41,17 @@ namespace homework.Manager
         }
 
         /// <summary>
+        /// 新增所有程表
+        /// </summary>
+        public void AddCurriculum(Course course)
+        {
+            if (!GetCurriculumCourses().ContainsKey(course.Number))
+            {
+                GetCurriculumCourses().Add(course.Number, course);
+            }
+        }
+
+        /// <summary>
         /// 新增各班課程表
         /// </summary>s
         public void AddClassCourse(string name, List<Course> courses)
@@ -101,7 +112,7 @@ namespace homework.Manager
             {
                 if (dep.DepartmentName.Equals(className))
                 {
-                    RemoveCourse(GetDepartmentCourses(dep), courseNumber);
+                    RemoveCourseFromClass(GetDepartmentCourses(dep), courseNumber);
                     break;
                 }
             }
@@ -221,7 +232,7 @@ namespace homework.Manager
         /// <summary>
         /// 移除課程
         /// </summary>
-        private void RemoveCourse(List<Course> courses, string courseNumber)
+        private void RemoveCourseFromClass(List<Course> courses, string courseNumber)
         {
             foreach (var c in courses)
             {
