@@ -29,7 +29,7 @@ namespace homeworkUnitTest.ManagerTest
         }
 
         /// <summary>
-        /// 測試將課程加入到課程總表
+        /// 初始化設定課程物件
         /// </summary>
         private void SetCourseInfo()
         {
@@ -125,7 +125,7 @@ namespace homeworkUnitTest.ManagerTest
         }
 
         /// <summary>
-        /// 測試撤選課程
+        /// 測試確認課程是否存在
         /// </summary>
         [TestMethod]
         public void TestIsCourseNumberExist()
@@ -139,7 +139,7 @@ namespace homeworkUnitTest.ManagerTest
         #endregion
 
         /// <summary>
-        /// 測試撤選課程
+        /// 測試從班級刪除課程
         /// </summary>
         [TestMethod]
         public void TestRemoveCourseFromClass()

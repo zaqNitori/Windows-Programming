@@ -30,9 +30,9 @@ namespace homework.Model
         /// <summary>
         /// 取得Item型態的所有班級名稱
         /// </summary>
-        public List<DataItem> GetDepartmentNameAsItem()
+        public List<DataItem> GetClassNameAsItem()
         {
-            List<Department> departments = _storeDataManager.GetAllDepartment();
+            List<Department> departments = _storeDataManager.GetAllClass();
 
             return DataItemManager.GetDataItems(departments);
         }
@@ -40,9 +40,9 @@ namespace homework.Model
         /// <summary>
         /// 用課號取得班級名稱
         /// </summary>
-        public string GetDepartmentNameByCourseNumber(string number)
+        public string GetClassNameByCourseNumber(string number)
         {
-            return _storeDataManager.GetDepartmentNameByCourseNumber(number);
+            return _storeDataManager.GetClassNameByCourseNumber(number);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace homework.Model
         /// </summary>
         public void EditCourse(Course course, string className, string originalCourseNumber)
         {
-            string originClassName = GetDepartmentNameByCourseNumber(originalCourseNumber);
+            string originClassName = GetClassNameByCourseNumber(originalCourseNumber);
             _storeDataManager.RemoveCourse(originClassName, originalCourseNumber);
             _storeDataManager.AddCourseToClass(course, className);
         }

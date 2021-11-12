@@ -44,7 +44,7 @@ namespace homework.PresentationModel
         public void GetCourseByCourseNumber(string number)
         {
             _originalCourse = _courseManageModel.GetCourseByCourseNumber(number);
-            _originalDepartmentName = DepartmentName = _courseManageModel.GetDepartmentNameByCourseNumber(number);
+            _originalDepartmentName = DepartmentName = _courseManageModel.GetClassNameByCourseNumber(number);
             CourseStatus = string.Empty;
             Number = OriginalCourseNumber = _originalCourse.Number;
             Name = _originalCourse.Name;

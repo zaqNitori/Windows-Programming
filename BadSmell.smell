@@ -376,6 +376,11 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>ModelTest\CourseManageModelTest.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Properties\AssemblyInfo.cs</RelativePath>
                 <ProjectName>homeworkUnitTest</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -383,7 +388,7 @@
             </AnalysisFiles>
           </AnalysisFileManager>
           <ProductionLoc>3996</ProductionLoc>
-          <TestLoc>172</TestLoc>
+          <TestLoc>332</TestLoc>
         </CodeReview>
       </Data>
     </div>

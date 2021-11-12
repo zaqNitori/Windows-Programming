@@ -56,7 +56,7 @@ namespace homework.Model
         /// </summary>
         public List<string> GetAllDepartmentName()
         {
-            List<Department> departments = _storeDataManager.GetAllDepartment();
+            List<Department> departments = _storeDataManager.GetAllClass();
             List<string> departmentsName = new List<string>();
             foreach (var dep in departments)
             {
@@ -70,7 +70,7 @@ namespace homework.Model
         /// </summary>
         public List<Course> GetCoursesByDepartmentName(string name)
         {
-            List<Course> allCourses = _storeDataManager.GetCoursesByDepartmentName(name);
+            List<Course> allCourses = _storeDataManager.GetCoursesByClassName(name);
             List<Course> showCourses = new List<Course>();
             foreach (var ac in allCourses)
             {

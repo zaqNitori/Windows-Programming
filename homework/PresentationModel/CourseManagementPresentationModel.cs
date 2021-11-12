@@ -188,7 +188,7 @@ namespace homework.PresentationModel
         /// </summary>
         public List<DataItem> GetDepartmentNameAsItem()
         {
-            return _courseManageModel.GetDepartmentNameAsItem();
+            return _courseManageModel.GetClassNameAsItem();
         }
 
         /// <summary>
