@@ -87,7 +87,7 @@ namespace homework.PresentationModel
         /// <summary>
         /// 清除
         /// </summary>
-        public void ClearCourse()
+        private void ClearCourse()
         {
             Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = DepartmentName = string.Empty;
             NotifyGroupBoxAndButtonChanged();
