@@ -59,7 +59,7 @@ namespace homework.Model
         /// </summary>
         public void AddCourse(Course course, string className)
         {
-            _storeDataManager.AddCourse(course, className);
+            _storeDataManager.AddCourseToClass(course, className);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace homework.Model
         {
             string originClassName = GetDepartmentNameByCourseNumber(originalCourseNumber);
             _storeDataManager.RemoveCourse(originClassName, originalCourseNumber);
-            _storeDataManager.AddCourse(course, className);
+            _storeDataManager.AddCourseToClass(course, className);
         }
 
         /// <summary>

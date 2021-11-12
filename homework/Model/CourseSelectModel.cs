@@ -45,7 +45,7 @@ namespace homework.Model
                 courses = _courseAnalyzer.GetCourses();
                 departmentName = _courseCrawler.DepartmentName;
                 _storeDataManager.AddCurriculum(courses);
-                _storeDataManager.AddDepartmentCourse(departmentName, courses);
+                _storeDataManager.AddClassCourse(departmentName, courses);
             }
 
         }
