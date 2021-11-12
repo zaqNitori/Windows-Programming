@@ -381,14 +381,19 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>PresentationModelTest\CourseManagementPresentationModelTest.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Properties\AssemblyInfo.cs</RelativePath>
                 <ProjectName>homeworkUnitTest</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3996</ProductionLoc>
-          <TestLoc>332</TestLoc>
+          <ProductionLoc>4005</ProductionLoc>
+          <TestLoc>594</TestLoc>
         </CodeReview>
       </Data>
     </div>
