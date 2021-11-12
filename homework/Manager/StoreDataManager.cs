@@ -43,8 +43,18 @@ namespace homework.Manager
         /// <summary>
         /// 新增各班課程表
         /// </summary>s
-        public void AddDepartmentCourse(string name, List<Course> courses)
+        public void AddClassCourse(string name, List<Course> courses)
         {
+            _departments.Add(new Department(name, courses));
+        }
+
+        /// <summary>
+        /// 新增各班課程表
+        /// </summary>s
+        public void AddClassCourse(string name, Course course)
+        {
+            List<Course> courses = new List<Course>();
+            courses.Add(course);
             _departments.Add(new Department(name, courses));
         }
 
@@ -62,14 +72,21 @@ namespace homework.Manager
         /// <summary>
         /// 新增課程到指定班級
         /// </summary>
-        public void AddCourse(Course course, string className)
+        public void AddCourseToClass(Course course, string className)
         {
+            bool isBreak = false;
             foreach (var dep in _departments)
             {
                 if (dep.DepartmentName.Equals(className))
                 {
                     GetDepartmentCourses(dep).Add(course);
+                    isBreak = true;
+                    break;
                 }
+            }
+            if (!isBreak)
+            {
+                AddClassCourse(className, course);
             }
             _curriculum.Courses.Add(course.Number, course);
             NotifyCourseChanged();
