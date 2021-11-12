@@ -91,6 +91,7 @@ namespace homeworkUnitTest.ManagerTest
             Assert.AreEqual(0, classCourse.Count);
             _storeDataManager.AddCourseToClass(_course, _courseName);
             classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            Assert.AreEqual(1, classCourse.Count);
             Assert.AreEqual(_courseName, classCourse[0].Name);
             Assert.AreEqual(_courseNumber, classCourse[0].Number);
         }
