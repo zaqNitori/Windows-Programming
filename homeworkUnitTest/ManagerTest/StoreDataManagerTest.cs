@@ -16,6 +16,7 @@ namespace homeworkUnitTest.ManagerTest
         private Course _course;
         private List<Course> courses;
 
+        #region PublicTest
         /// <summary>
         /// 在測試前，將需要使用到的物件先生成
         /// </summary>
@@ -123,5 +124,33 @@ namespace homeworkUnitTest.ManagerTest
             Assert.AreEqual(0, chosenCourses.Count);
         }
 
+        /// <summary>
+        /// 測試撤選課程
+        /// </summary>
+        [TestMethod]
+        public void TestIsCourseNumberExist()
+        {
+            var number = _storeDataManager.IsCourseNumberExist(_courseNumber);
+            Assert.AreEqual(false, number);
+            _storeDataManager.AddClassCourse(_courseName, _course);
+            _storeDataManager.AddCurriculum(_course);
+            number = _storeDataManager.IsCourseNumberExist(_courseNumber);
+            Assert.AreEqual(true, number);
+        }
+        #endregion
+
+        /// <summary>
+        /// 測試撤選課程
+        /// </summary>
+        [TestMethod]
+        public void TestRemoveCourseFromClass()
+        {
+            _storeDataManager.AddCourseToClass(_course, _courseName);
+            var classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            Assert.AreEqual(1, classCourse.Count);
+            _privateObject.Invoke("RemoveCourseFromClass", new object[] { classCourse, _courseNumber });
+            classCourse = _storeDataManager.GetCoursesByDepartmentName(_courseName);
+            Assert.AreEqual(0, classCourse.Count);
+        }
     }
 }
