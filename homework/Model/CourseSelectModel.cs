@@ -15,10 +15,6 @@ namespace homework.Model
         private CourseCrawler _courseCrawler;
         private CourseAnalyzer _courseAnalyzer;
         private StoreDataManager _storeDataManager;
-        private List<Course> _selectedCourses;
-        private const string COMMA = "，"; 
-        public const string SAME_COURSE_NAME_TEXT = "課程名稱相同 : ";
-        public const string SAME_COURSE_TIME_TEXT = "課程衝堂 : ";
 
         public CourseSelectModel(StoreDataManager storeDataManager)
         {
@@ -35,7 +31,7 @@ namespace homework.Model
         public void FetchCourseInfo(List<string> courseUrl)
         {
             List<Course> courses;
-            String departmentName;
+            string className;
 
             foreach (var url in courseUrl)
             {
@@ -43,8 +39,8 @@ namespace homework.Model
                 _courseAnalyzer.AnalyzeCourse(nodeCollection);
 
                 courses = _courseAnalyzer.GetCourses();
-                departmentName = _courseCrawler.DepartmentName;
-                _storeDataManager.AddCourse(departmentName, courses);
+                className = _courseCrawler.ClassName;
+                _storeDataManager.AddCourse(className, courses);
             }
 
         }
@@ -53,21 +49,21 @@ namespace homework.Model
         /// <summary>
         /// 取得所有班級名稱
         /// </summary>
-        public List<string> GetAllDepartmentName()
+        public List<string> GetAllClassName()
         {
-            List<Department> departments = _storeDataManager.GetAllClass();
-            List<string> departmentsName = new List<string>();
-            foreach (var dep in departments)
+            List<Department> classes = _storeDataManager.GetAllClass();
+            List<string> classesName = new List<string>();
+            foreach (var dep in classes)
             {
-                departmentsName.Add(dep.DepartmentName);
+                classesName.Add(dep.DepartmentName);
             }
-            return departmentsName;
+            return classesName;
         }
 
         /// <summary>
         /// 用班級名稱取得可顯示的課表
         /// </summary>
-        public List<Course> GetCoursesByDepartmentName(string name)
+        public List<Course> GetCoursesByClassName(string name)
         {
             List<Course> allCourses = _storeDataManager.GetCoursesByClassName(name);
             List<Course> showCourses = new List<Course>();
@@ -103,13 +99,13 @@ namespace homework.Model
         /// <summary>
         /// 驗證所有已選取跟正被選取的課程是否有衝突
         /// </summary>
-        public string CheckCoursesConflict(List<String> courses)
+        public string CheckCoursesConflict(List<string> courses)
         {
             string errorMessage = string.Empty;
-            ConvertSelectedCourses(courses);
+            List<Course> selectedCourses = ConvertSelectedCourses(courses);
 
-            errorMessage += CheckSelectedCoursesConflict();
-            errorMessage += CheckExistedCoursesConflict();
+            errorMessage += CheckSelectedCoursesConflict(selectedCourses);
+            errorMessage += CheckExistedCoursesConflict(selectedCourses);
 
             return errorMessage;
         }
@@ -117,9 +113,10 @@ namespace homework.Model
         /// <summary>
         /// 將選取課程放入課表
         /// </summary>
-        public void AddSelectedCourses()
+        public void AddSelectedCourses(List<string> courses)
         {
-            _storeDataManager.AddSelectedCourses(_selectedCourses);
+            List<Course> selectedCourses = ConvertSelectedCourses(courses);
+            _storeDataManager.AddSelectedCourses(selectedCourses);
         }
 
         #endregion
@@ -145,18 +142,18 @@ namespace homework.Model
         /// <summary>
         /// 驗證正被選取的課程是否有衝突
         /// </summary>
-        private string CheckSelectedCoursesConflict()
+        private string CheckSelectedCoursesConflict(List<Course> selectedCourses)
         {
             string courseNameConflictErrorMessage = string.Empty;
             string courseTimeConflictErrorMessage = string.Empty;
-            int length = _selectedCourses.Count;
+            int length = selectedCourses.Count;
 
             for (var i = 0; i < length; i++)
             {
                 for (var j = i + 1; j < length; j++)
                 {
-                    courseNameConflictErrorMessage += CheckIfCourseNameConflict(_selectedCourses[i], _selectedCourses[j]);
-                    courseTimeConflictErrorMessage += CheckIfCourseTimeComplicated(_selectedCourses[i], _selectedCourses[j]);
+                    courseNameConflictErrorMessage += CheckIfCourseNameConflict(selectedCourses[i], selectedCourses[j]);
+                    courseTimeConflictErrorMessage += CheckIfCourseTimeComplicated(selectedCourses[i], selectedCourses[j]);
                 }
             }
 
@@ -166,13 +163,13 @@ namespace homework.Model
         /// <summary>
         /// 驗證選取課程是否跟現在課表是否有衝突
         /// </summary>
-        private string CheckExistedCoursesConflict()
+        private string CheckExistedCoursesConflict(List<Course> selectedCourses)
         {
             string courseNameConflictErrorMessage = string.Empty;
             string courseTimeConflictErrorMessage = string.Empty;
             BindingList<Course> chosenCourses = _storeDataManager.GetChosenCourses();
 
-            foreach (var s in _selectedCourses)
+            foreach (var s in selectedCourses)
             {
                 foreach (var c in chosenCourses)
                 {
@@ -187,15 +184,15 @@ namespace homework.Model
         /// <summary>
         /// 藉由課號清單轉換成課程清單
         /// </summary>
-        private void ConvertSelectedCourses(List<String> courses)
+        private List<Course> ConvertSelectedCourses(List<string> courses)
         {
-            _selectedCourses = new List<Course>();
+            List<Course> selectedCourses = new List<Course>();
 
             foreach (var c in courses)
             {
-                _selectedCourses.Add(GetCourseByCourseNumber(c));
+                selectedCourses.Add(GetCourseByCourseNumber(c));
             }
-
+            return selectedCourses;
         }
 
         /// <summary>
@@ -205,7 +202,8 @@ namespace homework.Model
         {
             string errorMessage = "";
             if (GetCourseName(course2).Equals(GetCourseName(course1)))
-                errorMessage += SAME_COURSE_NAME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) + COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
+                errorMessage += CourseSelectProperty.SAME_COURSE_NAME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) 
+                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
             return errorMessage;
         }
 
@@ -246,7 +244,8 @@ namespace homework.Model
                 || CheckTimeDuplicate(course1.Thursday, course2.Thursday)
                 || CheckTimeDuplicate(course1.Friday, course2.Friday)
                 || CheckTimeDuplicate(course1.Saturday, course2.Saturday))
-                errorMessage += SAME_COURSE_TIME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) + COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
+                errorMessage += CourseSelectProperty.SAME_COURSE_TIME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) 
+                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
             return errorMessage;
         }
 

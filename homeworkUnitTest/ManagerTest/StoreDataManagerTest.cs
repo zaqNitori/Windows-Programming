@@ -189,6 +189,16 @@ namespace homeworkUnitTest.ManagerTest
         }
 
         /// <summary>
+        /// 測試 用課號取得 班級名稱 且沒有此課號
+        /// </summary>
+        [TestMethod]
+        public void TestGetClassNameByCourseNumberWithNoSuchCourseNumber()
+        {
+            var className = _storeDataManager.GetClassNameByCourseNumber(_courseNumber);
+            Assert.AreEqual(string.Empty, className);
+        }
+
+        /// <summary>
         /// 測試 用課號取得 課程
         /// </summary>
         [TestMethod]
@@ -200,5 +210,17 @@ namespace homeworkUnitTest.ManagerTest
             Assert.AreEqual(_courseName, classList[0].DepartmentName);
             Assert.AreEqual(_courseName2, classList[1].DepartmentName);
         }
+
+        /// <summary>
+        /// 重新拉取選取課表
+        /// </summary>
+        [TestMethod]
+        public void TestRefreshChosenCourses()
+        {
+            _storeDataManager.AddCourse(_courseName, courses);
+            _storeDataManager.AddSelectedCourses(courses);
+            _privateObject.Invoke("RefreshSelectedResult");
+        }
+
     }
 }

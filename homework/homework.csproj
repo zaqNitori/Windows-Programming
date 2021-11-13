@@ -101,6 +101,7 @@
     <Compile Include="Model\CourseSelectModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CourseSelectProperty.cs" />
     <Compile Include="ViewModel\Curriculum.cs" />
     <Compile Include="ViewModel\DataItem.cs" />
     <Compile Include="ViewModel\Department.cs" />

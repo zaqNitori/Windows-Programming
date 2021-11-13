@@ -32,9 +32,9 @@ namespace homework.Model
         /// </summary>
         public List<DataItem> GetClassNameAsItem()
         {
-            List<Department> departments = _storeDataManager.GetAllClass();
+            List<Department> classes = _storeDataManager.GetAllClass();
 
-            return DataItemManager.GetDataItems(departments);
+            return DataItemManager.GetDataItems(classes);
         }
 
         /// <summary>

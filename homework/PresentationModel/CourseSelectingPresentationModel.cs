@@ -107,7 +107,7 @@ namespace homework.PresentationModel
         /// </history>
         public List<string> GetAllDepartment()
         {
-            return _courseModel.GetAllDepartmentName();
+            return _courseModel.GetAllClassName();
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace homework.PresentationModel
         /// </history>
         public List<Course> GetCourseByDepartmentName(string name)
         {
-            return _courseModel.GetCoursesByDepartmentName(name);
+            return _courseModel.GetCoursesByClassName(name);
         }
 
         /// <summary>
@@ -129,12 +129,13 @@ namespace homework.PresentationModel
         /// </history>
         public void SendSelectedCourses()
         {
-            string errorMessage = _courseModel.CheckCoursesConflict(_courseSelectData.ToList());
+            List<string> courses = _courseSelectData.ToList();
+            string errorMessage = _courseModel.CheckCoursesConflict(courses);
 
             if (string.IsNullOrEmpty(errorMessage))
             {
                 _courseSelectData.Clear();
-                _courseModel.AddSelectedCourses();
+                _courseModel.AddSelectedCourses(courses);
                 MessageBox.Show(ADD_COURSE_SUCCESS);
                 NotifyCourseChanged();
             }

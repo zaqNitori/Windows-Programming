@@ -18,7 +18,7 @@ namespace homework.Model
             _webClient = new HtmlWeb();
         }
 
-        public string DepartmentName
+        public string ClassName
         {
             get; set;
         }
@@ -40,7 +40,7 @@ namespace homework.Model
             // 移除 tbody
             RemoveNode(nodeTableRow, 0);
             // 移除 <tr> 科系名稱
-            DepartmentName = GetDepartmentName(nodeTableRow);
+            ClassName = GetClassName(nodeTableRow);
             RemoveNode(nodeTableRow, 0);
             // 移除 table header
             RemoveNode(nodeTableRow, 0);
@@ -53,24 +53,15 @@ namespace homework.Model
         /// <summary>
         /// 移除標籤Node
         /// </summary>
-        /// <param name="tableRows"></param>
-        /// <history>
-        ///     1.  2021.10.03  create function
-        ///     2.  2021.10.24  將function改為public，讓model建立時可以使用
-        /// </history> 
         private void RemoveNode(HtmlNodeCollection tableRows, int index)
         {
             tableRows.RemoveAt(index);
         }
 
         /// <summary>
-        /// 取得科系名稱
+        /// 取得班級名稱
         /// </summary>
-        /// <param name="tableRows"></param>
-        /// <history>
-        ///     1.  2021.10.24  create function
-        /// </history> 
-        private string GetDepartmentName(HtmlNodeCollection tableRows)
+        private string GetClassName(HtmlNodeCollection tableRows)
         {
             return tableRows[0].InnerText.Trim().Replace(NEW_LINE, string.Empty);
         }

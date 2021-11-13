@@ -71,6 +71,7 @@ namespace homeworkUnitTest.PresentationModelTest
         /// </summary>
         private void SetAddCourseInfo()
         {
+            _courseManagementPresentationModel.ClassName = _className;
             _courseManagementPresentationModel.Name = _courseNameAdd;
             _courseManagementPresentationModel.Number = _courseNumberAdd;
             _courseManagementPresentationModel.Credit = "2.0";
@@ -87,7 +88,7 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManagementPresentationModel.Monday = "5 6";
             _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Add);
         }
-
+        
         /// <summary>
         /// 編輯課程設定用
         /// </summary>
@@ -127,6 +128,32 @@ namespace homeworkUnitTest.PresentationModelTest
         public void TestCheckIsNumericInputValidWithValidInput()
         {
             _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber1);
+            var errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
+            Assert.AreEqual(string.Empty, errorMessage);
+        }
+
+        /// <summary>
+        /// 檢測有限制輸入的欄位
+        /// </summary>
+        [TestMethod]
+        public void TestCheckIsNumericInputValidWithInValidInputForAdd()
+        {
+            _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Add);
+            _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber1);
+            var errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
+            Assert.AreEqual("Number" + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine
+                , errorMessage);
+        }
+
+        /// <summary>
+        /// 檢測有限制輸入的欄位
+        /// </summary>
+        [TestMethod]
+        public void TestCheckIsNumericInputValidWithValidInputForAdd()
+        {
+            _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Add);
+            _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber1);
+            _courseManagementPresentationModel.Number = _courseNumberAdd;
             var errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
             Assert.AreEqual(string.Empty, errorMessage);
         }
@@ -285,6 +312,44 @@ namespace homeworkUnitTest.PresentationModelTest
             {
                 _courseManagementPresentationModel.RecordCourseTime(10 + int.Parse(c));
             }
+            _courseManagementPresentationModel.CheckIsCourseInputValid();
+            Assert.AreEqual(expect, _courseManagementPresentationModel.IsButtonConfirmEnabled);
+        }
+
+        /// <summary>
+        /// 檢測 課程資訊是否有更改
+        /// </summary>
+        [TestMethod]
+        [DataRow("Monk", "12345", "2", "2.0", "None", "Required", "None", "None", "2", "Nihongo", "資工", "", "5 6", "", "", "", "", "", false)]
+        public void TestCheckIsCoursePropertyChanged(string name, string number, 
+            string stage, string credit, string teacher, string requiredOrElective
+            , string teachAssistant, string note, string hour, string language
+            , string className, string Sunday, string Monday, string Tuesday
+            , string Wednesday, string Thursday, string Friday, string Saturday
+            , bool expect)
+        {
+            SetAddCourseInfo();
+            _courseManagementPresentationModel.ClickConfirm();
+            _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumberAdd);
+
+            _courseManagementPresentationModel.Name = name;
+            _courseManagementPresentationModel.Number = number;
+            _courseManagementPresentationModel.TeachAssistant = teachAssistant;
+            _courseManagementPresentationModel.Note = note;
+            _courseManagementPresentationModel.Language = language;
+            _courseManagementPresentationModel.Stage = stage;
+            _courseManagementPresentationModel.Credit = credit;
+            _courseManagementPresentationModel.Teacher = teacher;
+            _courseManagementPresentationModel.RequiredOrElective = requiredOrElective;
+            _courseManagementPresentationModel.Hour = hour;
+            _courseManagementPresentationModel.ClassName = className;
+            _courseManagementPresentationModel.Sunday = Sunday;
+            _courseManagementPresentationModel.Monday = Monday;
+            _courseManagementPresentationModel.Tuesday = Tuesday;
+            _courseManagementPresentationModel.Wednesday = Wednesday;
+            _courseManagementPresentationModel.Thursday = Thursday;
+            _courseManagementPresentationModel.Friday = Friday;
+            _courseManagementPresentationModel.Saturday = Saturday;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
             Assert.AreEqual(expect, _courseManagementPresentationModel.IsButtonConfirmEnabled);
         }

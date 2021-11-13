@@ -18,7 +18,7 @@ namespace homework.PresentationModel
         public delegate void GridChangedEventHandler();
         private CourseManageModel _courseManageModel;
         private Course _originalCourse;
-        private string _originalDepartmentName;
+        private string _originalClassName;
         private HashSet<int> _courseTimeRecord;
 
         public CourseManagementPresentationModel(CourseManageModel courseManageModel)

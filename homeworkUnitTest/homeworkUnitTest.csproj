@@ -52,6 +52,7 @@
     <Compile Include="ManagerTest\DataItemManagerTest.cs" />
     <Compile Include="ManagerTest\StoreDataManagerTest.cs" />
     <Compile Include="ModelTest\CourseManageModelTest.cs" />
+    <Compile Include="ModelTest\CourseSelectModelTest.cs" />
     <Compile Include="PresentationModelTest\CourseManagementPresentationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
