@@ -172,7 +172,7 @@ namespace homework.PresentationModel
                 && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
                 && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
                 && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(ClassName)
-                /*&& IsCourseComboBoxEnabled*/ && int.Parse(Hour).Equals(_courseTimeRecord.Count))
+                && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
                 CheckIsCoursePropertyChanged();
             }

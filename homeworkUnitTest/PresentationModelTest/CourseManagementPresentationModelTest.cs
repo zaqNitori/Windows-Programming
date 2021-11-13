@@ -251,11 +251,42 @@ namespace homeworkUnitTest.PresentationModelTest
         /// <summary>
         /// 檢測 按下送出後執行編輯課程
         /// </summary>
+        /// 針對必填輸入進行測試，課程時間由於驗證方式相同，因此僅測試禮拜一的部分
         [TestMethod]
-        [DataRow]
-        public void TestCheckIsCourseInputValid()
+        [DataRow("3", "3.0", "None", "▲", "2", "資工", "", "3 4", "", "", "", "", "", true)]
+        [DataRow("", "3.0", "None", "▲", "2", "資工", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "", "None", "▲", "2", "資工", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "", "▲", "2", "資工", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "None", "", "2", "資工", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "None", "▲", "", "資工", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "None", "▲", "2", "", "", "3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "None", "▲", "2", "資工", "", "2 3 4", "", "", "", "", "", false)]
+        [DataRow("3", "3.0", "None", "▲", "2", "資工", "", "3", "", "", "", "", "", false)]
+        public void TestCheckIsCourseInputValid(string stage, string credit
+            , string teacher, string requiredOrElective, string hour, string className
+            , string Sunday, string Monday, string Tuesday, string Wednesday, string Thursday
+            , string Friday, string Saturday, bool expect)
         {
-
+            _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber1);
+            _courseManagementPresentationModel.Stage = stage;
+            _courseManagementPresentationModel.Credit = credit;
+            _courseManagementPresentationModel.Teacher = teacher;
+            _courseManagementPresentationModel.RequiredOrElective = requiredOrElective;
+            _courseManagementPresentationModel.Hour = hour;
+            _courseManagementPresentationModel.ClassName = className;
+            _courseManagementPresentationModel.Sunday = Sunday;
+            _courseManagementPresentationModel.Monday = Monday;
+            _courseManagementPresentationModel.Tuesday = Tuesday;
+            _courseManagementPresentationModel.Wednesday = Wednesday;
+            _courseManagementPresentationModel.Thursday = Thursday;
+            _courseManagementPresentationModel.Friday = Friday;
+            _courseManagementPresentationModel.Saturday = Saturday;
+            foreach(var c in Monday.Split(' '))
+            {
+                _courseManagementPresentationModel.RecordCourseTime(10 + int.Parse(c));
+            }
+            _courseManagementPresentationModel.CheckIsCourseInputValid();
+            Assert.AreEqual(expect, _courseManagementPresentationModel.IsButtonConfirmEnabled);
         }
 
     }

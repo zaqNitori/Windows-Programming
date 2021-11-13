@@ -36,28 +36,6 @@ namespace homework.Manager
         }
 
         /// <summary>
-        /// 新增課程總表
-        /// </summary>
-        private void AddCurriculum(List<Course> courses)
-        {
-            foreach (var course in courses)
-            {
-                if (!GetCurriculumCourses().ContainsKey(course.Number))
-                {
-                    GetCurriculumCourses().Add(course.Number, course);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 新增各班課程表
-        /// </summary>s
-        private void AddClassCourse(string name, List<Course> courses)
-        {
-            _departments.Add(new Department(name, courses));
-        }
-
-        /// <summary>
         /// 把選取的課程加入課表
         /// </summary>
         public void AddSelectedCourses(List<Course> courses)
@@ -125,6 +103,24 @@ namespace homework.Manager
         }
 
         #region Get
+
+        /// <summary>
+        /// 用課號取得班級名稱
+        /// </summary>
+        public string GetClassNameByCourseNumber(string number)
+        {
+            foreach (var dep in _departments)
+            {
+                foreach (var c in dep.Courses)
+                {
+                    if (c.Number.Equals(number))
+                    {
+                        return dep.DepartmentName;
+                    }
+                }
+            }
+            return string.Empty;
+        }
 
         /// <summary>
         /// 取得所有課程
@@ -197,25 +193,29 @@ namespace homework.Manager
             return department.Courses;
         }
 
+        #endregion
+
         /// <summary>
-        /// 用課號取得班級名稱
+        /// 新增課程總表
         /// </summary>
-        public string GetClassNameByCourseNumber(string number)
+        private void AddCurriculum(List<Course> courses)
         {
-            foreach (var dep in _departments)
+            foreach (var course in courses)
             {
-                foreach (var c in dep.Courses)
+                if (!GetCurriculumCourses().ContainsKey(course.Number))
                 {
-                    if (c.Number.Equals(number))
-                    {
-                        return dep.DepartmentName;
-                    }
+                    GetCurriculumCourses().Add(course.Number, course);
                 }
             }
-            return string.Empty;
         }
 
-        #endregion
+        /// <summary>
+        /// 新增各班課程表
+        /// </summary>s
+        private void AddClassCourse(string name, List<Course> courses)
+        {
+            _departments.Add(new Department(name, courses));
+        }
 
         /// <summary>
         /// 新增各班課程表

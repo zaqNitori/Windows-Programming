@@ -11,9 +11,11 @@ namespace homeworkUnitTest.ManagerTest
     {
         private string _courseName = "Window";
         private string _courseNumber = "55688";
+        private string _courseName2 = "Window222";
+        private string _courseNumber2 = "55688222";
         private StoreDataManager _storeDataManager;
         private PrivateObject _privateObject;
-        private Course _course;
+        private Course _course, _course2;
         private List<Course> courses;
 
         #region PublicTest
@@ -26,6 +28,7 @@ namespace homeworkUnitTest.ManagerTest
             _storeDataManager = new StoreDataManager();
             _privateObject = new PrivateObject(_storeDataManager);
             SetCourseInfo();
+            SetCourse2Info();
         }
 
         /// <summary>
@@ -38,6 +41,16 @@ namespace homeworkUnitTest.ManagerTest
             _course.Number = _courseNumber;
             courses = new List<Course>();
             courses.Add(_course);
+        }
+
+        /// <summary>
+        /// 初始化設定課程物件
+        /// </summary>
+        private void SetCourse2Info()
+        {
+            _course2 = new Course();
+            _course2.Name = _courseName2;
+            _course2.Number = _courseNumber2;
         }
 
         /// <summary>
@@ -150,6 +163,42 @@ namespace homeworkUnitTest.ManagerTest
             _privateObject.Invoke("RemoveCourseFromClass", new object[] { classCourse, _courseNumber });
             classCourse = _storeDataManager.GetCoursesByClassName(_courseName);
             Assert.AreEqual(0, classCourse.Count);
+        }
+
+        /// <summary>
+        /// 測試 用課號取得 班級名稱
+        /// </summary>
+        [TestMethod]
+        public void TestGetClassNameByCourseNumber()
+        {
+            _storeDataManager.AddCourseToClass(_course, _courseName);
+            var className = _storeDataManager.GetClassNameByCourseNumber(_courseNumber);
+            Assert.AreEqual(_courseName, className);
+        }
+
+        /// <summary>
+        /// 測試 用課號取得 課程
+        /// </summary>
+        [TestMethod]
+        public void TestGetCourseByCourseNumber()
+        {
+            _storeDataManager.AddCourseToClass(_course, _courseName);
+            var course = _storeDataManager.GetCourseByCourseNumber(_courseNumber);
+            Assert.AreEqual(_courseName, course.Name);
+            Assert.AreEqual(_courseNumber, course.Number);
+        }
+
+        /// <summary>
+        /// 測試 用課號取得 課程
+        /// </summary>
+        [TestMethod]
+        public void TestGetAllClass()
+        {
+            _storeDataManager.AddCourseToClass(_course, _courseName);
+            _storeDataManager.AddCourseToClass(_course2, _courseName2);
+            var classList = _storeDataManager.GetAllClass();
+            Assert.AreEqual(_courseName, classList[0].DepartmentName);
+            Assert.AreEqual(_courseName2, classList[1].DepartmentName);
         }
     }
 }
