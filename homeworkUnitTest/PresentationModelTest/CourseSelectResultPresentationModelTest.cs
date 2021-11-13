@@ -3,8 +3,8 @@ using homework.Manager;
 using homework.PresentationModel;
 using homework.Model;
 using homework.ViewModel;
-using System;
 using System.Collections.Generic;
+using System;
 
 namespace homeworkUnitTest.PresentationModelTest
 {

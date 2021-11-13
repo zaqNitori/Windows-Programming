@@ -56,14 +56,13 @@
     <Compile Include="PresentationModelTest\CourseManagementPresentationModelTest.cs" />
     <Compile Include="PresentationModelTest\StartUpPresentationModelTest.cs" />
     <Compile Include="PresentationModelTest\CourseSelectResultPresentationModelTest.cs" />
+    <Compile Include="PresentationModelTest\CourseSelectingPresentationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BuilderTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\homework\homework.csproj">
       <Project>{412c6981-20f7-42aa-a7e2-d59c35a64bf5}</Project>

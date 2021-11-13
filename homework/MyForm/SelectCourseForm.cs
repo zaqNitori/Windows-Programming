@@ -60,9 +60,9 @@ namespace homework
         private void RefreshTabControl()
         {
             //string controlName = "_courseDataGridViewComponent";
-            _department = _courseSelectingPresentationModel.GetAllDepartment();
-            _courseDataGridViewComponent1.SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(_department[0]));
-            _courseDataGridViewComponent2.SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(_department[1]));
+            _department = _courseSelectingPresentationModel.GetAllClassName();
+            _courseDataGridViewComponent1.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(_department[0]));
+            _courseDataGridViewComponent2.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(_department[1]));
             //foreach (var dep in _department.Select((value, index) => new 
             //{ 
             //    value, index 
@@ -91,7 +91,8 @@ namespace homework
         /// </summary>
         private void SendSelectedCourses(object sender, EventArgs e)
         {
-            _courseSelectingPresentationModel.SendSelectedCourses();
+            string message = _courseSelectingPresentationModel.SendSelectedCourses();
+            MessageBox.Show(message);
         }
 
         /// <summary>
