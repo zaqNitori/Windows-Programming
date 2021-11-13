@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using homework.Manager;
-using homework.ViewModel;
 using homework.PresentationModel;
 using homework.Model;
 using System;

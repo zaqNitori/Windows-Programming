@@ -22,7 +22,9 @@ namespace homeworkUnitTest.PresentationModelTest
         private StoreDataManager _storeDataManager;
         private CourseManageModel _courseManageModel;
         private CourseManagementPresentationModel _courseManagementPresentationModel;
+        private PrivateObject _privateObject;
         private Course _course1, _course2;
+        private int notify = 0;
 
         /// <summary>
         /// 初始化設定
@@ -34,6 +36,7 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManageModel = new CourseManageModel(_storeDataManager);
             _courseManagementPresentationModel = new CourseManagementPresentationModel(_courseManageModel);
             _courseManagementPresentationModel.ClassName = _className;
+            _privateObject = new PrivateObject(_courseManagementPresentationModel);
             SetCourse1Info();
             SetCourse2Info();
             _courseManageModel.AddCourse(_course1, _className);
@@ -97,6 +100,14 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManagementPresentationModel.Name = _courseNameEdit;
             _courseManagementPresentationModel.Number = _courseNumberEdit;
             _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Edit);
+        }
+
+        /// <summary>
+        /// 測試Notify功能用
+        /// </summary>
+        private void ChangeNotify()
+        {
+            notify = 10;
         }
 
         /// <summary>
@@ -353,6 +364,42 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManagementPresentationModel.Saturday = Saturday;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
             Assert.AreEqual(expect, _courseManagementPresentationModel.IsButtonConfirmEnabled);
+        }
+
+        /// <summary>
+        /// 測試 Notify function
+        /// </summary>
+        [TestMethod]
+        public void TestNotifyGridContentChanged()
+        {
+            _courseManagementPresentationModel._gridContentChanged += ChangeNotify;
+            Assert.AreEqual(0, notify);
+            _privateObject.Invoke("NotifyGridContentChanged");
+            Assert.AreEqual(10, notify);
+        }
+
+        /// <summary>
+        /// 測試 Notify function
+        /// </summary>
+        [TestMethod]
+        public void TestNotifyGroupBoxAndButtonChanged()
+        {
+            _courseManagementPresentationModel._groupBoxAndButtonChanged += ChangeNotify;
+            Assert.AreEqual(0, notify);
+            _privateObject.Invoke("NotifyGroupBoxAndButtonChanged");
+            Assert.AreEqual(10, notify);
+        }
+
+        /// <summary>
+        /// 測試 Notify function
+        /// </summary>
+        [TestMethod]
+        public void TestNotifyListBoxChanged()
+        {
+            _courseManagementPresentationModel._listBoxChanged += ChangeNotify;
+            Assert.AreEqual(0, notify);
+            _privateObject.Invoke("NotifyListBoxChanged");
+            Assert.AreEqual(10, notify);
         }
 
     }
