@@ -54,6 +54,7 @@
     <Compile Include="ModelTest\CourseManageModelTest.cs" />
     <Compile Include="ModelTest\CourseSelectModelTest.cs" />
     <Compile Include="PresentationModelTest\CourseManagementPresentationModelTest.cs" />
+    <Compile Include="PresentationModelTest\StartUpPresentationModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

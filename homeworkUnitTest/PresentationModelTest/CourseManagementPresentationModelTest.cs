@@ -321,6 +321,7 @@ namespace homeworkUnitTest.PresentationModelTest
         /// </summary>
         [TestMethod]
         [DataRow("Monk", "12345", "2", "2.0", "None", "Required", "None", "None", "2", "Nihongo", "資工", "", "5 6", "", "", "", "", "", false)]
+        [DataRow("Monk", "12345", "2", "2.0", "None", "Required", "None", "None", "2", "Nihongo", "資工", "", "", "5 6", "", "", "", "", true)]
         public void TestCheckIsCoursePropertyChanged(string name, string number, 
             string stage, string credit, string teacher, string requiredOrElective
             , string teachAssistant, string note, string hour, string language
