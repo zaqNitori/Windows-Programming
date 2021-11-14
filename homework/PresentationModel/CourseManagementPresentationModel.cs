@@ -12,8 +12,10 @@ namespace homework.PresentationModel
     {
         public event ListBoxChangedEventHandler _listBoxChanged;
         public delegate void ListBoxChangedEventHandler();
-        public event GroupBoxAndButtonChangedEventHandler _groupBoxAndButtonChanged; 
-        public delegate void GroupBoxAndButtonChangedEventHandler();
+        public event ButtonChangedEventHandler _buttonChanged;
+        public delegate void ButtonChangedEventHandler();
+        public event GroupBoxChangedEventHandler _groupBoxChanged; 
+        public delegate void GroupBoxChangedEventHandler();
         public event GridChangedEventHandler _gridContentChanged;
         public delegate void GridChangedEventHandler();
         private CourseManageModel _courseManageModel;
@@ -51,6 +53,11 @@ namespace homework.PresentationModel
         }
 
         public int ListBoxSelectedIndex
+        {
+            get; set;
+        }
+
+        public bool IsButtonImportEnabled
         {
             get; set;
         }

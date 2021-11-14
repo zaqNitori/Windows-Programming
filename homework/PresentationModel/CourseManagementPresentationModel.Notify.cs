@@ -14,10 +14,19 @@ namespace homework.PresentationModel
         /// <summary>
         /// GroupBox以及按鈕 修改事件觸發 
         /// </summary>
-        private void NotifyGroupBoxAndButtonChanged()
+        private void NotifyButtonChanged()
         {
-            if (_groupBoxAndButtonChanged != null)
-                _groupBoxAndButtonChanged();
+            if (_buttonChanged != null)
+                _buttonChanged();
+        }
+
+        /// <summary>
+        /// GroupBox以及按鈕 修改事件觸發 
+        /// </summary>
+        private void NotifyGroupBoxChanged()
+        {
+            if (_groupBoxChanged != null)
+                _groupBoxChanged();
         }
 
         /// <summary>
@@ -57,7 +66,7 @@ namespace homework.PresentationModel
             Note = _originalCourse.Note;
             Hour = _originalCourse.Hour;
             SetCourseTime();
-            NotifyGroupBoxAndButtonChanged();
+            NotifyGroupBoxChanged();
             NotifyGridContentChanged();
         }
 
@@ -89,8 +98,10 @@ namespace homework.PresentationModel
         /// </summary>
         private void ClearCourse()
         {
-            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = ClassName = string.Empty;
-            NotifyGroupBoxAndButtonChanged();
+            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = ClassName = Sunday = Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = string.Empty;
+            _courseTimeRecord.Clear();
+            NotifyGroupBoxChanged();
+            NotifyButtonChanged();
         }
 
         /// <summary>
@@ -180,7 +191,7 @@ namespace homework.PresentationModel
             {
                 IsButtonConfirmEnabled = false;
             }
-            NotifyGroupBoxAndButtonChanged();
+            NotifyButtonChanged();
         }
 
         /// <summary>

@@ -264,7 +264,7 @@ namespace homework.Manager
         }
 
         /// <summary>
-        /// 課程修改事件要觸發畫面更新 
+        /// 課程修改事件要觸發 課程畫面更新 
         /// </summary>
         private void NotifyCourseChanged()
         {
