@@ -116,6 +116,7 @@ namespace homework
             _buttonAddCourse.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[1].ReadValue();
+            _buttonImport.DataBindings[0].ReadValue();
         }
 
         /// <summary>

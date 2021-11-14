@@ -52,6 +52,12 @@
     <Compile Include="Builder\CourseBuilder.cs" />
     <Compile Include="Builder\CourseAnalyzer.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="MyForm\ImportCourseProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ImportCourseProgressForm.Designer.cs">
+      <DependentUpon>ImportCourseProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manager\DataItemManager.cs" />
     <Compile Include="Manager\StoreDataManager.cs" />
     <Compile Include="MyForm\ManageCourseForm.Event.cs">
@@ -86,6 +92,7 @@
     <Compile Include="PresentationModel\CourseManagementPresentationModel.cs" />
     <Compile Include="PresentationModel\CourseManagementPresentationModel.Notify.cs" />
     <Compile Include="PresentationModel\CourseSelectResultPresentationModel.cs" />
+    <Compile Include="PresentationModel\ImportCourseProgressPresentationModel.cs" />
     <Compile Include="PresentationModel\StartUpPresentationModel.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="ViewModel\CourseManageProperty.cs" />
@@ -105,6 +112,9 @@
     <Compile Include="ViewModel\Curriculum.cs" />
     <Compile Include="ViewModel\DataItem.cs" />
     <Compile Include="ViewModel\Department.cs" />
+    <EmbeddedResource Include="MyForm\ImportCourseProgressForm.resx">
+      <DependentUpon>ImportCourseProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyController\CourseDataGridViewComponent.resx">
       <DependentUpon>CourseDataGridViewComponent.cs</DependentUpon>
     </EmbeddedResource>

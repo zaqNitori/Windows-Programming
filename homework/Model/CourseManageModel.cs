@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using homework.Builder;
 using homework.Manager;
 using homework.ViewModel;
+using HtmlAgilityPack;
 
 namespace homework.Model
 {
     public class CourseManageModel
     {
+        public event ProgressChangedEventHandler _progressChanged;
+        public delegate void ProgressChangedEventHandler();
         private StoreDataManager _storeDataManager;
+        private CourseCrawler _courseCrawler;
+        private CourseAnalyzer _courseAnalyzer;
 
         public CourseManageModel(StoreDataManager storeDataManager)
         {
+            _courseCrawler = new CourseCrawler();
+            _courseAnalyzer = new CourseAnalyzer();
             _storeDataManager = storeDataManager;
         }
 
@@ -78,6 +86,48 @@ namespace homework.Model
         public bool CheckIsCourseNumberConflict(string courseNumber)
         {
             return _storeDataManager.IsCourseNumberExist(courseNumber);
+        }
+
+        /// <summary>
+        /// 爬取課程資訊並儲存
+        /// </summary>
+        public void FetchCourseInfo(List<string> courseUrl)
+        {
+            List<Course> courses;
+            string className;
+
+            foreach (var url in courseUrl)
+            {
+                HtmlNodeCollection nodeCollection = _courseCrawler.GetCourseNodeCollection(url);
+                _courseAnalyzer.AnalyzeCourse(nodeCollection);
+
+                courses = _courseAnalyzer.GetCourses();
+                className = _courseCrawler.ClassName;
+                _storeDataManager.AddCourse(className, courses);
+                NotifyProgressChanged();
+            }
+        }
+
+        /// <summary>
+        /// 匯入資工系課程 進度通知
+        /// </summary>
+        private void NotifyProgressChanged()
+        {
+            if (_progressChanged != null)
+                _progressChanged();
+        }
+
+        /// <summary>
+        /// 匯入資工系課程
+        /// </summary>
+        public void ImportComputerScienceCourses()
+        {
+            List<string> courseUrl = new List<string>();
+            courseUrl.Add(Common.COMPUTER_SCIENCE_GRADE1_COURSE_URL);
+            courseUrl.Add(Common.COMPUTER_SCIENCE_GRADE2_COURSE_URL);
+            courseUrl.Add(Common.COMPUTER_SCIENCE_GRADE3_COURSE_URL);
+            courseUrl.Add(Common.COMPUTER_SCIENCE_GRADE4_COURSE_URL);
+            FetchCourseInfo(courseUrl);
         }
 
     }
