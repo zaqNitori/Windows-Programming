@@ -29,6 +29,7 @@ namespace homework
             _courseSelectingPresentationModel._courseChanged += RefreshTabControl;
             _courseDataGridViewComponent1.SetPresentationModel(courseSelectingPresentationModel);
             _courseDataGridViewComponent2.SetPresentationModel(courseSelectingPresentationModel);
+            this.FormClosing += ListenSelectCourseFormClosing;
 
             InitializeButton();
             RefreshTabControl();
@@ -59,18 +60,17 @@ namespace homework
         /// </summary>
         private void RefreshTabControl()
         {
-            //string controlName = "_courseDataGridViewComponent";
+            string controlName = "_courseDataGridViewComponent";
             _department = _courseSelectingPresentationModel.GetAllClassName();
-            _courseDataGridViewComponent1.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(_department[0]));
-            _courseDataGridViewComponent2.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(_department[1]));
-            //foreach (var dep in _department.Select((value, index) => new 
-            //{ 
-            //    value, index 
-            //}))
-            //{
-            //    _tabControl.TabPages[dep.index].Text = dep.value;
-            //    ((CourseDataGridViewComponent)this.Controls.Find(controlName + (dep.index + 1).ToString(), true)[0]).SetDataSource(_courseSelectingPresentationModel.GetCourseByDepartmentName(dep.value));
-            //}
+
+            int index = 0;
+            foreach (var dep in _department)
+            {
+                var courses = _courseSelectingPresentationModel.GetCourseByClassName(dep);
+                _tabControl.TabPages[index].Text = dep;
+                var dataGridView = (CourseDataGridViewComponent)this.Controls.Find(controlName + (++index), true)[0];
+                dataGridView.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(dep));
+            }
         }
 
         /// <summary>
@@ -96,12 +96,21 @@ namespace homework
         }
 
         /// <summary>
-        /// 顯示選課結果button 點擊事件
+        /// 監聽 選課結果表單關閉事件
         /// </summary>
         private void ListenCourseSelectResultFormClosed(object sender, FormClosedEventArgs e)
         {
             _courseSelectingPresentationModel.IsButtonShowSelectResultEnable = true;
             RefreshWidgetStatus();
+        }
+
+        /// <summary>
+        /// 監聽 選課表單關閉事件
+        /// </summary>
+        private void ListenSelectCourseFormClosing(object sender, FormClosingEventArgs e)
+        {
+            _courseSelectingPresentationModel._courseChanged -= RefreshTabControl;
+            _courseSelectingPresentationModel._modelChanged -= RefreshWidgetStatus;
         }
 
     }

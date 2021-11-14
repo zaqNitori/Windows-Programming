@@ -26,9 +26,8 @@ namespace homework
 
             _courseSelectResultPresentationModel = courseSelectResultPresentationModel;
             _courseSelectResultPresentationModel._courseChanged += RefreshSelectResultDataGridView;
-            RefreshSelectResultDataGridView();
-            _courseSelectResultDataGridView.CellContentClick += ClickCourseSelectResultDataGridViewCellContent;
-            Common.ActivateDoubleBuffer(_courseSelectResultDataGridView);
+            InitializeSelectResultDataGridView();
+            this.FormClosing += ListenCourseSelectResultFormClosing;
         }
 
         /// <summary>
@@ -64,6 +63,16 @@ namespace homework
         }
 
         /// <summary>
+        /// 初始化選課結果Grid
+        /// </summary>
+        private void InitializeSelectResultDataGridView()
+        {
+            RefreshSelectResultDataGridView();
+            _courseSelectResultDataGridView.CellContentClick += ClickCourseSelectResultDataGridViewCellContent;
+            Common.ActivateDoubleBuffer(_courseSelectResultDataGridView);
+        }
+
+        /// <summary>
         /// 重新拉取選課結果
         /// </summary>
         private void RefreshSelectResultDataGridView()
@@ -71,5 +80,12 @@ namespace homework
             _courseSelectResultDataGridView.DataSource = _courseSelectResultPresentationModel.GetChosenCourses();
         }
 
+        /// <summary>
+        /// 監聽 選課結果表單關閉事件
+        /// </summary>
+        private void ListenCourseSelectResultFormClosing(object sender, FormClosingEventArgs e)
+        {
+            _courseSelectResultPresentationModel._courseChanged -= RefreshSelectResultDataGridView;
+        }
     }
 }

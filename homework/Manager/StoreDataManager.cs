@@ -214,6 +214,13 @@ namespace homework.Manager
         /// </summary>s
         private void AddClassCourse(string name, List<Course> courses)
         {
+            foreach (var dep in _departments)
+            {
+                if (dep.DepartmentName.Equals(name))
+                {
+                    return;
+                }
+            }
             _departments.Add(new Department(name, courses));
         }
 
