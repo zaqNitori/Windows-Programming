@@ -12,14 +12,13 @@ namespace homework.PresentationModel
         public event ProgressChangedEventHandler _progressChanged;
         public delegate void ProgressChangedEventHandler();
         private CourseManageModel _courseManageModel;
-        private const int ONE = 1;
         private const int HUNDRED = 100;
         private const int TWENTY_FIVE = 25;
 
         public ImportCourseProgressPresentationModel(CourseManageModel courseManageModel)
         {
             _courseManageModel = courseManageModel;
-            ProgressBarMinimum = ProgressBarValue = ONE;
+            ProgressBarMinimum = ProgressBarValue = 0;
             ProgressBarStep = TWENTY_FIVE;
             ProgressBarMaximum = HUNDRED;
             _courseManageModel._progressChanged += NotifyProgressChanged;

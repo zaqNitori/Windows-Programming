@@ -16,14 +16,27 @@ namespace homework
         private ImportCourseProgressPresentationModel _importCourseProgressPresentationModel;
         private string _loadingText = "正在載入課程...";
         private const string PERCENT = "%";
-        private int _loading = 0;
 
         public ImportCourseProgressForm(ImportCourseProgressPresentationModel importCourseProgressPresentationModel)
         {
             InitializeComponent();
             _importCourseProgressPresentationModel = importCourseProgressPresentationModel;
             _importCourseProgressPresentationModel._progressChanged += StartRunProgressBar;
+            InitializeProgressBar();
             this.Shown += ListenImportCourseProgressShow;
+        }
+
+        /// <summary>
+        /// 初始化 進度條
+        /// </summary>
+        private void InitializeProgressBar()
+        {
+            _loadingProgressBar.Visible = true;
+            _loadingProgressBar.Minimum = _importCourseProgressPresentationModel.ProgressBarMinimum;
+            _loadingProgressBar.Maximum = _importCourseProgressPresentationModel.ProgressBarMaximum;
+            _loadingProgressBar.Value = _importCourseProgressPresentationModel.ProgressBarValue;
+            _loadingProgressBar.Step = _importCourseProgressPresentationModel.ProgressBarStep;
+            _loadingLabel.Text = _loadingText + _loadingProgressBar.Value.ToString() + PERCENT;
         }
 
         /// <summary>
@@ -32,7 +45,9 @@ namespace homework
         private void ListenImportCourseProgressShow(object sender, EventArgs e)
         {
             ImportCourses();
-            //StartRunProgressBar();
+            System.Threading.Thread.Sleep(600);
+            _importCourseProgressPresentationModel._progressChanged -= StartRunProgressBar;
+            this.Close();
         }
 
         /// <summary>
@@ -48,21 +63,11 @@ namespace homework
         /// </summary>
         private void StartRunProgressBar()
         {
-            _loadingProgressBar.Visible = true;
-            _loadingProgressBar.Minimum = _importCourseProgressPresentationModel.ProgressBarMinimum;
-            _loadingProgressBar.Maximum = _importCourseProgressPresentationModel.ProgressBarMaximum;
-            _loadingProgressBar.Value = _importCourseProgressPresentationModel.ProgressBarValue;
-            _loadingProgressBar.Step = _importCourseProgressPresentationModel.ProgressBarStep;
             _loadingProgressBar.PerformStep();
+            System.Threading.Thread.Sleep(500);
             _loadingLabel.Text = _loadingText + _loadingProgressBar.Value.ToString() + PERCENT;
+            Application.DoEvents();
 
-            //for (var i = 0; i < 101; i++)
-            //{
-            //    _loadingProgressBar.PerformStep();
-            //    _loadingLabel.Text = _loadingText + i.ToString() + PERCENT;
-            //    System.Threading.Thread.Sleep(100);
-            //    Application.DoEvents();
-            //}
         }
 
     }

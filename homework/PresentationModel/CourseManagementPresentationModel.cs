@@ -30,6 +30,7 @@ namespace homework.PresentationModel
             IsCourseComboBoxEnabled = false;
             IsButtonAddCourseEnabled = true;
             IsButtonConfirmEnabled = false;
+            IsButtonImportEnabled = true;
             ListBoxSelectedIndex = -1;
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
@@ -180,6 +181,14 @@ namespace homework.PresentationModel
         private string OriginalCourseNumber
         {
             get; set;
+        }
+
+        /// <summary>
+        /// 取得model
+        /// </summary>
+        public CourseManageModel GetCourseManageModel()
+        {
+            return _courseManageModel;
         }
 
         /// <summary>

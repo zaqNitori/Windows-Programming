@@ -63,7 +63,7 @@ namespace homework
         private void SetGroupBoxControlsStatus()
         {
             InitializeDataGridView();
-            _courseDepartmentComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
+            _courseClassComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
             _courseGroupBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, CourseManageProperty.SOURCE_GROUP_BOX_TITLE);
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
@@ -228,7 +228,7 @@ namespace homework
             _courseStatusComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.CourseStatus));
             _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.RequiredOrElective));
             _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Hour));
-            _courseDepartmentComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.ClassName));
+            _courseClassComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.ClassName));
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace homework
             _courseNoteTextBox.TextChanged += ListenCourseNoteTextChanged;
             _courseHourComboBox.SelectedIndexChanged += ListenCourseHourTextChanged;
             _courseStatusComboBox.SelectedIndexChanged += ListenCourseStatusTextChanged;
-            _courseDepartmentComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
+            _courseClassComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
         }
 
     }

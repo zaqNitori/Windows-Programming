@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using homework.Model;
-using homework.Manager;
 
 namespace homework
 {
@@ -19,12 +17,9 @@ namespace homework
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            StoreDataManager _storeDataManager = new StoreDataManager();
-            CourseManageModel _courseManageModel = new CourseManageModel(_storeDataManager);
-            //StartUp startUp = new StartUp();
+            StartUp startUp = new StartUp();
 
-            //Application.Run(startUp.startUpForm);
-            Application.Run(new ImportCourseProgressForm(new homework.PresentationModel.ImportCourseProgressPresentationModel(_courseManageModel)));
+            Application.Run(startUp.startUpForm);
         }
     }
 

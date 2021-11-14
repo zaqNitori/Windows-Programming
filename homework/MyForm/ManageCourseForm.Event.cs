@@ -161,7 +161,7 @@ namespace homework
         /// </summary>
         private void ListenCourseClassNameTextChanged(object sender, EventArgs e)
         {
-            _courseManagementPresentationModel.ClassName = _courseDepartmentComboBox.Text;
+            _courseManagementPresentationModel.ClassName = _courseClassComboBox.Text;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
         }
 
@@ -229,11 +229,29 @@ namespace homework
         }
 
         /// <summary>
-        /// 監聽 匯入資工課程 按鈕點擊
+        /// 監聽 匯入資工課程 按鈕點擊事件
         /// </summary>
         private void ListenButtonImportClicked(object sender, EventArgs e)
         {
-            //_buttonImport;
+            ImportCourseProgressPresentationModel importCourseProgressPresentationModel = new ImportCourseProgressPresentationModel(_courseManagementPresentationModel.GetCourseManageModel());
+            ImportCourseProgressForm importCourseProgressForm = new ImportCourseProgressForm(importCourseProgressPresentationModel);
+            importCourseProgressForm.FormClosed += ListenImportCourseProgressFormClosed;
+            _courseManagementPresentationModel.IsButtonImportEnabled = false;
+            RefreshButtonStatus();
+            importCourseProgressForm.ShowDialog();
+            importCourseProgressForm.Dispose();
         }
+
+        /// <summary>
+        /// 監聽 匯入資工課程表單關閉事件
+        /// </summary>
+        private void ListenImportCourseProgressFormClosed(object sender, FormClosedEventArgs e)
+        {
+            _courseManagementPresentationModel.IsButtonImportEnabled = true;
+            RefreshButtonStatus();
+            RefreshListBoxStatus();
+            _courseClassComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
+        }
+
     }
 }
