@@ -11,47 +11,16 @@ namespace homework
 {
     partial class ManageCourseForm
     {
-        /// <summary>
-        /// GroupBox 資料綁定
-        /// </summary>
-        private void BindObjectWithData()
-        {
-            _courseNumberTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Number));
-            _courseNameTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Name));
-            _courseStageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Stage));
-            _courseCreditTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Credit));
-            _courseTeacherTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Teacher));
-            _courseTeachAssistantTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.TeachAssistant));
-            _courseLanguageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Language));
-            _courseNoteTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Note));
-            _courseStatusComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.CourseStatus));
-            _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.RequiredOrElective));
-            _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Hour));
-            _courseDepartmentComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.ClassName));
-        }
 
         /// <summary>
-        /// GroupBox 事件綁定
+        /// 監聽 選課表單關閉事件
         /// </summary>
-        private void BindControlEvent()
+        private void ListenManageCourseFormClosing(object sender, FormClosingEventArgs e)
         {
-            _courseNumberTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseStageTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseCreditTextBox.KeyPress += ListenTextBoxKeyPress;
-            _courseNumberTextBox.TextChanged += ListenCourseNumberTextChanged;
-            _courseNameTextBox.TextChanged += ListenCourseNameTextChanged;
-            _courseStageTextBox.TextChanged += ListenCourseStageTextChanged;
-            _courseCreditTextBox.TextChanged += ListenCourseCreditTextChanged;
-            _courseTeacherTextBox.TextChanged += ListenCourseTeacherTextChanged;
-            _courseRequiredOrElectiveComboBox.SelectedIndexChanged += ListenCourseRequiredOrElectiveTextChanged;
-            _courseTeachAssistantTextBox.TextChanged += ListenCourseTeachAssistantTextChanged;
-            _courseLanguageTextBox.TextChanged += ListenCourseLanguageTextChanged;
-            _courseNoteTextBox.TextChanged += ListenCourseNoteTextChanged;
-            _courseHourComboBox.SelectedIndexChanged += ListenCourseHourTextChanged;
-            _courseStatusComboBox.SelectedIndexChanged += ListenCourseStatusTextChanged;
-            _courseDepartmentComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
-            _courseTimeDataGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
-            _courseTimeDataGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
+            _courseManagementPresentationModel._groupBoxChanged -= RefreshGroupBoxStatus;
+            _courseManagementPresentationModel._buttonChanged -= RefreshButtonStatus;
+            _courseManagementPresentationModel._gridContentChanged -= RefreshDataGridViewStatus;
+            _courseManagementPresentationModel._listBoxChanged -= RefreshListBoxStatus;
         }
 
         /// <summary>
@@ -102,8 +71,8 @@ namespace homework
         /// </summary>
         private void ListenButtonAddCourseClicked(object sender, EventArgs e)
         {
-            ClearGroupBoxStatus();
             _courseManagementPresentationModel.ClickAddCourse();
+            ClearGroupBoxStatus();
         }
 
         /// <summary>
@@ -192,7 +161,7 @@ namespace homework
         /// </summary>
         private void ListenCourseClassNameTextChanged(object sender, EventArgs e)
         {
-            _courseManagementPresentationModel.ClassName = _courseDepartmentComboBox.Text;
+            _courseManagementPresentationModel.ClassName = _courseClassComboBox.Text;
             _courseManagementPresentationModel.CheckIsCourseInputValid();
         }
 
@@ -257,6 +226,31 @@ namespace homework
                 }
             }
             typeof(CourseManagementPresentationModel).GetProperty((DayOfWeek.Sunday + columnIndex - 1).ToString()).SetValue(_courseManagementPresentationModel, courseTime);
+        }
+
+        /// <summary>
+        /// 監聽 匯入資工課程 按鈕點擊事件
+        /// </summary>
+        private void ListenButtonImportClicked(object sender, EventArgs e)
+        {
+            ImportCourseProgressPresentationModel importCourseProgressPresentationModel = new ImportCourseProgressPresentationModel(_courseManagementPresentationModel.GetCourseManageModel());
+            ImportCourseProgressForm importCourseProgressForm = new ImportCourseProgressForm(importCourseProgressPresentationModel);
+            importCourseProgressForm.FormClosed += ListenImportCourseProgressFormClosed;
+            _courseManagementPresentationModel.IsButtonImportEnabled = false;
+            RefreshButtonStatus();
+            importCourseProgressForm.ShowDialog();
+            importCourseProgressForm.Dispose();
+        }
+
+        /// <summary>
+        /// 監聽 匯入資工課程表單關閉事件
+        /// </summary>
+        private void ListenImportCourseProgressFormClosed(object sender, FormClosedEventArgs e)
+        {
+            _courseManagementPresentationModel.IsButtonImportEnabled = true;
+            RefreshButtonStatus();
+            RefreshListBoxStatus();
+            _courseClassComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
         }
 
     }

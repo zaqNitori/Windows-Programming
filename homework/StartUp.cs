@@ -50,7 +50,7 @@ namespace homework
         /// </history>
         private void InitializeObject()
         {
-            _courseModel.FetchCourseInfo(_coursesUrl);
+            _courseManageModel.FetchCourseInfo(_coursesUrl);
 
             startUpForm.SetCourseManageModel(_courseManageModel);
             startUpForm.SetCourseSelectModel(_courseModel);

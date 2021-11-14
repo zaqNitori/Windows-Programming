@@ -12,8 +12,10 @@ namespace homework.PresentationModel
     {
         public event ListBoxChangedEventHandler _listBoxChanged;
         public delegate void ListBoxChangedEventHandler();
-        public event GroupBoxAndButtonChangedEventHandler _groupBoxAndButtonChanged; 
-        public delegate void GroupBoxAndButtonChangedEventHandler();
+        public event ButtonChangedEventHandler _buttonChanged;
+        public delegate void ButtonChangedEventHandler();
+        public event GroupBoxChangedEventHandler _groupBoxChanged; 
+        public delegate void GroupBoxChangedEventHandler();
         public event GridChangedEventHandler _gridContentChanged;
         public delegate void GridChangedEventHandler();
         private CourseManageModel _courseManageModel;
@@ -28,6 +30,7 @@ namespace homework.PresentationModel
             IsCourseComboBoxEnabled = false;
             IsButtonAddCourseEnabled = true;
             IsButtonConfirmEnabled = false;
+            IsButtonImportEnabled = true;
             ListBoxSelectedIndex = -1;
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
@@ -51,6 +54,11 @@ namespace homework.PresentationModel
         }
 
         public int ListBoxSelectedIndex
+        {
+            get; set;
+        }
+
+        public bool IsButtonImportEnabled
         {
             get; set;
         }
@@ -173,6 +181,14 @@ namespace homework.PresentationModel
         private string OriginalCourseNumber
         {
             get; set;
+        }
+
+        /// <summary>
+        /// 取得model
+        /// </summary>
+        public CourseManageModel GetCourseManageModel()
+        {
+            return _courseManageModel;
         }
 
         /// <summary>

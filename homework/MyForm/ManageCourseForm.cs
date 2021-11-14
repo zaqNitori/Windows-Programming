@@ -44,6 +44,8 @@ namespace homework
             _buttonConfirm.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, CourseManageProperty.SOURCE_BUTTON_CONFIRM_ENABLED);
             _buttonConfirm.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, CourseManageProperty.SOURCE_BUTTON_CONFIRM_TEXT);
             _buttonConfirm.Click += ListenButtonConfirmClicked;
+            _buttonImport.Click += ListenButtonImportClicked;
+            _buttonImport.DataBindings.Add(CourseManageProperty.BINDING_ENABLED_STATUS, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.IsButtonImportEnabled));
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace homework
         private void SetGroupBoxControlsStatus()
         {
             InitializeDataGridView();
-            _courseDepartmentComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
+            _courseClassComboBox.DataSource = _courseManagementPresentationModel.GetClassNameAsItem();
             _courseGroupBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, CourseManageProperty.SOURCE_GROUP_BOX_TITLE);
 
             foreach (ComboBox c in _courseGroupBox.Controls.OfType<ComboBox>())
@@ -114,6 +116,7 @@ namespace homework
             _buttonAddCourse.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[0].ReadValue();
             _buttonConfirm.DataBindings[1].ReadValue();
+            _buttonImport.DataBindings[0].ReadValue();
         }
 
         /// <summary>
@@ -123,6 +126,7 @@ namespace homework
         {
             string dayOfWeek;
             string[] courseTime;
+            _isDataGridViewEditing = false;
             for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
             {
                 dayOfWeek = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(_courseManagementPresentationModel, null);
@@ -136,6 +140,7 @@ namespace homework
                     }
                 }
             }
+            _isDataGridViewEditing = true;
         }
 
         /// <summary>
@@ -193,6 +198,7 @@ namespace homework
             {
                 c.SelectedIndex = -1;
             }
+            RefreshDataGridViewStatus();
         }
 
         /// <summary>
@@ -200,21 +206,62 @@ namespace homework
         /// </summary>
         private void BindNotifyEvent()
         {
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshGroupBoxStatus;
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += RefreshButtonStatus;
+            _courseManagementPresentationModel._groupBoxChanged += RefreshGroupBoxStatus;
+            _courseManagementPresentationModel._buttonChanged += RefreshButtonStatus;
             _courseManagementPresentationModel._gridContentChanged += RefreshDataGridViewStatus;
             _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
         /// <summary>
-        /// 監聽 選課表單關閉事件
+        /// GroupBox 資料綁定
         /// </summary>
-        private void ListenManageCourseFormClosing(object sender, FormClosingEventArgs e)
+        private void BindObjectWithData()
         {
-            _courseManagementPresentationModel._groupBoxAndButtonChanged -= RefreshGroupBoxStatus;
-            _courseManagementPresentationModel._groupBoxAndButtonChanged -= RefreshButtonStatus;
-            _courseManagementPresentationModel._gridContentChanged -= RefreshDataGridViewStatus;
-            _courseManagementPresentationModel._listBoxChanged -= RefreshListBoxStatus;
+            _courseNumberTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Number));
+            _courseNameTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Name));
+            _courseStageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Stage));
+            _courseCreditTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Credit));
+            _courseTeacherTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Teacher));
+            _courseTeachAssistantTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.TeachAssistant));
+            _courseLanguageTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Language));
+            _courseNoteTextBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Note));
+            _courseStatusComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.CourseStatus));
+            _courseRequiredOrElectiveComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.RequiredOrElective));
+            _courseHourComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.Hour));
+            _courseClassComboBox.DataBindings.Add(CourseManageProperty.BINDING_TEXT, _courseManagementPresentationModel, nameof(_courseManagementPresentationModel.ClassName));
         }
+
+        /// <summary>
+        /// GroupBox 事件綁定
+        /// </summary>
+        private void BindControlEvent()
+        {
+            _courseNumberTextBox.KeyPress += ListenTextBoxKeyPress;
+            _courseStageTextBox.KeyPress += ListenTextBoxKeyPress;
+            _courseCreditTextBox.KeyPress += ListenTextBoxKeyPress;
+            _courseTimeDataGridView.CellMouseUp += ListenCourseDataGridOnCellMouseUp;
+            _courseTimeDataGridView.CellValueChanged += ListenCourseDataGridOnCellValueChanged;
+            BindTextChangedEvent();
+        }
+
+        /// <summary>
+        /// TextChanged 事件綁定
+        /// </summary>
+        private void BindTextChangedEvent()
+        {
+            _courseNumberTextBox.TextChanged += ListenCourseNumberTextChanged;
+            _courseNameTextBox.TextChanged += ListenCourseNameTextChanged;
+            _courseStageTextBox.TextChanged += ListenCourseStageTextChanged;
+            _courseCreditTextBox.TextChanged += ListenCourseCreditTextChanged;
+            _courseTeacherTextBox.TextChanged += ListenCourseTeacherTextChanged;
+            _courseRequiredOrElectiveComboBox.SelectedIndexChanged += ListenCourseRequiredOrElectiveTextChanged;
+            _courseTeachAssistantTextBox.TextChanged += ListenCourseTeachAssistantTextChanged;
+            _courseLanguageTextBox.TextChanged += ListenCourseLanguageTextChanged;
+            _courseNoteTextBox.TextChanged += ListenCourseNoteTextChanged;
+            _courseHourComboBox.SelectedIndexChanged += ListenCourseHourTextChanged;
+            _courseStatusComboBox.SelectedIndexChanged += ListenCourseStatusTextChanged;
+            _courseClassComboBox.SelectedIndexChanged += ListenCourseClassNameTextChanged;
+        }
+
     }
 }

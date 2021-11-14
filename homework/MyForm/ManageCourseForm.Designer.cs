@@ -32,6 +32,7 @@ namespace homework
             this._alertText = new System.Windows.Forms.Label();
             this._courseTabControl = new System.Windows.Forms.TabControl();
             this._tabPage1 = new System.Windows.Forms.TabPage();
+            this._buttonImport = new System.Windows.Forms.Button();
             this._buttonConfirm = new System.Windows.Forms.Button();
             this._courseTimeDataGridView = new System.Windows.Forms.DataGridView();
             this._courseSection = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +47,7 @@ namespace homework
             this._courseRequiredOrElectiveComboBox = new System.Windows.Forms.ComboBox();
             this._courseHourComboBox = new System.Windows.Forms.ComboBox();
             this._courseDepartmentLabel = new System.Windows.Forms.Label();
-            this._courseDepartmentComboBox = new System.Windows.Forms.ComboBox();
+            this._courseClassComboBox = new System.Windows.Forms.ComboBox();
             this._courseHourLabel = new System.Windows.Forms.Label();
             this._courseNoteLabel = new System.Windows.Forms.Label();
             this._courseNoteTextBox = new System.Windows.Forms.TextBox();
@@ -69,7 +70,6 @@ namespace homework
             this._buttonAddCourse = new System.Windows.Forms.Button();
             this._courseListBox = new System.Windows.Forms.ListBox();
             this._tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this._courseTabControl.SuspendLayout();
             this._tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._courseTimeDataGridView)).BeginInit();
@@ -100,7 +100,7 @@ namespace homework
             // 
             // _tabPage1
             // 
-            this._tabPage1.Controls.Add(this.button1);
+            this._tabPage1.Controls.Add(this._buttonImport);
             this._tabPage1.Controls.Add(this._buttonConfirm);
             this._tabPage1.Controls.Add(this._courseTimeDataGridView);
             this._tabPage1.Controls.Add(this._courseGroupBox);
@@ -113,6 +113,15 @@ namespace homework
             this._tabPage1.TabIndex = 0;
             this._tabPage1.Text = "tabPage1";
             this._tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // _buttonImport
+            // 
+            this._buttonImport.Location = new System.Drawing.Point(259, 475);
+            this._buttonImport.Name = "_buttonImport";
+            this._buttonImport.Size = new System.Drawing.Size(159, 61);
+            this._buttonImport.TabIndex = 5;
+            this._buttonImport.Text = "匯入資工系全部課程";
+            this._buttonImport.UseVisualStyleBackColor = true;
             // 
             // _buttonConfirm
             // 
@@ -212,7 +221,7 @@ namespace homework
             this._courseGroupBox.Controls.Add(this._courseRequiredOrElectiveComboBox);
             this._courseGroupBox.Controls.Add(this._courseHourComboBox);
             this._courseGroupBox.Controls.Add(this._courseDepartmentLabel);
-            this._courseGroupBox.Controls.Add(this._courseDepartmentComboBox);
+            this._courseGroupBox.Controls.Add(this._courseClassComboBox);
             this._courseGroupBox.Controls.Add(this._courseHourLabel);
             this._courseGroupBox.Controls.Add(this._courseNoteLabel);
             this._courseGroupBox.Controls.Add(this._courseNoteTextBox);
@@ -279,12 +288,12 @@ namespace homework
             // 
             // _courseDepartmentComboBox
             // 
-            this._courseDepartmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._courseDepartmentComboBox.FormattingEnabled = true;
-            this._courseDepartmentComboBox.Location = new System.Drawing.Point(311, 148);
-            this._courseDepartmentComboBox.Name = "_courseDepartmentComboBox";
-            this._courseDepartmentComboBox.Size = new System.Drawing.Size(121, 23);
-            this._courseDepartmentComboBox.TabIndex = 21;
+            this._courseClassComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._courseClassComboBox.FormattingEnabled = true;
+            this._courseClassComboBox.Location = new System.Drawing.Point(311, 148);
+            this._courseClassComboBox.Name = "_courseDepartmentComboBox";
+            this._courseClassComboBox.Size = new System.Drawing.Size(121, 23);
+            this._courseClassComboBox.TabIndex = 21;
             // 
             // _courseHourLabel
             // 
@@ -473,15 +482,6 @@ namespace homework
             this._tabPage2.Text = "tabPage2";
             this._tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(259, 475);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 61);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "匯入資工系全部課程";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // ManageCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -531,7 +531,7 @@ namespace homework
         private System.Windows.Forms.TextBox _courseNoteTextBox;
         private System.Windows.Forms.Label _courseHourLabel;
         private System.Windows.Forms.Label _courseDepartmentLabel;
-        private System.Windows.Forms.ComboBox _courseDepartmentComboBox;
+        private System.Windows.Forms.ComboBox _courseClassComboBox;
         private System.Windows.Forms.Button _buttonConfirm;
         private System.Windows.Forms.DataGridView _courseTimeDataGridView;
         private System.Windows.Forms.ComboBox _courseHourComboBox;
@@ -544,6 +544,6 @@ namespace homework
         private System.Windows.Forms.DataGridViewCheckBoxColumn _thursday;
         private System.Windows.Forms.DataGridViewCheckBoxColumn _friday;
         private System.Windows.Forms.DataGridViewCheckBoxColumn _saturday;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _buttonImport;
     }
 }
