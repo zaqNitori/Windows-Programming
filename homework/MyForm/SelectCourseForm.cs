@@ -19,6 +19,7 @@ namespace homework
         private CourseSelectResultPresentationModel _courseSelectingResultPresentationModel;
         private CourseSelectResultForm _courseSelectResultForm;
         private const string BINDING_PROPERTY = "Enabled";
+        private string _componentName = "_courseDataGridViewComponent";
 
         public SelectCourseForm(CourseSelectingPresentationModel courseSelectingPresentationModel)
         {
@@ -60,17 +61,35 @@ namespace homework
         /// </summary>
         private void RefreshTabControl()
         {
-            string controlName = "_courseDataGridViewComponent";
             _department = _courseSelectingPresentationModel.GetAllClassName();
 
             int index = 0;
             foreach (var dep in _department)
             {
-                var courses = _courseSelectingPresentationModel.GetCourseByClassName(dep);
+                if (_tabControl.TabPages.Count < _department.Count)
+                {
+                    CreateNewWidget(_tabControl.TabPages.Count + 1);
+                }
                 _tabControl.TabPages[index].Text = dep;
-                var dataGridView = (CourseDataGridViewComponent)this.Controls.Find(controlName + (++index), true)[0];
+                var dataGridView = (CourseDataGridViewComponent)this.Controls.Find(_componentName + (++index), true)[0];
                 dataGridView.SetDataSource(_courseSelectingPresentationModel.GetCourseByClassName(dep));
             }
+        }
+
+        /// <summary>
+        /// 動態生成畫面
+        /// </summary>
+        private void CreateNewWidget(int number)
+        {
+            string tabPageName = "_tabPage";
+            TabPage tabPage = new TabPage();
+            tabPage.Name = tabPageName + number;
+            _tabControl.TabPages.Add(tabPage);
+
+            CourseDataGridViewComponent courseDataGridViewComponent = new CourseDataGridViewComponent();
+            courseDataGridViewComponent.SetPresentationModel(_courseSelectingPresentationModel);
+            courseDataGridViewComponent.Name = _componentName + number;
+            courseDataGridViewComponent.Parent = tabPage;
         }
 
         /// <summary>

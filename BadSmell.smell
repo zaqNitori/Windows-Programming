@@ -185,7 +185,24 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>ICS(變數-1)</SmellType>
+              <HashCode>Variable1.ManageCourseForm.button1</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homework</Project>
+              <File>ManageCourseForm.Designer.cs</File>
+              <Line>547</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(變數-1) Class 成員變數以底線開始，底線後第一個字母小寫，若由多個單字組成，從第二個單字開始，每個單字的第一個字母大寫，其餘小寫。 不以底線區隔單字</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList />
           <AnalysisFileManager>
@@ -417,8 +434,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>3959</ProductionLoc>
-          <TestLoc>1241</TestLoc>
+          <ProductionLoc>4036</ProductionLoc>
+          <TestLoc>1252</TestLoc>
         </CodeReview>
       </Data>
     </div>

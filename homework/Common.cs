@@ -10,6 +10,10 @@ namespace homework
 {
     public class Common
     {
+        public const string COMPUTER_SCIENCE_GRADE3_COURSE_URL = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
+        public const string COMPUTER_SCIENCE_GRADE2_COURSE_URL = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=109&sem=1&code=2433";
+        public const string COMPUTER_SCIENCE_GRADE1_COURSE_URL = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=108&sem=1&code=2433";
+
         /// <summary>
         /// 啟用datagridview的doublebuffered
         /// </summary>
