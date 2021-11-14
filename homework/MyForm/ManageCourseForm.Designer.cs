@@ -69,6 +69,7 @@ namespace homework
             this._buttonAddCourse = new System.Windows.Forms.Button();
             this._courseListBox = new System.Windows.Forms.ListBox();
             this._tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this._courseTabControl.SuspendLayout();
             this._tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._courseTimeDataGridView)).BeginInit();
@@ -99,6 +100,7 @@ namespace homework
             // 
             // _tabPage1
             // 
+            this._tabPage1.Controls.Add(this.button1);
             this._tabPage1.Controls.Add(this._buttonConfirm);
             this._tabPage1.Controls.Add(this._courseTimeDataGridView);
             this._tabPage1.Controls.Add(this._courseGroupBox);
@@ -471,6 +473,15 @@ namespace homework
             this._tabPage2.Text = "tabPage2";
             this._tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(259, 475);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(159, 61);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "匯入資工系全部課程";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // ManageCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -533,5 +544,6 @@ namespace homework
         private System.Windows.Forms.DataGridViewCheckBoxColumn _thursday;
         private System.Windows.Forms.DataGridViewCheckBoxColumn _friday;
         private System.Windows.Forms.DataGridViewCheckBoxColumn _saturday;
+        private System.Windows.Forms.Button button1;
     }
 }

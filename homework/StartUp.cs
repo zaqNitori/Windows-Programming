@@ -38,10 +38,8 @@ namespace homework
         /// </history>
         private void SetCoursesUrl()
         {
-            const string COURSE1 = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
-            const string COURSE2 = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=109&sem=1&code=2433";
-            _coursesUrl.Add(COURSE1);
-            _coursesUrl.Add(COURSE2);
+            _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE2_COURSE_URL);
+            _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE3_COURSE_URL);
         }
 
         /// <summary>

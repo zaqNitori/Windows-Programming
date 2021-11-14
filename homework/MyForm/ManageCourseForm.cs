@@ -22,6 +22,7 @@ namespace homework
             BindObjectWithData();
             BindControlEvent();
             BindNotifyEvent();
+            this.FormClosing += ListenManageCourseFormClosing;
         }
 
         /// <summary>
@@ -205,5 +206,15 @@ namespace homework
             _courseManagementPresentationModel._listBoxChanged += RefreshListBoxStatus;
         }
 
+        /// <summary>
+        /// 監聽 選課表單關閉事件
+        /// </summary>
+        private void ListenManageCourseFormClosing(object sender, FormClosingEventArgs e)
+        {
+            _courseManagementPresentationModel._groupBoxAndButtonChanged -= RefreshGroupBoxStatus;
+            _courseManagementPresentationModel._groupBoxAndButtonChanged -= RefreshButtonStatus;
+            _courseManagementPresentationModel._gridContentChanged -= RefreshDataGridViewStatus;
+            _courseManagementPresentationModel._listBoxChanged -= RefreshListBoxStatus;
+        }
     }
 }
