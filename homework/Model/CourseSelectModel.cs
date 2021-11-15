@@ -50,7 +50,7 @@ namespace homework.Model
             List<Course> showCourses = new List<Course>();
             foreach (var ac in allCourses)
             {
-                if (!IsCourseNumberConflict(ac))
+                if (!IsCourseNumberConflict(ac) && !ac.Status.Equals(Common.COURSE_STATUS_CLOSE))
                 {
                     showCourses.Add(ac);
                 }
