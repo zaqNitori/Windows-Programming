@@ -98,7 +98,7 @@ namespace homework.PresentationModel
         /// </summary>
         private void ClearCourse()
         {
-            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = ClassName = Sunday = Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = string.Empty;
+            Number = Name = Stage = Credit = Teacher = RequiredOrElective = TeachAssistant = Language = Note = Hour = ClassName = Sunday = Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = CourseStatus = string.Empty;
             _courseTimeRecord.Clear();
             NotifyGroupBoxChanged();
             NotifyButtonChanged();
@@ -179,17 +179,19 @@ namespace homework.PresentationModel
         /// </summary>
         public void CheckIsCourseInputValid()
         {
-            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Number)
-                && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
-                && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective)
-                && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(ClassName)
+            IsButtonConfirmEnabled = false;
+            if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Number) && !string.IsNullOrWhiteSpace(Stage) && !string.IsNullOrWhiteSpace(Credit)
+                && !string.IsNullOrWhiteSpace(Teacher) && !string.IsNullOrWhiteSpace(RequiredOrElective) && !string.IsNullOrWhiteSpace(Hour) && !string.IsNullOrWhiteSpace(ClassName)
                 && int.Parse(Hour).Equals(_courseTimeRecord.Count))
             {
-                CheckIsCoursePropertyChanged();
-            }
-            else
-            {
-                IsButtonConfirmEnabled = false;
+                if (CourseManageState.Equals((int)CourseManageAction.Edit))
+                {
+                    CheckIsCoursePropertyChanged();
+                }
+                else 
+                {
+                    IsButtonConfirmEnabled = true;
+                }
             }
             NotifyButtonChanged();
         }
@@ -238,6 +240,7 @@ namespace homework.PresentationModel
         private Course BuildCourse()
         {
             Course course = new Course();
+            course.Status = CourseStatus;
             course.Name = Name;
             course.Number = Number;
             course.Stage = Stage;
@@ -248,12 +251,20 @@ namespace homework.PresentationModel
             course.Language = Language;
             course.Note = Note;
             course.Hour = Hour;
+            BuildCourseTime(course);
+            return course;
+        }
+
+        /// <summary>
+        /// 建立課程時間
+        /// </summary>
+        private void BuildCourseTime(Course course)
+        {
             for (var day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; day++)
             {
                 string property = (string)typeof(CourseManagementPresentationModel).GetProperty(day.ToString()).GetValue(this, null);
                 typeof(Course).GetProperty(day.ToString()).SetValue(course, property);
             }
-            return course;
         }
 
     }

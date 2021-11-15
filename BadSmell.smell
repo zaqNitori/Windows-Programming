@@ -421,6 +421,11 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>PresentationModelTest\ImportCourseProgressPresentationModelTest.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>PresentationModelTest\StartUpPresentationModelTest.cs</RelativePath>
                 <ProjectName>homeworkUnitTest</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -432,8 +437,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>4362</ProductionLoc>
-          <TestLoc>1252</TestLoc>
+          <ProductionLoc>4374</ProductionLoc>
+          <TestLoc>1410</TestLoc>
         </CodeReview>
       </Data>
     </div>
