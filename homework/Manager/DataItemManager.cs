@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using homework.ViewModel;
 
-namespace homework.Data
+namespace homework.Manager
 {
     public class DataItemManager
     {

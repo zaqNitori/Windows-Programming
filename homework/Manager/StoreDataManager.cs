@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using homework.ViewModel;
 
-namespace homework.Data
+namespace homework.Manager
 {
     public class StoreDataManager
     {
@@ -27,32 +27,19 @@ namespace homework.Data
         #region Public
 
         /// <summary>
-        /// 新增各班課程表
+        /// 新增課程到班級及課程總表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public void AddCurriculum(string name, List<Course> courses)
+        public void AddCourse(string name, List<Course> courses)
         {
-            _departments.Add(new Department(name, courses));
-            foreach (var course in courses)
-            {
-                if (!GetCurriculumCourses().ContainsKey(course.Number))
-                {
-                    GetCurriculumCourses().Add(course.Number, course);
-                }
-            }
+            AddCurriculum(courses);
+            AddClassCourse(name, courses);
         }
 
         /// <summary>
         /// 把選取的課程加入課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public void AddSelectedCourses(List<Course> courses)
         {
-
             foreach (var c in courses)
             {
                 _chosenCourses.Add(c);
@@ -62,14 +49,21 @@ namespace homework.Data
         /// <summary>
         /// 新增課程到指定班級
         /// </summary>
-        public void AddCourse(Course course, string className)
+        public void AddCourseToClass(Course course, string className)
         {
+            bool isBreak = false;
             foreach (var dep in _departments)
             {
                 if (dep.DepartmentName.Equals(className))
                 {
-                    GetDepartmentCourses(dep).Add(course);
+                    GetClassCourses(dep).Add(course);
+                    isBreak = true;
+                    break;
                 }
+            }
+            if (!isBreak)
+            {
+                AddClassCourse(className, course);
             }
             _curriculum.Courses.Add(course.Number, course);
             NotifyCourseChanged();
@@ -84,7 +78,7 @@ namespace homework.Data
             {
                 if (dep.DepartmentName.Equals(className))
                 {
-                    RemoveCourse(GetDepartmentCourses(dep), courseNumber);
+                    RemoveCourseFromClass(GetClassCourses(dep), courseNumber);
                     break;
                 }
             }
@@ -94,9 +88,6 @@ namespace homework.Data
         /// <summary>
         /// 退選課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history> 
         public void DropCourse(int index)
         {
             if (_chosenCourses.Count > index)
@@ -114,11 +105,26 @@ namespace homework.Data
         #region Get
 
         /// <summary>
+        /// 用課號取得班級名稱
+        /// </summary>
+        public string GetClassNameByCourseNumber(string number)
+        {
+            foreach (var dep in _departments)
+            {
+                foreach (var c in dep.Courses)
+                {
+                    if (c.Number.Equals(number))
+                    {
+                        return dep.DepartmentName;
+                    }
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
         /// 取得所有課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public Dictionary<string, Course> GetCurriculumCourses()
         {
             return _curriculum.Courses;
@@ -127,10 +133,7 @@ namespace homework.Data
         /// <summary>
         /// 取得所有班級名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public List<Department> GetAllDepartment()
+        public List<Department> GetAllClass()
         {
             return _departments;
         }
@@ -138,16 +141,13 @@ namespace homework.Data
         /// <summary>
         /// 用班級名稱取得課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public List<Course> GetCoursesByDepartmentName(string name)
+        public List<Course> GetCoursesByClassName(string name)
         {
             foreach (var dep in _departments)
             {
-                if (GetDepartmentName(dep).Equals(name))
+                if (GetClassName(dep).Equals(name))
                 {
-                    return GetDepartmentCourses(dep);
+                    return GetClassCourses(dep);
                 }
             }
             return new List<Course>();
@@ -156,9 +156,6 @@ namespace homework.Data
         /// <summary>
         /// 用班級名稱取得課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public Course GetCourseByCourseNumber(string number)
         {
             return _curriculum.Courses[number];
@@ -167,9 +164,6 @@ namespace homework.Data
         /// <summary>
         /// 取得以選取的課程
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         public BindingList<Course> GetChosenCourses()
         {
             return _chosenCourses;
@@ -186,10 +180,7 @@ namespace homework.Data
         /// <summary>
         /// 取得科系名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        private string GetDepartmentName(Department department)
+        private string GetClassName(Department department)
         {
             return department.DepartmentName;
         }
@@ -197,41 +188,56 @@ namespace homework.Data
         /// <summary>
         /// 取得科系名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        private List<Course> GetDepartmentCourses(Department department)
+        private List<Course> GetClassCourses(Department department)
         {
             return department.Courses;
-        }
-
-        /// <summary>
-        /// 用課號取得班級名稱
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.31  create function
-        /// </history>
-        public string GetDepartmentNameByCourseNumber(string number)
-        {
-            foreach (var dep in _departments)
-            {
-                foreach (var c in dep.Courses)
-                {
-                    if (c.Number.Equals(number))
-                    {
-                        return dep.DepartmentName;
-                    }
-                }
-            }
-            return string.Empty;
         }
 
         #endregion
 
         /// <summary>
+        /// 新增課程總表
+        /// </summary>
+        private void AddCurriculum(List<Course> courses)
+        {
+            foreach (var course in courses)
+            {
+                if (!GetCurriculumCourses().ContainsKey(course.Number))
+                {
+                    GetCurriculumCourses().Add(course.Number, course);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 新增各班課程表
+        /// </summary>s
+        private void AddClassCourse(string name, List<Course> courses)
+        {
+            foreach (var dep in _departments)
+            {
+                if (dep.DepartmentName.Equals(name))
+                {
+                    return;
+                }
+            }
+            _departments.Add(new Department(name, courses));
+        }
+
+        /// <summary>
+        /// 新增各班課程表
+        /// </summary>s
+        private void AddClassCourse(string name, Course course)
+        {
+            List<Course> courses = new List<Course>();
+            courses.Add(course);
+            _departments.Add(new Department(name, courses));
+        }
+
+        /// <summary>
         /// 移除課程
         /// </summary>
-        private void RemoveCourse(List<Course> courses, string courseNumber)
+        private void RemoveCourseFromClass(List<Course> courses, string courseNumber)
         {
             foreach (var c in courses)
             {
@@ -251,14 +257,25 @@ namespace homework.Data
             BindingList<Course> courses = new BindingList<Course>();
             foreach (var c in _chosenCourses)
             {
-                courses.Add(_curriculum.Courses[c.Number]);
+                if (IsCourseStatusOpen(c.Number))
+                {
+                    courses.Add(_curriculum.Courses[c.Number]);
+                }
             }
 
             _chosenCourses = courses;
         }
 
         /// <summary>
-        /// 課程修改事件要觸發畫面更新 
+        /// 確認課程狀態是否為開課 
+        /// </summary>
+        private bool IsCourseStatusOpen(string number)
+        {
+            return _curriculum.Courses[number].Status.Equals(Common.COURSE_STATUS_OPEN);
+        }
+
+        /// <summary>
+        /// 課程修改事件要觸發 課程畫面更新 
         /// </summary>
         private void NotifyCourseChanged()
         {

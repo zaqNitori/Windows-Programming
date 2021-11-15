@@ -49,9 +49,6 @@ namespace homework.PresentationModel
         /// <summary>
         /// GridCheckBox點擊事件trigger 
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private void NotifyModelChanged()
         {
             if (_modelChanged != null)
@@ -61,15 +58,15 @@ namespace homework.PresentationModel
         /// <summary>
         /// 紀錄當前畫面上checkbox的狀態
         /// </summary>
-        public void SetCourseCheckBoxStatus(string courseId)
+        public void SetCourseCheckBoxStatus(string courseNumber)
         {
-            if (_courseSelectData.Contains(courseId))
+            if (_courseSelectData.Contains(courseNumber))
             {
-                _courseSelectData.Remove(courseId);
+                _courseSelectData.Remove(courseNumber);
             }
             else
             {
-                _courseSelectData.Add(courseId);
+                _courseSelectData.Add(courseNumber);
             }
 
             IsButtonSendEnable = (_courseSelectData.Count == 0) ? false : true;
@@ -77,70 +74,39 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
-        /// 取得畫面上選取到的資料內容
-        /// </summary>
-        /// <history>
-        ///     1.  2021.10.02  create function
-        /// </history>
-        public string GetSelectedResult()
-        {
-            string message = string.Empty;
-            List<string> selectIndex;
-            
-            if (_courseSelectData.Count > 0)
-            {
-                selectIndex = _courseSelectData.ToList();
-                selectIndex.Sort();
-                foreach (string str in selectIndex)
-                {
-                    message += str + Environment.NewLine;
-                }
-            }
-            return message;
-        }
-
-        /// <summary>
         /// 取得所有班級名稱
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public List<string> GetAllDepartment()
+        public List<string> GetAllClassName()
         {
-            return _courseModel.GetAllDepartmentName();
+            return _courseModel.GetAllClassName();
         }
 
         /// <summary>
         /// 用班級名稱取得課表
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public List<Course> GetCourseByDepartmentName(string name)
+        public List<Course> GetCourseByClassName(string name)
         {
-            return _courseModel.GetCoursesByDepartmentName(name);
+            return _courseModel.GetCoursesByClassName(name);
         }
 
         /// <summary>
         /// 送出課表，先檢查
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
-        public void SendSelectedCourses()
+        public string SendSelectedCourses()
         {
-            string errorMessage = _courseModel.CheckCoursesConflict(_courseSelectData.ToList());
+            List<string> courses = _courseSelectData.ToList();
+            string errorMessage = _courseModel.CheckCoursesConflict(courses);
 
             if (string.IsNullOrEmpty(errorMessage))
             {
                 _courseSelectData.Clear();
-                _courseModel.AddSelectedCourses();
-                MessageBox.Show(ADD_COURSE_SUCCESS);
+                _courseModel.AddSelectedCourses(courses);
                 NotifyCourseChanged();
+                return ADD_COURSE_SUCCESS;
             }
             else
             {
-                MessageBox.Show(ADD_COURSE_FAIL + Environment.NewLine + errorMessage);
+                return ADD_COURSE_FAIL + Environment.NewLine + errorMessage;
             }
 
         }
@@ -148,9 +114,6 @@ namespace homework.PresentationModel
         /// <summary>
         /// 課程送出後，重整畫面 
         /// </summary>
-        /// <history>
-        ///     1.  2021.10.25  create function
-        /// </history>
         private void NotifyCourseChanged()
         {
             if (_courseChanged != null)

@@ -13,7 +13,7 @@ namespace homework.ViewModel
         Add
     }
 
-    static class CourseManageProperty
+    public static class CourseManageProperty
     {
         public const int COLUMN_WIDTH = 40;
         public const int FIFTY_SEVEN_NUMBER = 57;

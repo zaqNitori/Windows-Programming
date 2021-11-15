@@ -12,13 +12,15 @@ namespace homework.PresentationModel
     {
         public event ListBoxChangedEventHandler _listBoxChanged;
         public delegate void ListBoxChangedEventHandler();
-        public event GroupBoxAndButtonChangedEventHandler _groupBoxAndButtonChanged; 
-        public delegate void GroupBoxAndButtonChangedEventHandler();
+        public event ButtonChangedEventHandler _buttonChanged;
+        public delegate void ButtonChangedEventHandler();
+        public event GroupBoxChangedEventHandler _groupBoxChanged; 
+        public delegate void GroupBoxChangedEventHandler();
         public event GridChangedEventHandler _gridContentChanged;
         public delegate void GridChangedEventHandler();
         private CourseManageModel _courseManageModel;
         private Course _originalCourse;
-        private string _originalDepartmentName;
+        private string _originalClassName;
         private HashSet<int> _courseTimeRecord;
 
         public CourseManagementPresentationModel(CourseManageModel courseManageModel)
@@ -28,6 +30,7 @@ namespace homework.PresentationModel
             IsCourseComboBoxEnabled = false;
             IsButtonAddCourseEnabled = true;
             IsButtonConfirmEnabled = false;
+            IsButtonImportEnabled = true;
             ListBoxSelectedIndex = -1;
             GroupBoxTitle = CourseManageProperty.COURSE_EDIT_GROUP_BOX_TITLE;
             ButtonConfirmText = CourseManageProperty.BUTTON_SAVE_TEXT;
@@ -51,6 +54,11 @@ namespace homework.PresentationModel
         }
 
         public int ListBoxSelectedIndex
+        {
+            get; set;
+        }
+
+        public bool IsButtonImportEnabled
         {
             get; set;
         }
@@ -130,7 +138,7 @@ namespace homework.PresentationModel
             get; set;
         }
 
-        public string DepartmentName
+        public string ClassName
         {
             get; set;
         }
@@ -176,6 +184,14 @@ namespace homework.PresentationModel
         }
 
         /// <summary>
+        /// 取得model
+        /// </summary>
+        public CourseManageModel GetCourseManageModel()
+        {
+            return _courseManageModel;
+        }
+
+        /// <summary>
         /// 取得Item型態的所有課程
         /// </summary>
         public List<DataItem> GetCurriculumAsItem()
@@ -186,9 +202,9 @@ namespace homework.PresentationModel
         /// <summary>
         /// 取得Item型態的班級名稱
         /// </summary>
-        public List<DataItem> GetDepartmentNameAsItem()
+        public List<DataItem> GetClassNameAsItem()
         {
-            return _courseManageModel.GetDepartmentNameAsItem();
+            return _courseManageModel.GetClassNameAsItem();
         }
 
         /// <summary>

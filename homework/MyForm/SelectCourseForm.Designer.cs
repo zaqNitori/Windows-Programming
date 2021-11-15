@@ -31,14 +31,14 @@ namespace homework
         {
             this._buttonSend = new System.Windows.Forms.Button();
             this._buttonShowSelectResult = new System.Windows.Forms.Button();
-            this._tabControl = new System.Windows.Forms.TabControl();
-            this._tabPage1 = new System.Windows.Forms.TabPage();
             this._tabPage2 = new System.Windows.Forms.TabPage();
-            this._courseDataGridViewComponent1 = new homework.MyController.CourseDataGridViewComponent();
             this._courseDataGridViewComponent2 = new homework.MyController.CourseDataGridViewComponent();
-            this._tabControl.SuspendLayout();
-            this._tabPage1.SuspendLayout();
+            this._tabPage1 = new System.Windows.Forms.TabPage();
+            this._courseDataGridViewComponent1 = new homework.MyController.CourseDataGridViewComponent();
+            this._tabControl = new System.Windows.Forms.TabControl();
             this._tabPage2.SuspendLayout();
+            this._tabPage1.SuspendLayout();
+            this._tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // _buttonSend
@@ -61,6 +61,42 @@ namespace homework
             this._buttonShowSelectResult.Text = "顯示選課結果";
             this._buttonShowSelectResult.UseVisualStyleBackColor = true;
             // 
+            // _tabPage2
+            // 
+            this._tabPage2.Controls.Add(this._courseDataGridViewComponent2);
+            this._tabPage2.Location = new System.Drawing.Point(4, 25);
+            this._tabPage2.Name = "_tabPage2";
+            this._tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this._tabPage2.Size = new System.Drawing.Size(1039, 388);
+            this._tabPage2.TabIndex = 1;
+            this._tabPage2.Text = "tabPage2";
+            this._tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // _courseDataGridViewComponent2
+            // 
+            this._courseDataGridViewComponent2.Location = new System.Drawing.Point(6, 6);
+            this._courseDataGridViewComponent2.Name = "_courseDataGridViewComponent2";
+            this._courseDataGridViewComponent2.Size = new System.Drawing.Size(1027, 376);
+            this._courseDataGridViewComponent2.TabIndex = 0;
+            // 
+            // _tabPage1
+            // 
+            this._tabPage1.Controls.Add(this._courseDataGridViewComponent1);
+            this._tabPage1.Location = new System.Drawing.Point(4, 25);
+            this._tabPage1.Name = "_tabPage1";
+            this._tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this._tabPage1.Size = new System.Drawing.Size(1039, 388);
+            this._tabPage1.TabIndex = 0;
+            this._tabPage1.Text = "tabPage1";
+            this._tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // _courseDataGridViewComponent1
+            // 
+            this._courseDataGridViewComponent1.Location = new System.Drawing.Point(6, 6);
+            this._courseDataGridViewComponent1.Name = "_courseDataGridViewComponent1";
+            this._courseDataGridViewComponent1.Size = new System.Drawing.Size(1027, 376);
+            this._courseDataGridViewComponent1.TabIndex = 1;
+            // 
             // _tabControl
             // 
             this._tabControl.Controls.Add(this._tabPage1);
@@ -70,42 +106,6 @@ namespace homework
             this._tabControl.SelectedIndex = 0;
             this._tabControl.Size = new System.Drawing.Size(1047, 417);
             this._tabControl.TabIndex = 3;
-            // 
-            // tabPage1
-            // 
-            this._tabPage1.Controls.Add(this._courseDataGridViewComponent1);
-            this._tabPage1.Location = new System.Drawing.Point(4, 25);
-            this._tabPage1.Name = "tabPage1";
-            this._tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this._tabPage1.Size = new System.Drawing.Size(1039, 388);
-            this._tabPage1.TabIndex = 0;
-            this._tabPage1.Text = "tabPage1";
-            this._tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this._tabPage2.Controls.Add(this._courseDataGridViewComponent2);
-            this._tabPage2.Location = new System.Drawing.Point(4, 25);
-            this._tabPage2.Name = "tabPage2";
-            this._tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this._tabPage2.Size = new System.Drawing.Size(1039, 388);
-            this._tabPage2.TabIndex = 1;
-            this._tabPage2.Text = "tabPage2";
-            this._tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // _courseDataGridViewComponent1
-            // 
-            this._courseDataGridViewComponent1.Location = new System.Drawing.Point(6, 6);
-            this._courseDataGridViewComponent1.Name = "_courseDataGridViewComponent1";
-            this._courseDataGridViewComponent1.Size = new System.Drawing.Size(1027, 376);
-            this._courseDataGridViewComponent1.TabIndex = 1;
-            // 
-            // _courseDataGridViewComponent2
-            // 
-            this._courseDataGridViewComponent2.Location = new System.Drawing.Point(6, 6);
-            this._courseDataGridViewComponent2.Name = "_courseDataGridViewComponent2";
-            this._courseDataGridViewComponent2.Size = new System.Drawing.Size(1027, 376);
-            this._courseDataGridViewComponent2.TabIndex = 0;
             // 
             // SelectCourseForm
             // 
@@ -117,9 +117,9 @@ namespace homework
             this.Controls.Add(this._buttonSend);
             this.Name = "SelectCourseForm";
             this.Text = "SelectCourseForm";
-            this._tabControl.ResumeLayout(false);
-            this._tabPage1.ResumeLayout(false);
             this._tabPage2.ResumeLayout(false);
+            this._tabPage1.ResumeLayout(false);
+            this._tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,10 +128,10 @@ namespace homework
         #endregion
         private System.Windows.Forms.Button _buttonSend;
         private System.Windows.Forms.Button _buttonShowSelectResult;
-        private System.Windows.Forms.TabControl _tabControl;
-        private System.Windows.Forms.TabPage _tabPage1;
         private System.Windows.Forms.TabPage _tabPage2;
-        private MyController.CourseDataGridViewComponent _courseDataGridViewComponent1;
         private MyController.CourseDataGridViewComponent _courseDataGridViewComponent2;
+        private System.Windows.Forms.TabPage _tabPage1;
+        private MyController.CourseDataGridViewComponent _courseDataGridViewComponent1;
+        private System.Windows.Forms.TabControl _tabControl;
     }
 }

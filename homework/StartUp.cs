@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using homework.PresentationModel;
 using homework.Model;
-using homework.Data;
+using homework.Manager;
 
 namespace homework
 {
@@ -38,10 +38,8 @@ namespace homework
         /// </history>
         private void SetCoursesUrl()
         {
-            const string COURSE1 = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2433";
-            const string COURSE2 = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=109&sem=1&code=2433";
-            _coursesUrl.Add(COURSE1);
-            _coursesUrl.Add(COURSE2);
+            _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE2_COURSE_URL);
+            _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE3_COURSE_URL);
         }
 
         /// <summary>
@@ -52,7 +50,7 @@ namespace homework
         /// </history>
         private void InitializeObject()
         {
-            _courseModel.FetchCourseInfo(_coursesUrl);
+            _courseManageModel.FetchCourseInfo(_coursesUrl);
 
             startUpForm.SetCourseManageModel(_courseManageModel);
             startUpForm.SetCourseSelectModel(_courseModel);

@@ -10,7 +10,7 @@ namespace homework.PresentationModel
 {
     public class StartUpPresentationModel
     {
-        private List<String> _courseUrl;
+        private List<string> _courseUrl;
         private CourseSelectModel _courseModel;
 
         public StartUpPresentationModel(CourseSelectModel courseModel)
@@ -25,11 +25,6 @@ namespace homework.PresentationModel
         /// <summary>
         /// 回傳button狀態 
         /// </summary>
-        /// <returns>button狀態</returns>
-        /// <history>
-        ///     1.  2021.10.16  create function
-        ///     2.  2021.10.23  change function to property
-        /// </history>
         public bool IsButtonCourseSelectingEnabled
         {
             get; set;
@@ -38,11 +33,6 @@ namespace homework.PresentationModel
         /// <summary>
         /// 回傳button狀態 
         /// </summary>
-        /// <returns>button狀態</returns>
-        /// <history>
-        ///     1.  2021.10.16  create function
-        ///     2.  2021.10.23  change function to property
-        /// </history>
         public bool IsButtonCourseManagementEnabled
         {
             get; set;
@@ -51,11 +41,6 @@ namespace homework.PresentationModel
         /// <summary>
         /// 回傳button狀態 
         /// </summary>
-        /// <returns>button狀態</returns>
-        /// <history>
-        ///     1.  2021.10.16  create function
-        ///     2.  2021.10.23  change function to property
-        /// </history>
         public bool IsButtonExitEnabled
         {
             get; set;
