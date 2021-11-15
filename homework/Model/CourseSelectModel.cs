@@ -25,25 +25,6 @@ namespace homework.Model
         }
 
         #region Public
-        /// <summary>
-        /// 爬取課程資訊並儲存
-        /// </summary>
-        public void FetchCourseInfo(List<string> courseUrl)
-        {
-            List<Course> courses;
-            string className;
-
-            foreach (var url in courseUrl)
-            {
-                HtmlNodeCollection nodeCollection = _courseCrawler.GetCourseNodeCollection(url);
-                _courseAnalyzer.AnalyzeCourse(nodeCollection);
-
-                courses = _courseAnalyzer.GetCourses();
-                className = _courseCrawler.ClassName;
-                _storeDataManager.AddCourse(className, courses);
-            }
-
-        }
 
         #region Get
         /// <summary>

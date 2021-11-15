@@ -14,6 +14,8 @@ namespace homeworkUnitTest.ModelTest
         private StoreDataManager _storeDataManager;
         private CourseManageModel _courseManageModel;
         private Course _course;
+        private PrivateObject _privateObject;
+        private int notify = 0;
 
         /// <summary>
         /// 初始化設定
@@ -23,6 +25,7 @@ namespace homeworkUnitTest.ModelTest
         {
             _storeDataManager = new StoreDataManager();
             _courseManageModel = new CourseManageModel(_storeDataManager);
+            _privateObject = new PrivateObject(_courseManageModel);
             SetCourseInfo();
         }
 
@@ -34,6 +37,14 @@ namespace homeworkUnitTest.ModelTest
             _course = new Course();
             _course.Name = _courseName;
             _course.Number = _courseNumber;
+        }
+
+        /// <summary>
+        /// 測試Notify功能用
+        /// </summary>
+        private void ChangeNotify()
+        {
+            notify = 10;
         }
 
         /// <summary>
@@ -126,6 +137,29 @@ namespace homeworkUnitTest.ModelTest
             _courseManageModel.AddCourse(_course, _courseName);
             var conflict = _courseManageModel.CheckIsCourseNumberConflict(_courseNumber);
             Assert.AreEqual(true, conflict);
+        }
+
+        /// <summary>
+        /// 測試 匯入課程
+        /// </summary>
+        [TestMethod]
+        public void TestImportCourses()
+        {
+            _courseManageModel.ImportComputerScienceCourses();
+            var courses = _courseManageModel.GetClassNameAsItem();
+            Assert.AreEqual(4, courses.Count);
+        }
+
+        /// <summary>
+        /// 測試 Notify function
+        /// </summary>
+        [TestMethod]
+        public void NotifyProgressChanged()
+        {
+            _courseManageModel._progressChanged += ChangeNotify;
+            Assert.AreEqual(0, notify);
+            _privateObject.Invoke("NotifyProgressChanged");
+            Assert.AreEqual(10, notify);
         }
 
     }

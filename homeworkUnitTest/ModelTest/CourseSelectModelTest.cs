@@ -18,6 +18,7 @@ namespace homeworkUnitTest.ModelTest
         private string _courseNumber = "55688";
         private StoreDataManager _storeDataManager;
         private CourseSelectModel _courseSelectModel;
+        private CourseManageModel _courseManageModel;
         private PrivateObject _privateObject;
         private List<string> _courseURL;
         private Course _course;
@@ -30,6 +31,7 @@ namespace homeworkUnitTest.ModelTest
         {
             _storeDataManager = new StoreDataManager();
             _courseSelectModel = new CourseSelectModel(_storeDataManager);
+            _courseManageModel = new CourseManageModel(_storeDataManager);
             _privateObject = new PrivateObject(_courseSelectModel);
             SetCourseInfo();
             FetchCourseInfo();
@@ -52,7 +54,7 @@ namespace homeworkUnitTest.ModelTest
         {
             _courseURL = new List<string>();
             _courseURL.Add(URL);
-            _courseSelectModel.FetchCourseInfo(_courseURL);
+            _courseManageModel.FetchCourseInfo(_courseURL);
         }
 
         /// <summary>
@@ -97,7 +99,7 @@ namespace homeworkUnitTest.ModelTest
         {
             _courseSelectModel.AddSelectedCourses(new List<string> { class1});
             List<string> vs2 = class2.Split(' ').ToList();
-            _courseSelectModel.FetchCourseInfo(new List<string> { URL2 });
+            _courseManageModel.FetchCourseInfo(new List<string> { URL2 });
             var errMsg = _courseSelectModel.CheckCoursesConflict(vs2);
             if(!string.IsNullOrEmpty(expect))
             {

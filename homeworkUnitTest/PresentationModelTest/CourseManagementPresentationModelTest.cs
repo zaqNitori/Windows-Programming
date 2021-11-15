@@ -382,11 +382,23 @@ namespace homeworkUnitTest.PresentationModelTest
         /// 測試 Notify function
         /// </summary>
         [TestMethod]
-        public void TestNotifyGroupBoxAndButtonChanged()
+        public void TestNotifyGroupBoxChanged()
         {
-            _courseManagementPresentationModel._groupBoxAndButtonChanged += ChangeNotify;
+            _courseManagementPresentationModel._groupBoxChanged += ChangeNotify;
             Assert.AreEqual(0, notify);
-            _privateObject.Invoke("NotifyGroupBoxAndButtonChanged");
+            _privateObject.Invoke("NotifyGroupBoxChanged");
+            Assert.AreEqual(10, notify);
+        }
+
+        /// <summary>
+        /// 測試 Notify function
+        /// </summary>
+        [TestMethod]
+        public void TestNotifyButtonChanged()
+        {
+            _courseManagementPresentationModel._buttonChanged += ChangeNotify;
+            Assert.AreEqual(0, notify);
+            _privateObject.Invoke("NotifyButtonChanged");
             Assert.AreEqual(10, notify);
         }
 

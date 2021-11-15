@@ -16,6 +16,7 @@ namespace homeworkUnitTest.PresentationModelTest
         private string _courseNumber = "55688";
         private StoreDataManager _storeDataManager;
         private CourseSelectModel _courseSelectModel;
+        private CourseManageModel _courseManageModel;
         private CourseSelectingPresentationModel _courseSelectingPresentationModel;
         private PrivateObject _privateObject;
         private int notify = 0;
@@ -28,6 +29,7 @@ namespace homeworkUnitTest.PresentationModelTest
         {
             _storeDataManager = new StoreDataManager();
             _courseSelectModel = new CourseSelectModel(_storeDataManager);
+            _courseManageModel = new CourseManageModel(_storeDataManager);
             _courseSelectingPresentationModel = new CourseSelectingPresentationModel(_courseSelectModel);
             _privateObject = new PrivateObject(_courseSelectingPresentationModel);
             FetchCourseInfo();
@@ -38,7 +40,7 @@ namespace homeworkUnitTest.PresentationModelTest
         /// </summary>
         private void FetchCourseInfo()
         {
-            _courseSelectModel.FetchCourseInfo(new List<string> {URL});
+            _courseManageModel.FetchCourseInfo(new List<string> {URL});
         }
 
         /// <summary>
