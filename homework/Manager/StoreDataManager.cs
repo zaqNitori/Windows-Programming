@@ -257,10 +257,21 @@ namespace homework.Manager
             BindingList<Course> courses = new BindingList<Course>();
             foreach (var c in _chosenCourses)
             {
-                courses.Add(_curriculum.Courses[c.Number]);
+                if (IsCourseStatusOpen(c.Number))
+                {
+                    courses.Add(_curriculum.Courses[c.Number]);
+                }
             }
 
             _chosenCourses = courses;
+        }
+
+        /// <summary>
+        /// 確認課程狀態是否為開課 
+        /// </summary>
+        private bool IsCourseStatusOpen(string number)
+        {
+            return _curriculum.Courses[number].Status.Equals(Common.COURSE_STATUS_OPEN);
         }
 
         /// <summary>

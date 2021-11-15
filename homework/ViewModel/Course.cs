@@ -6,11 +6,12 @@ namespace homework.ViewModel
     {
         public Course()
         {
-
+            Status = Common.COURSE_STATUS_OPEN;
         }
 
         public Course(Course course)
         {
+            Status = course.Status;
             Number = course.Number;
             Name = course.Name;
             Stage = course.Stage;
@@ -34,6 +35,11 @@ namespace homework.ViewModel
             Syllabus = course.Syllabus;
             Audit = course.Audit;
             Experiment = course.Experiment;
+        }
+
+        public string Status
+        {
+            get; set;
         }
 
         public string Number
