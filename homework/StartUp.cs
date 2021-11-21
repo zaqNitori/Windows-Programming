@@ -38,7 +38,7 @@ namespace homework
         /// </history>
         private void SetCoursesUrl()
         {
-            _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE2_COURSE_URL);
+            _coursesUrl.Add(Common.ELECTRONIC_ENGINEERING_GRADE3_COURSE_URL);
             _coursesUrl.Add(Common.COMPUTER_SCIENCE_GRADE3_COURSE_URL);
         }
 

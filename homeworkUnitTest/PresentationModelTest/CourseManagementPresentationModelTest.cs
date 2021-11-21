@@ -362,6 +362,7 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManagementPresentationModel.Thursday = Thursday;
             _courseManagementPresentationModel.Friday = Friday;
             _courseManagementPresentationModel.Saturday = Saturday;
+            _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Edit);
             _courseManagementPresentationModel.CheckIsCourseInputValid();
             Assert.AreEqual(expect, _courseManagementPresentationModel.IsButtonConfirmEnabled);
         }
