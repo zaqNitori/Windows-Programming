@@ -12,14 +12,10 @@ namespace homework.Model
     {
         public event CourseChangedEventHandler _courseChanged;
         public delegate void CourseChangedEventHandler();
-        private CourseCrawler _courseCrawler;
-        private CourseAnalyzer _courseAnalyzer;
         private StoreDataManager _storeDataManager;
 
         public CourseSelectModel(StoreDataManager storeDataManager)
         {
-            _courseCrawler = new CourseCrawler();
-            _courseAnalyzer = new CourseAnalyzer();
             _storeDataManager = storeDataManager;
             _storeDataManager._courseChanged += NotifyCourseChanged;
         }

@@ -33,6 +33,7 @@ namespace homework.Manager
         {
             AddCurriculum(courses);
             AddClassCourse(name, courses);
+            NotifyCourseChanged();
         }
 
         /// <summary>
