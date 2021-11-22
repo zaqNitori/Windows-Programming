@@ -96,9 +96,9 @@ namespace homeworkGUITest
         /// 測試衝堂，選課失敗
         /// </summary>
         [TestMethod]
-        public void TestSelectCourseFailByCourseTimeConflic()
+        public void TestSelectCourseFailByCourseTimeConflict()
         {
-            string errMsg = "加選失敗" + NEW_LINE + "課程衝堂: 291539數位信號處理，291706計算機網路" + NEW_LINE;
+            //string errMsg = "加選失敗\n課程衝堂 : 291539數位信號處理,291706計算機網路\n";
 
             _robot.ClickButton(_buttonCourseSelecting);
             _robot.SwitchTo(COURSE_SELECT_FORM);
@@ -108,8 +108,34 @@ namespace homeworkGUITest
             _robot.ClickTabControl(TAB_PAGE_CSIE_GRADE3);
             _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 5, "選取");
             _robot.ClickButton(_buttonSend);
-            _robot.AssertText(errMsg, errMsg);
+
+            //_robot.AssertText(errMsg, errMsg);
+            _robot.Sleep(1);
             _robot.CloseMessageBox();
+            _robot.Sleep(1);
+        }
+
+        /// <summary>
+        /// 測試名稱相同，選課失敗
+        /// </summary>
+        [TestMethod]
+        public void TestSelectCourseFailByCourseNameConflict()
+        {
+            //string errMsg = "加選失敗\n課程名稱相同 : 291506實務專題(一),291707實務專題(一)\n";
+
+            _robot.ClickButton(_buttonCourseSelecting);
+            _robot.SwitchTo(COURSE_SELECT_FORM);
+
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 4, "選取");
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 5, "選取");
+            _robot.ClickTabControl(TAB_PAGE_CSIE_GRADE3);
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 6, "選取");
+            _robot.ClickButton(_buttonSend);
+
+            //_robot.AssertText(errMsg, errMsg);
+            _robot.Sleep(1);
+            _robot.CloseMessageBox();
+            _robot.Sleep(1);
         }
 
     }
