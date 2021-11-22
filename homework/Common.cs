@@ -17,6 +17,9 @@ namespace homework
         public const string ELECTRONIC_ENGINEERING_GRADE3_COURSE_URL = "https://aps.ntut.edu.tw/course/tw/Subj.jsp?format=-4&year=110&sem=1&code=2423";
         public const string COURSE_STATUS_OPEN = "開課";
         public const string COURSE_STATUS_CLOSE = "停開";
+        public const string COMMA = ",";
+        public const string DOUBLE_QUOTES = @"""";
+        public const string NEW_LINE = "\n";
 
         /// <summary>
         /// 啟用datagridview的doublebuffered

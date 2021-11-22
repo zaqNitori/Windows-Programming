@@ -156,5 +156,34 @@ namespace homework.ViewModel
         {
             get; set;
         }
+
+        /// <summary>
+        /// 格式化輸出
+        /// </summary>
+        public override string ToString()
+        {
+            string text = string.Empty;
+            text = AddDoubleQuote(Status) + Common.COMMA + AddDoubleQuote(Number) + Common.COMMA +
+                AddDoubleQuote(Name) + Common.COMMA + AddDoubleQuote(Stage) + Common.COMMA +
+                AddDoubleQuote(Credit) + Common.COMMA + AddDoubleQuote(Hour) + Common.COMMA +
+                AddDoubleQuote(RequiredOrElective) + Common.COMMA + AddDoubleQuote(Teacher) + Common.COMMA +
+                AddDoubleQuote(Sunday) + Common.COMMA + AddDoubleQuote(Monday) + Common.COMMA + AddDoubleQuote(Tuesday) + Common.COMMA +
+                AddDoubleQuote(Wednesday) + Common.COMMA + AddDoubleQuote(Thursday) + Common.COMMA +
+                AddDoubleQuote(Friday) + Common.COMMA + AddDoubleQuote(Saturday) + Common.COMMA +
+                AddDoubleQuote(Classroom) + Common.COMMA + AddDoubleQuote(NumberOfStudent) + Common.COMMA + 
+                AddDoubleQuote(NumberOfDropStudent) + Common.COMMA + AddDoubleQuote(TeachAssistant) + Common.COMMA +
+                AddDoubleQuote(Language) + Common.COMMA + AddDoubleQuote(Syllabus) + Common.COMMA + 
+                AddDoubleQuote(Note) + Common.COMMA + AddDoubleQuote(Audit) + Common.COMMA + AddDoubleQuote(Experiment);
+            return text;
+        }
+
+        /// <summary>
+        /// 加上雙引號
+        /// </summary>
+        private string AddDoubleQuote(string text)
+        {
+            return Common.DOUBLE_QUOTES + text + Common.DOUBLE_QUOTES;
+        }
+
     }
 }
