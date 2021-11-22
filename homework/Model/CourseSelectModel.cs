@@ -180,7 +180,7 @@ namespace homework.Model
             string errorMessage = "";
             if (GetCourseName(course2).Equals(GetCourseName(course1)))
                 errorMessage += CourseSelectProperty.SAME_COURSE_NAME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) 
-                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
+                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Common.NEW_LINE;
             return errorMessage;
         }
 
@@ -222,7 +222,7 @@ namespace homework.Model
                 || CheckTimeDuplicate(course1.Friday, course2.Friday)
                 || CheckTimeDuplicate(course1.Saturday, course2.Saturday))
                 errorMessage += CourseSelectProperty.SAME_COURSE_TIME_TEXT + GetCourseNumber(course1) + GetCourseName(course1) 
-                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Environment.NewLine;
+                    + CourseSelectProperty.COMMA + GetCourseNumber(course2) + GetCourseName(course2) + Common.NEW_LINE;
             return errorMessage;
         }
 

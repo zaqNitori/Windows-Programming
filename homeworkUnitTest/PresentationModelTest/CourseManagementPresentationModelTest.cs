@@ -152,7 +152,7 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseManagementPresentationModel.CourseManageState = ((int)CourseManageAction.Add);
             _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber1);
             var errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
-            Assert.AreEqual("Number" + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine
+            Assert.AreEqual("Number" + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Common.NEW_LINE
                 , errorMessage);
         }
 
@@ -177,10 +177,10 @@ namespace homeworkUnitTest.PresentationModelTest
         {
             _courseManagementPresentationModel.GetCourseByCourseNumber(_courseNumber2);
             var errorMessage = _courseManagementPresentationModel.CheckIsNumericInputValid();
-            string expect = "Number" + Environment.NewLine 
-                + "Credit" + Environment.NewLine 
-                + "Stage" + Environment.NewLine 
-                + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine;
+            string expect = "Number" + Common.NEW_LINE 
+                + "Credit" + Common.NEW_LINE 
+                + "Stage" + Common.NEW_LINE 
+                + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Common.NEW_LINE;
             Assert.AreEqual(expect, errorMessage);
         }
 

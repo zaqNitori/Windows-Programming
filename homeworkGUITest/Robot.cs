@@ -108,14 +108,14 @@ namespace homeworkGUITest
         // test
         public void CloseMessageBox()
         {
-            _driver.FindElementByName("確定").Click();
+            _driver.FindElementByName("OK").Click();
         }
 
         // test
         public void ClickDataGridViewCellBy(string name, int rowIndex, string columnName)
         {
             var dataGridView = _driver.FindElementByAccessibilityId(name);
-            _driver.FindElementByName($"{columnName} 資料列 {rowIndex}").Click();
+            _driver.FindElementByName($"{columnName} Row {rowIndex}").Click();
         }
 
         // test
@@ -136,7 +136,7 @@ namespace homeworkGUITest
         public void AssertDataGridViewRowDataBy(string name, int rowIndex, string[] data)
         {
             var dataGridView = _driver.FindElementByAccessibilityId(name);
-            var rowDatas = dataGridView.FindElementByName($"資料列 {rowIndex}").FindElementsByXPath("//*");
+            var rowDatas = dataGridView.FindElementByName($"Row {rowIndex}").FindElementsByXPath("//*");
 
             // FindElementsByXPath("//*") 會把 "row" node 也抓出來，因此 i 要從 1 開始以跳過 "row" node
             for (int i = 1; i < rowDatas.Count; i++)
@@ -151,8 +151,8 @@ namespace homeworkGUITest
             var dataGridView = _driver.FindElementByAccessibilityId(name);
             Point point = new Point(dataGridView.Location.X, dataGridView.Location.Y);
             AutomationElement element = AutomationElement.FromPoint(point);
-
-            while (element != null && element.Current.LocalizedControlType.Contains("datagrid") == false)
+            
+            while (element != null && element.Current.LocalizedControlType.Contains("table") == false)
             {
                 element = TreeWalker.RawViewWalker.GetParent(element);
             }

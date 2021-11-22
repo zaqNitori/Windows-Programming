@@ -14,15 +14,29 @@ namespace homeworkGUITest
         private string targetAppPath;
         private const string START_UP_FORM = "StartUpForm";
         private const string COURSE_SELECT_FORM = "SelectCourseForm";
+        private const string COURSE_SELECT_RESULT_FORM = "CourseSelectResultForm";
+        private const string NEW_LINE = "\n";
 
         private Robot _robot;
         private const string _buttonCourseSelecting = "Course Selecting System";
         private const string _buttonCourseManagement = "Course Management System";
         private const string _buttonExit = "Exit";
-        private const string RESULT_CONTROL_NAME = "CalculatorResults";
+        private const string SELECTING_DATA_GRID_VIEW = "_courseDataGridView";
+        private const string SELECT_RESULT_DATA_GRID_VIEW = "_courseSelectResultDataGridView";
+        private const string EE_GRADE3_COURSES_GRIDVIEW = "_courseDataGridViewComponent1";
+        private const string CSIE_GRADE3_COURSES_GRIDVIEW = "_courseDataGridViewComponent2";
+        private const string CSIE_GRADE1_COURSES_GRIDVIEW = "_courseDataGridViewComponent3";
+        private const string CSIE_GRADE2_COURSES_GRIDVIEW = "_courseDataGridViewComponent4";
+        private const string CSIE_GRADE4_COURSES_GRIDVIEW = "_courseDataGridViewComponent5";
+        private const string TAB_PAGE_CSIE_GRADE3 = "資工三";
+        private const string _buttonShowSelectResult = "顯示選課結果";
+        private const string _buttonSend = "確認送出";
 
-        // init
-        [TestInitialize]
+        private string[] EE3_Course4 = { "退選", "開課", "291505", "應用軟體設計實習", "1", "1.0", "3", "▲", "黃士嘉", "", "", "", "", "", "B C D", "", "共同312(e)", "49", "2", "", "", "查詢", "*計網中心電腦教室", "", "是" };
+        private string[] CSIE3_Course4 = { "退選", "開課", "291705", "資料庫系統", "1", "3.0", "3", "▲", "劉建宏", "", "", "7", "8 9", "", "", "", "六教327(e)", "100", "1", "", "", "查詢", "◎", "", "" };
+
+       // init
+       [TestInitialize]
         public void Initialize()
         {
             var projectName = "homework";
@@ -40,13 +54,63 @@ namespace homeworkGUITest
             _robot.CleanUp();
         }
 
+        /// <summary>
+        /// 測試成功選課，以及退選
+        /// </summary>
         [TestMethod]
         public void TestSelectCourseSuccess()
         {
             _robot.ClickButton(_buttonCourseSelecting);
             _robot.SwitchTo(COURSE_SELECT_FORM);
-            _robot.ClickButton("顯示選課結果");
+
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 25);
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 12);
+
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 4, "選取");
+            _robot.ClickTabControl(TAB_PAGE_CSIE_GRADE3);
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 4, "選取");
+            _robot.ClickButton(_buttonSend);
+            _robot.CloseMessageBox();
+
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 24);
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 11);
+
+            _robot.ClickButton(_buttonShowSelectResult);
+            _robot.SwitchTo(COURSE_SELECT_RESULT_FORM);
+
+            _robot.AssertDataGridViewRowDataBy(SELECT_RESULT_DATA_GRID_VIEW, 0, EE3_Course4);
+            _robot.AssertDataGridViewRowDataBy(SELECT_RESULT_DATA_GRID_VIEW, 1, CSIE3_Course4);
+
+            _robot.ClickDataGridViewCellBy(SELECT_RESULT_DATA_GRID_VIEW, 0, "退");
+            _robot.ClickDataGridViewCellBy(SELECT_RESULT_DATA_GRID_VIEW, 0, "退");
+
+            _robot.SwitchTo(COURSE_SELECT_FORM);
+
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 25);
+            //_robot.AssertDataGridViewRowCountBy(DATA_GRID_VIEW, 12);
+
             _robot.Sleep(2);
         }
+
+        /// <summary>
+        /// 測試衝堂，選課失敗
+        /// </summary>
+        [TestMethod]
+        public void TestSelectCourseFailByCourseTimeConflic()
+        {
+            string errMsg = "加選失敗" + NEW_LINE + "課程衝堂: 291539數位信號處理，291706計算機網路" + NEW_LINE;
+
+            _robot.ClickButton(_buttonCourseSelecting);
+            _robot.SwitchTo(COURSE_SELECT_FORM);
+
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 7, "選取");
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 8, "選取");
+            _robot.ClickTabControl(TAB_PAGE_CSIE_GRADE3);
+            _robot.ClickDataGridViewCellBy(SELECTING_DATA_GRID_VIEW, 5, "選取");
+            _robot.ClickButton(_buttonSend);
+            _robot.AssertText(errMsg, errMsg);
+            _robot.CloseMessageBox();
+        }
+
     }
 }

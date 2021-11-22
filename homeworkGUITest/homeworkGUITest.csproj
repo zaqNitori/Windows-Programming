@@ -76,7 +76,6 @@
   <ItemGroup>
     <Compile Include="MainFormTest.cs" />
     <Compile Include="Robot.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
