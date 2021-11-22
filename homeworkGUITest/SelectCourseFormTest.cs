@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 namespace homeworkGUITest
 {
     [TestClass()]
-    public class MainFormTest
+    public class SelectCourseFormTest
     {
         private string targetAppPath;
         private const string START_UP_FORM = "StartUpForm";
         private const string COURSE_SELECT_FORM = "SelectCourseForm";
         private const string COURSE_SELECT_RESULT_FORM = "CourseSelectResultForm";
-        private const string NEW_LINE = "\n";
 
         private Robot _robot;
         private const string _buttonCourseSelecting = "Course Selecting System";
@@ -23,11 +22,6 @@ namespace homeworkGUITest
         private const string _buttonExit = "Exit";
         private const string SELECTING_DATA_GRID_VIEW = "_courseDataGridView";
         private const string SELECT_RESULT_DATA_GRID_VIEW = "_courseSelectResultDataGridView";
-        private const string EE_GRADE3_COURSES_GRIDVIEW = "_courseDataGridViewComponent1";
-        private const string CSIE_GRADE3_COURSES_GRIDVIEW = "_courseDataGridViewComponent2";
-        private const string CSIE_GRADE1_COURSES_GRIDVIEW = "_courseDataGridViewComponent3";
-        private const string CSIE_GRADE2_COURSES_GRIDVIEW = "_courseDataGridViewComponent4";
-        private const string CSIE_GRADE4_COURSES_GRIDVIEW = "_courseDataGridViewComponent5";
         private const string TAB_PAGE_CSIE_GRADE3 = "資工三";
         private const string _buttonShowSelectResult = "顯示選課結果";
         private const string _buttonSend = "確認送出";
