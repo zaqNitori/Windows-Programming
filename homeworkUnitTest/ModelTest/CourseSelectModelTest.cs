@@ -103,7 +103,7 @@ namespace homeworkUnitTest.ModelTest
             var errMsg = _courseSelectModel.CheckCoursesConflict(vs2);
             if(!string.IsNullOrEmpty(expect))
             {
-                expect += Environment.NewLine;
+                expect += Common.NEW_LINE;
             }
             Assert.AreEqual(expect, errMsg);
         }

@@ -143,7 +143,7 @@ namespace homeworkUnitTest.PresentationModelTest
             _courseSelectingPresentationModel.SetCourseCheckBoxStatus(course2);
             if (!string.IsNullOrEmpty(expect2))
             {
-                expect1 += Environment.NewLine + expect2 + Environment.NewLine;
+                expect1 += Common.NEW_LINE + expect2 + Common.NEW_LINE;
             }
             Assert.AreEqual(expect1, _courseSelectingPresentationModel.SendSelectedCourses());
         }

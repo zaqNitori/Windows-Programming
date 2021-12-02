@@ -22,6 +22,7 @@ namespace homework
             BindObjectWithData();
             BindControlEvent();
             BindNotifyEvent();
+            InitializeClassManagementTabPage();
             this.FormClosing += ListenManageCourseFormClosing;
         }
 

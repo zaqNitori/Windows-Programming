@@ -231,16 +231,16 @@ namespace homework.PresentationModel
             string errorMessage = string.Empty;
             if (!IsNumeric(Number))
             {
-                errorMessage += nameof(Number) + Environment.NewLine;
+                errorMessage += nameof(Number) + Common.NEW_LINE;
             }
 
             errorMessage += CheckIsCreditNumeric();
 
             if (!IsNumeric(Stage))
             {
-                errorMessage += nameof(Stage) + Environment.NewLine;
+                errorMessage += nameof(Stage) + Common.NEW_LINE;
             }
-            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Environment.NewLine);
+            return (string.IsNullOrEmpty(errorMessage) ? errorMessage : errorMessage + CourseManageProperty.ERROR_MESSAGE_NOT_NUMBER + Common.NEW_LINE);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace homework.PresentationModel
         {
             if (_courseManageModel.CheckIsCourseNumberConflict(Number))
             {
-                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Environment.NewLine;
+                return nameof(Number) + CourseManageProperty.ERROR_MESSAGE_COURSE_NUMBER_CONFLICT + Common.NEW_LINE;
             }
             return string.Empty;
         }
@@ -266,7 +266,7 @@ namespace homework.PresentationModel
             }
             catch
             {
-                return nameof(Credit) + Environment.NewLine;
+                return nameof(Credit) + Common.NEW_LINE;
             }
             return string.Empty;
         }

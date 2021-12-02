@@ -106,7 +106,7 @@ namespace homework.PresentationModel
             }
             else
             {
-                return ADD_COURSE_FAIL + Environment.NewLine + errorMessage;
+                return ADD_COURSE_FAIL + Common.NEW_LINE + errorMessage;
             }
 
         }

@@ -185,9 +185,61 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>A syntax error has been discovered in file D:\Ntut\Windows-Programming\homework\homeworkGUITest\Robot.cs on line 118.</SmellType>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>homeworkGUITest</Project>
+              <File>Robot.cs</File>
+              <Line>118</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>138 目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>homeworkGUITest</Project>
+              <File>D:\Ntut\Windows-Programming\homework\homeworkGUITest\Robot.cs</File>
+              <Line>138</Line>
+              <StartLine>138</StartLine>
+              <StartCol>16</StartCol>
+              <EndLine>138</EndLine>
+              <EndCol>103</EndCol>
+              <Comment>目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>3</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>141 目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>homeworkGUITest</Project>
+              <File>D:\Ntut\Windows-Programming\homework\homeworkGUITest\Robot.cs</File>
+              <Line>141</Line>
+              <StartLine>141</StartLine>
+              <StartCol>28</StartCol>
+              <EndLine>141</EndLine>
+              <EndCol>46</EndCol>
+              <Comment>目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList />
+          <HashCodeRequestIgnoreList>
+            <string xsi:nil="true" />
+            <string>138 目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</string>
+            <string>141 目前物件 homeworkGUITest.Robot，使用物件的方法或屬性次數：0次，Envy到對象物件 OpenQA.Selenium.Appium.AppiumWebElement，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：OpenQA.Selenium.Appium.AppiumWebElement.FindElementByName(string) 以及 OpenQA.Selenium.Appium.AppiumWebElement.FindElementsByXPath(string)</string>
+          </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
@@ -386,6 +438,11 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Common.cs</RelativePath>
+                <ProjectName>homeworkUnitTest</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>ManagerTest\DataItemManagerTest.cs</RelativePath>
                 <ProjectName>homeworkUnitTest</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -435,10 +492,25 @@
                 <ProjectName>homeworkUnitTest</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Properties\AssemblyInfo.cs</RelativePath>
+                <ProjectName>homeworkGUITest</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Robot.cs</RelativePath>
+                <ProjectName>homeworkGUITest</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>SelectCourseFormTest.cs</RelativePath>
+                <ProjectName>homeworkGUITest</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>4374</ProductionLoc>
-          <TestLoc>1410</TestLoc>
+          <ProductionLoc>4505</ProductionLoc>
+          <TestLoc>1547</TestLoc>
         </CodeReview>
       </Data>
     </div>
